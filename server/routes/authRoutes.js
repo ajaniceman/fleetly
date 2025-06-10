@@ -1,7 +1,7 @@
 // server/authRoutes.js
 const express = require('express');
 const router = express.Router();
-const pool = require('./dbPool'); // assume you export your MySQL pool
+const pool = require('../config/dbPool'); // assume you export your MySQL pool
 
 router.post('/register', async (req, res) => {
   const { email, password, name } = req.body;

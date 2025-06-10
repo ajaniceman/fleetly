@@ -2,23 +2,11 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path'); // Add this line
-const mysql = require('mysql2/promise');
+const pool = require('./config/dbPool');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-// Database connection pool
-const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  port: process.env.PORT,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
-});
 
 const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
