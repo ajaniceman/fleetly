@@ -1,7 +1,7 @@
 // src/components/Testimonials.jsx
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper.min.css';
+import 'swiper/css';
 import './Testimonials.css';
 
 const reviews = [
