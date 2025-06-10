@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import Hero from './components/Hero/Hero';
+import Features from './features/Features/Features';
+import Testimonials from './features/Testimonials/Testimonials';
+import Footer from './components/Footer/Footer';
 import './App.css';
 
 function App() {
@@ -12,20 +16,12 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Welcome to Fleetly</h1>
-        {health ? (
-          <div>
-            <p>API Status: {health.status || 'unknown'}</p>
-            <p>Database: {health.database || 'unknown'}</p>
-            {health.error && <p>Error: {health.error}</p>}
-          </div>
-        ) : (
-          <p>Loading...</p>
-        )}
-      </header>
-    </div>
+    <>
+      <Hero />
+      <Features />
+      <Testimonials />
+      <Footer />
+    </>
   );
 }
 
