@@ -20,6 +20,9 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
+const authRoutes = require('./routes/authRoutes');
+app.use('/api/auth', authRoutes);
+
 // Simple health check endpoint
 app.get('/api/health', async (req, res) => {
   try {
