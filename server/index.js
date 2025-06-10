@@ -12,6 +12,7 @@ app.use(express.json());
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
+  port: process.env.PORT,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   waitForConnections: true,
@@ -41,14 +42,14 @@ app.get('/api/health', async (req, res) => {
 if (process.env.NODE_ENV === 'production') {
     const clientBuildPath = path.join(__dirname, 'public');    
     app.use(express.static(clientBuildPath));
-    
+
     app.get('/*splat', (req, res) => {
       res.sendFile(path.join(clientBuildPath, 'index.html'));
 });
 
 }
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5555;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
 });
