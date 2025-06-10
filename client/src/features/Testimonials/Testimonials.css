@@ -1,0 +1,42 @@
+.testimonials {
+  padding: 4rem 2rem;
+  background: white;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.testimonials h2 {
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.testimonials .card {
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 2rem;
+  margin: 0 auto;
+  max-width: 600px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.testimonials .card p {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.testimonials .author {
+  font-weight: 600;
+  color: #3498db;
+}
+
+.swiper {
+  padding: 2rem 0;
+}
+
+.swiper-pagination-bullet-active {
+  background: #3498db !important;
+}

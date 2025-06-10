@@ -1,0 +1,36 @@
+.footer {
+  background: #2c3e50;
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.footer .cols {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto 1rem;
+  gap: 1rem;
+}
+
+.footer div {
+  margin: 0.5rem 0;
+}
+
+.footer a {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer a:hover {
+  color: #2980b9;
+}
+
+@media (max-width: 768px) {
+  .footer .cols {
+    flex-direction: column;
+  }
+}
