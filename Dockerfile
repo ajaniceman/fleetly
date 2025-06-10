@@ -4,6 +4,7 @@ WORKDIR /app
 COPY client/package.json client/package-lock.json ./
 RUN npm install
 COPY client .
+WORKDIR /app/client
 RUN npm run build
 
 # Setup backend
