@@ -53,14 +53,18 @@ export default function Hero() {
             <label>Email</label>
           </div>
 
-          <div className="input-group password-group">
+          <div className="input-group">
+            <div className = "form-floating">
             <input
-              name="password"
               type={showPwd ? 'text' : 'password'}
+              className="form-control"
+              id="password"
+              name="password"
               required
               value={form.password}
               onChange={handleChange}
             />
+            <label htmlFor="password">Password</label>
             <button
               type="button"
               className="show-btn"
@@ -69,6 +73,7 @@ export default function Hero() {
               {showPwd ? <FaEyeSlash /> : <FaEye />}
             </button>
             <label>Password</label>
+           </div>
           </div>
 
           {mode === 'register' && (
@@ -96,7 +101,7 @@ export default function Hero() {
           </button>
 
           <Link to="/" className="back-link">
-            <FaArrowLeft /> Back to Home
+            Back to Home
           </Link>
         </form>
       </div>
