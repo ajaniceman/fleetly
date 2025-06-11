@@ -10,20 +10,15 @@ function App() {
   const { user } = useAuth();
 
   return (
-    <BrowserRouter>
-      <div className="app">
-        <Routes>
-          <Route path="/" element={<HomeWithFooter />} />
-
-          <Route path="/login" element={!user ? <AuthPage mode="login" /> : <Navigate to="/dashboard" replace />} />
-          <Route path="/register" element={!user ? <AuthPage mode="register" /> : <Navigate to="/dashboard" replace />} />
-
-          <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" replace />} />
-
-          <Route path="*" element={<Navigate to={user ? "/dashboard" : "/"} replace />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <>
+      <Routes>
+        <Route path="/" element={<><Home/><Footer/></>} />
+        <Route path="/login" element={!user ? <AuthPage mode="login"/> : <Navigate to="/dashboard" replace />} />
+        <Route path="/register" element={!user ? <AuthPage mode="register"/> : <Navigate to="/dashboard" replace />} />
+        <Route path="/dashboard" element={user ? <Dashboard/> : <Navigate to="/login" replace />} />
+        <Route path="*" element={<Navigate to={user ? "/dashboard" : "/"} replace />} />
+      </Routes>
+    </>
   );
 }
 
@@ -38,7 +33,7 @@ function HomeWithFooter() {
 
 function AuthPage({ mode }) {
   const location = useLocation();
-  return <Hero mode={mode} key={location.pathname} />;
+  return <Hero key={location.pathname} mode={mode} />;
 }
 
 export default App;

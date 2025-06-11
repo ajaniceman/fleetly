@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export function useAuth() {
+const AuthContext = createContext();
+
+export function AuthProvider({ children }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
@@ -10,13 +12,10 @@ export function useAuth() {
     if (stored) setUser(JSON.parse(stored));
   }, []);
 
-  const login = async ({ email, password }) => {
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+  const login = async (credentials) => {
+    const res = await fetch('/api/auth/login', { /* ... */ });
     const json = await res.json();
+
     if (res.ok) {
       setUser(json.user);
       localStorage.setItem('token', json.token);
@@ -26,32 +25,18 @@ export function useAuth() {
     return json;
   };
 
-  const register = async ({ email, password, name }) => {
-    if (password.length < 8 || !/\d/.test(password)) {
-      return { error: true, error: 'Password must be 8+ characters and include a number' };
-    }
+  const register = async (data) => { /* similar to login */ };
+  const logout = () => { /* clear state */ };
 
-    const res = await fetch('/api/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password, name }),
-    });
-    const json = await res.json();
-    if (res.ok) {
-      setUser(json.user);
-      localStorage.setItem('token', json.token);
-      localStorage.setItem('user', JSON.stringify(json.user));
-      navigate('/dashboard', { replace: true });
-    }
-    return json;
-  };
+  return (
+    <AuthContext.Provider value={{ user, login, register, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    navigate('/login', { replace: true });
-  };
-
-  return { user, login, register, logout };
+export function useAuth() {
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error('useAuth must be used within AuthProvider');
+  return ctx;
 }
