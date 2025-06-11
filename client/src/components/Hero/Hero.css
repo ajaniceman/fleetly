@@ -70,6 +70,10 @@
   margin-bottom: 1.5rem;
 }
 
+.input-group.name-group {
+  margin-top: 1rem;
+}
+
 .form-error {
   background: #f8d7da;
   color: #721c24;
@@ -91,7 +95,7 @@
 
 .input-group input {
   width: 100%;
-  padding: 1rem 0.5rem 0.5rem;
+  padding: 1rem 0.75rem;
   border: none;
   border-bottom: 2px solid #bdc3c7;
   font-size: 1rem;
@@ -146,6 +150,7 @@
   display: flex;
   align-items: center;
   color: #d9534f;
+  margin: 0.5rem 0 1.5rem;
 }
 
 .password-checklist li.valid {

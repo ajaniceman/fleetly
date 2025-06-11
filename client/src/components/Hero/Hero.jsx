@@ -83,7 +83,7 @@ export default function Hero() {
           )}
 
           {mode === 'register' && (
-            <div className="input-group">
+            <div className="input-group name-group">
               <input name="name" type="text" required value={form.name} onChange={handleChange} />
               <label>Name</label>
             </div>
