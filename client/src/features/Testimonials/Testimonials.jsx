@@ -5,9 +5,18 @@ import 'swiper/css';
 import './Testimonials.css';
 
 const reviews = [
-  { name: 'Alice', text: 'Fleetly changed how we manage logistics.' },
-  { name: 'Bob', text: 'Real-time tracking saved us hours each day.' },
-  { name: 'Carol', text: 'Insightful analytics improved routes.' }
+  {
+    quote: "Fleetly reminded me to renew my registration—saved me a $200 late fee!",
+    name: "Sarah K.",
+    role: "Small Business Owner",
+    avatar: "https://i.pravatar.cc/150?img=5",
+  },
+  {
+    quote: "I used to forget oil changes. Now my truck runs smoother than ever.",
+    name: "Mike T.",
+    role: "Independent Driver",
+    avatar: "https://i.pravatar.cc/150?img=11",
+  },
 ];
 
 export default function Testimonials() {
