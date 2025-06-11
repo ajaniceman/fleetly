@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Hero from './components/Hero/Hero';
+import Home from './pages/Home'; 
 import Footer from './components/Footer/Footer';
 import { useAuth } from './hooks/useAuth';
 import './App.css';
 import './styles/global.css';
 
 function App() {
-  const { user } = useAuth();
   const [health, setHealth] = useState(null);
 
   useEffect(() => {
@@ -23,27 +22,23 @@ function App() {
     <BrowserRouter>
       <div className="app">
         <Routes>
-          {/* Public Home */}
+          {/* Public Routes */}
           <Route path="/" element={<HomeWithFooter />} />
-
-          {/* Auth Pages */}
-          <Route
-            path="/login"
-            element={!user ? <AuthPage mode="login" /> : <Navigate to="/dashboard" replace />}
+          
+          {/* Auth Routes */}
+          
+          <Route path="/login" element={<AuthPage mode="login" />} />
+          <Route path="/register" element={<AuthPage mode="register" />} />
+          
+          {/* Protected Routes */}
+          <Route 
+            path="/dashboard" 
+            element={
+              <ProtectedRoute>
+                <div>Your Dashboard</div>
+              </ProtectedRoute>
+            } 
           />
-          <Route
-            path="/register"
-            element={!user ? <AuthPage mode="register" /> : <Navigate to="/dashboard" replace />}
-          />
-
-          {/* Dashboard (Protected) */}
-          <Route
-            path="/dashboard"
-            element={user ? <Dashboard /> : <Navigate to="/login" replace />}
-          />
-
-          {/* Catch-all redirect back to home */}
-          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
     </BrowserRouter>
@@ -61,9 +56,28 @@ function HomeWithFooter() {
 
 function AuthPage({ mode }) {
   const location = useLocation();
+  const { user } = useAuth();
+
+  // If user is logged in, redirect to home
+  if (user) return <Navigate to="/" replace />;
+
   return (
-    <Hero mode={mode} key={location.pathname} />
+    <Hero 
+      mode={mode} 
+      key={location.pathname} // Force re-render when route changes
+    />
   );
 }
+
+function AuthRoute({ element }) {
+  const { user } = useAuth();
+  return user ? <Navigate to="/" replace /> : element;
+}
+
+function ProtectedRoute({ children }) {
+  const { user } = useAuth();
+  return user ? children : <Navigate to="/login" replace />;
+}
+
 
 export default App;
