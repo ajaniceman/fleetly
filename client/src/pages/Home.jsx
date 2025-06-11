@@ -11,14 +11,13 @@ export default function Home() {
       <section className="hero-section">
         <div className="hero-content container">
           <div className="title-wrapper">
-            <div className="pre-title">FLEET MANAGEMENT SIMPLIFIED</div>
-            <h1>
-              <span className="title-br">Maintenance Tracking</span>
-            </h1>
+            <div className="pre-title">Smart. Reliable. Effortless.</div>
+          <h1>
+            <span className="title-br">Fleet Maintenance Made Easy</span>
+          </h1>
           </div>
           <p className="subtitle">
-            Never miss a service deadline again. Fleetly helps you stay on top of registrations, 
-            inspections, and maintenance with automated reminders.
+            Take control of your vehicles with automated tracking for maintenance, registrations, and inspections—all in one place.
           </p>
           <div className="cta-buttons">
             <Link to="/register" className="btn primary">
