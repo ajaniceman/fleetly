@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Hero from './components/Hero/Hero';
 import Home from './pages/Home'; 
 import Footer from './components/Footer/Footer';
@@ -25,8 +25,8 @@ function App() {
           <Route path="/" element={<HomeWithFooter />} />
           
           {/* Auth Routes */}
-          <Route path="/login" element={<AuthRoute element={<Hero mode="login" />} />} />
-          <Route path="/register" element={<AuthRoute element={<Hero mode="register" />} />} />
+          <Route path="/login" element={<AuthPage mode="login" />} />
+          <Route path="/register" element={<AuthPage mode="register" />} />
           
           {/* Protected Routes */}
           <Route 
@@ -49,6 +49,21 @@ function HomeWithFooter() {
       <Home />
       <Footer />
     </>
+  );
+}
+
+function AuthPage({ mode }) {
+  const location = useLocation();
+  const { user } = useAuth();
+
+  // If user is logged in, redirect to home
+  if (user) return <Navigate to="/" replace />;
+
+  return (
+    <Hero 
+      mode={mode} 
+      key={location.pathname} // Force re-render when route changes
+    />
   );
 }
 
