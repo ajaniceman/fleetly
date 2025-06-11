@@ -101,14 +101,23 @@
   background: #2980b9;
 }
 
+/* For SVG arrow alignment */
+.auth-widget a.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* For all link variants */
 .auth-widget a {
-  display: block;
   margin-top: 1rem;
   text-align: center;
-  color: #3b82f6; /* Tailwind's blue-500 */
+  color: #3b82f6; /* Tailwind blue-500 */
   font-size: 0.875rem; /* text-sm */
+  transition: all 0.2s;
 }
 
 .auth-widget a:hover {
   text-decoration: underline;
+  opacity: 0.9;
 }
