@@ -13,7 +13,6 @@ export default function Home() {
           <div className="title-wrapper">
             <div className="pre-title">FLEET MANAGEMENT SIMPLIFIED</div>
             <h1>
-              <span className="title-gradient">Smarter Vehicle</span>
               <span className="title-br">Maintenance Tracking</span>
             </h1>
           </div>
