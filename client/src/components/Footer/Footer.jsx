@@ -55,16 +55,14 @@ export default function Footer() {
                   <FaGithub className="social-icon" />
                 </a>
               </div>            
-          </div>
-
-            {/* Footer Bottom */}
-            <div className="footer-bottom">
-              <div className="footer-left">
-                © {new Date().getFullYear()} Fleetly
+              <div className="footer-bottom">
+                <div className="footer-left">
+                  © {new Date().getFullYear()} Fleetly
+                </div>
+                <div className="footer-right">
+                  Powered by <strong>Eman</strong>
               </div>
-              <div className="footer-right">
-                Powered by <strong>Eman</strong>
-              </div>
+           </div>
           </div>          
         </div>
       </div>
