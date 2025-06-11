@@ -100,3 +100,15 @@
 .cta-btn:hover {
   background: #2980b9;
 }
+
+.auth-widget a {
+  display: block;
+  margin-top: 1rem;
+  text-align: center;
+  color: #3b82f6; /* Tailwind's blue-500 */
+  font-size: 0.875rem; /* text-sm */
+}
+
+.auth-widget a:hover {
+  text-decoration: underline;
+}

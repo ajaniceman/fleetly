@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth'; // Added import
+import { Link } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
 import './Hero.css';
 
 export default function Hero({ mode: initialMode = 'login' }) { // Changed prop name to avoid conflict
@@ -82,6 +84,9 @@ export default function Hero({ mode: initialMode = 'login' }) { // Changed prop 
           <button type="submit" className="cta-btn">
             {mode === 'login' ? 'Log In' : 'Register'}
           </button>
+          <Link to="/" className="flex items-center justify-center gap-2 mt-4 text-sm text-blue-500">
+           <FaArrowLeft /> Back to Home
+         </Link>
         </form>
       </div>
     </div>
