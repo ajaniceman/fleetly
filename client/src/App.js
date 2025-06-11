@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Hero from './components/Hero/Hero';
 import Home from './pages/Home'; 
-import Features from './features/Features/Features';
-import Testimonials from './features/Testimonials/Testimonials';
 import Footer from './components/Footer/Footer';
 import { useAuth } from './hooks/useAuth';
 import './App.css';
@@ -25,13 +23,12 @@ function App() {
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<HomeWithFooter />} />
-          <Route path="/features" element={<HomeWithFooter />} />
           
           {/* Auth Routes */}
           <Route path="/login" element={<AuthRoute element={<Hero mode="login" />} />} />
           <Route path="/register" element={<AuthRoute element={<Hero mode="register" />} />} />
           
-          {/* Protected Example (add your actual protected routes later) */}
+          {/* Protected Routes */}
           <Route 
             path="/dashboard" 
             element={
@@ -44,15 +41,12 @@ function App() {
       </div>
     </BrowserRouter>
   );
-
 }
 
 function HomeWithFooter() {
   return (
     <>
       <Home />
-      <Features />
-      <Testimonials />
       <Footer />
     </>
   );
