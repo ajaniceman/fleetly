@@ -49,8 +49,16 @@ export default function Hero() {
 
         <form id="auth-form" onSubmit={submit}>
           <div className="input-group">
-            <input name="email" type="email" required value={form.email} onChange={handleChange} />
-            <label>Email</label>
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Email"
+              required
+              value={form.email}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="input-group password-group">
@@ -84,9 +92,17 @@ export default function Hero() {
           )}
 
           {mode === 'register' && (
-            <div className="input-group name-group">
-              <input name="name" type="text" required value={form.name} onChange={handleChange} />
-              <label>Name</label>
+            <div className="input-group">
+              <label htmlFor="name">Name</label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Name"
+                required
+                value={form.name}
+                onChange={handleChange}
+              />
             </div>
           )}
 

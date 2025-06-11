@@ -147,11 +147,18 @@
 
 .input-group label {
   position: absolute;
-  top: 1rem;
+  top: 1rem;  
   left: 0.5rem;
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
   color: #7f8c8d;
   transition: all 0.3s;
   pointer-events: none;
+}
+
+.input-group:not(.password-group) input::placeholder {
+  opacity: 0.5;
 }
 
 .input-group .show-btn {
