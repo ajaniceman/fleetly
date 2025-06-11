@@ -13,10 +13,9 @@ export default function Footer() {
             <h3 className="footer-title">Fleetly</h3>
             <p className="footer-text">
               Simplifying vehicle maintenance and registration tracking for businesses and individuals.
-            </p>
-            <div className="footer-copyright">© {new Date().getFullYear()} Fleetly</div>
+            </p>            
           </div>
-
+          
           {/* Quick Links */}
           <div className="footer-col">
             <h3 className="footer-title">Quick Links</h3>
@@ -55,11 +54,16 @@ export default function Footer() {
               <a href="https://github.com" aria-label="GitHub">
                 <FaGithub className="social-icon" />
               </a>
+            </div>            
+            <div className="footer-bottom">
+              <div className="footer-left">
+                © {new Date().getFullYear()} Fleetly
+              </div>
+              <div className="footer-right">
+                Powered by <strong>Eman</strong>
+              </div>
             </div>
-            <div className="footer-credit">
-              Powered by <strong>Eman</strong>
-            </div>
-          </div>
+          </div>          
         </div>
       </div>
     </footer>
