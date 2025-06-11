@@ -1,22 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export function useAuth() {
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('user');
+    if (stored) setUser(JSON.parse(stored));
+  }, []);
 
   const login = async ({ email, password }) => {
     const res = await fetch('/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password }),
     });
     const json = await res.json();
-
     if (res.ok) {
       setUser(json.user);
       localStorage.setItem('token', json.token);
-      navigate('/dashboard');
+      localStorage.setItem('user', JSON.stringify(json.user));
+      navigate('/dashboard', { replace: true });
     }
     return json;
   };
@@ -29,22 +34,23 @@ export function useAuth() {
     const res = await fetch('/api/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password, name })
+      body: JSON.stringify({ email, password, name }),
     });
     const json = await res.json();
-
     if (res.ok) {
       setUser(json.user);
       localStorage.setItem('token', json.token);
-      navigate('/login');
+      localStorage.setItem('user', JSON.stringify(json.user));
+      navigate('/dashboard', { replace: true });
     }
     return json;
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
     setUser(null);
-    navigate('/login');
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/login', { replace: true });
   };
 
   return { user, login, register, logout };
