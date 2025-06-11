@@ -13,8 +13,8 @@ const vehicleRoutes = require('./routes/vehicleRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
 
 app.use('/api/auth', authRoutes);
-app.use('/api/vehicles', authenticate, vehicleRoutes);
-app.use('/api/services', authenticate, serviceRoutes);
+app.use('/api/vehicles', vehicleRoutes);
+app.use('/api/services', serviceRoutes);
 
 
 // Simple health check endpoint
