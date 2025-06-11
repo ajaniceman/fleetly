@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth'; // Added import
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import './Hero.css';
 
-export default function Hero({ mode: initialMode = 'login' }) { // Changed prop name to avoid conflict
+export default function Hero({ mode: initialMode = 'login' }) {
   const { login, register } = useAuth();
-  const [form, setForm] = useState({ email: '', password: '' });
-  const [mode, setMode] = useState(initialMode); // Added local state for mode
+  const location = useLocation();
+  const [form, setForm] = useState({ email: '', password: '', name: '' });
+  
+  // Derive mode from URL instead of maintaining internal state
+  const mode = location.pathname === '/register' ? 'register' : 'login';
 
   const switchMode = (m) => {
     document.getElementById('auth-form').classList.add('fade-out');
     setTimeout(() => {
-      setMode(m);
       document.getElementById('auth-form').classList.remove('fade-out');
     }, 300);
   };
@@ -30,24 +32,26 @@ export default function Hero({ mode: initialMode = 'login' }) { // Changed prop 
     } else {
       alert(result.message);
     }
-  };
+  }
 
   return (
     <div className="hero">
       <div className="auth-widget">
         <div className="mode-switch">
-          <button 
-            onClick={() => switchMode('login')} 
+          <Link 
+            to="/login"
             className={mode === 'login' ? 'active' : ''}
+            onClick={() => switchMode('login')}
           >
             Login
-          </button>
-          <button 
-            onClick={() => switchMode('register')} 
+          </Link>
+          <Link 
+            to="/register"
             className={mode === 'register' ? 'active' : ''}
+            onClick={() => switchMode('register')}
           >
             Register
-          </button>
+          </Link>
         </div>
         <form id="auth-form" onSubmit={submit}>
           <div className="input-group">
