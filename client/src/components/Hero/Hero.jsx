@@ -53,10 +53,8 @@ export default function Hero() {
             <label>Email</label>
           </div>
 
-          <div className="input-group">
-            <label htmlFor="password" className="sr-only">Password</label>
+          <div className="input-group password-group">
             <input
-              id="password"
               name="password"
               type={showPwd ? 'text' : 'password'}
               placeholder="Password"
@@ -68,6 +66,7 @@ export default function Hero() {
               type="button"
               className="show-btn"
               onClick={() => setShowPwd(v => !v)}
+              tabIndex={-1} // prevents tab focus on the button
             >
               {showPwd ? <FaEyeSlash /> : <FaEye />}
             </button>
