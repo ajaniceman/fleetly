@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
-import VehicleForm from '../components/VehicleForm';
+import VehicleForm from '../components/VehicleForm/VehicleForm';
 import './Dashboard.css';
 
 export default function Dashboard() {
