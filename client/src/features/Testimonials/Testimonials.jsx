@@ -1,4 +1,3 @@
-// src/components/Testimonials.jsx
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -22,17 +21,37 @@ const reviews = [
 export default function Testimonials() {
   return (
     <section className="testimonials">
-      <h2>What Our Users Say</h2>
-      <Swiper spaceBetween={20} slidesPerView={1} loop>
-        {reviews.map((r, i) => (
-          <SwiperSlide key={i}>
-            <div className="card">
-              <p>"{r.text}"</p>
-              <div className="author">— {r.name}</div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <div className="container">
+        <h2 className="section-title">What Our Users Say</h2>
+        <div className="testimonials-wrapper">
+          <Swiper
+            spaceBetween={30}
+            slidesPerView={1}
+            loop
+            grabCursor
+            className="testimonials-swiper"
+          >
+            {reviews.map((review, index) => (
+              <SwiperSlide key={index}>
+                <div className="testimonial-card">
+                  <div className="avatar-container">
+                    <img 
+                      src={review.avatar} 
+                      alt={review.name} 
+                      className="avatar"
+                    />
+                  </div>
+                  <blockquote className="quote">"{review.quote}"</blockquote>
+                  <div className="author-info">
+                    <p className="name">{review.name}</p>
+                    <p className="role">{review.role}</p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
     </section>
   );
 }
