@@ -9,41 +9,36 @@ export default function Home() {
     <div className="home-page">
       {/* Hero Section */}
       <section className="hero-section">
-        <div className="hero-content container">
-          <div className="title-wrapper">
-            <div className="pre-title">Smart. Reliable. Effortless.</div>
+      <div className="hero-content container">
+        <div className="title-wrapper">
+          <div className="pre-title">Smart. Reliable. Effortless.</div>
           <h1 className="hero-title">
             Fleet <span className="highlight">Maintenance</span> Made Easy
           </h1>
+        </div>
+        <p className="subtitle">
+          Simplify vehicle tracking with automatic reminders for maintenance, registrations, and inspections — all in one place.
+        </p>
+        <div className="cta-buttons">
+          <Link to="/register" className="btn primary">Get Started</Link>
+          <Link to="/login" className="btn secondary">Login</Link>
+        </div>
+        <div className="stats-grid">
+          <div className="stat-item">
+            <span className="stat-number">95%</span>
+            <span className="stat-label">On-time renewals</span>
           </div>
-          <p className="subtitle">
-            Simplify vehicle tracking with automatic reminders for maintenance, registrations, and inspections — all in one place.
-          </p>
-          <div className="cta-buttons">
-            <Link to="/register" className="btn primary">
-              Get Started
-            </Link>
-            <Link to="/login" className="btn secondary">
-              Login
-            </Link>
+          <div className="stat-item">
+            <span className="stat-number">30%</span>
+            <span className="stat-label">Cost reduction</span>
           </div>
-          <div className="stats-grid">
-            <div className="stat-item">
-              <span className="stat-number">95%</span>
-              <span className="stat-label">On-time renewals</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">30%</span>
-              <span className="stat-label">Cost reduction</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">24/7</span>
-              <span className="stat-label">Access</span>
-            </div>
+          <div className="stat-item">
+            <span className="stat-number">24/7</span>
+            <span className="stat-label">Access</span>
           </div>
         </div>
-        <div className="hero-image"></div>
-      </section>
+      </div>
+    </section>
 
       {/* Features Preview */}
       <section className="features-preview">

@@ -16,18 +16,22 @@
 .hero-section {
   background: linear-gradient(to bottom right, #1e3c72, #2a5298);
   color: white;
-  padding: 4rem 1rem;
+  padding: 5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
 .hero-title {
-  font-size: 2.8rem;
+  font-size: 3rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin: 0 auto 1rem;
+  line-height: 1.2;
 }
 
 .hero-title .highlight {
-  color: #ffd166; /* optional highlight for "Maintenance" */
+  color: #ffd166;
 }
 
 .hero-content {
@@ -35,6 +39,11 @@
   margin: 0 auto;
   padding: 0 2rem;
   z-index: 2;
+}
+
+.hero-content.container {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .hero-content h1 {
@@ -67,6 +76,14 @@
   min-width: 120px;
 }
 
+.stat-item {
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 1.2rem 2rem;
+  border-radius: 12px;
+  min-width: 130px;
+  text-align: center;
+}
+
 .stat-number {
   display: block;
   font-size: 1.8rem;
@@ -84,11 +101,12 @@
   display: flex;
   justify-content: center;
   gap: 1rem;
-  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
 }
 
 .btn {
-  padding: 1rem 2rem;
+  padding: 0.75rem 1.5rem;
   border-radius: 8px;
   font-weight: 600;
   text-decoration: none;
@@ -135,6 +153,7 @@
 
 /* Sections */
 .container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
@@ -184,6 +203,7 @@
   justify-content: center;
   gap: 1.5rem;
   margin-top: 2rem;
+  flex-wrap: wrap;
 }
   
   .cta-buttons {
@@ -200,8 +220,8 @@
 }
 
 .pre-title {
-  font-size: 0.9rem;
-  letter-spacing: 1.5px;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
   color: #d0dfff;
   margin-bottom: 0.5rem;
   font-weight: 600;
