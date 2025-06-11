@@ -16,10 +16,7 @@ export default function Footer() {
             </p>
             <div className="footer-copyright">© {new Date().getFullYear()} Fleetly</div>
           </div>
-          <div className="footer-credit">
-              Powered by <strong>Eman</strong>
-          </div>
-          
+
           {/* Quick Links */}
           <div className="footer-col">
             <h3 className="footer-title">Quick Links</h3>
@@ -58,7 +55,10 @@ export default function Footer() {
               <a href="https://github.com" aria-label="GitHub">
                 <FaGithub className="social-icon" />
               </a>
-            </div>            
+            </div>
+            <div className="footer-credit">
+              Powered by <strong>Eman</strong>
+            </div>
           </div>
         </div>
       </div>

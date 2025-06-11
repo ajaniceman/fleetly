@@ -21,6 +21,10 @@
 
 .footer-col {
   padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 240px; /* Ensures columns are tall enough */
 }
 
 .footer-title {
@@ -104,11 +108,12 @@
   transform: translateY(-3px);
 }
 
-.footer-copyright, .footer-credit {
-  color: #6c757d;
+.footer-credit,
+.footer-copyright {
+  margin-top: auto;
   font-size: 0.9rem;
-  margin-top: 2rem;
-  text-align: center;
+  color: #6c757d;
+  text-align: left;
 }
 
 .footer-credit {
