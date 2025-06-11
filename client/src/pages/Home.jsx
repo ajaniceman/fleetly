@@ -10,8 +10,17 @@ export default function Home() {
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content container">
-          <h1>Take Control of Your Fleet</h1>
-          <p className="subtitle">Streamline maintenance, track registrations, and reduce costs with Fleetly</p>
+          <div className="title-wrapper">
+            <div className="pre-title">FLEET MANAGEMENT SIMPLIFIED</div>
+            <h1>
+              <span className="title-gradient">Smarter Vehicle</span>
+              <span className="title-br">Maintenance Tracking</span>
+            </h1>
+          </div>
+          <p className="subtitle">
+            Never miss a service deadline again. Fleetly helps you stay on top of registrations, 
+            inspections, and maintenance with automated reminders.
+          </p>
           <div className="cta-buttons">
             <Link to="/register" className="btn primary">
               Get Started
