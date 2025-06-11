@@ -15,7 +15,7 @@ export default function Footer() {
               Simplifying vehicle maintenance and registration tracking for businesses and individuals.
             </p>            
           </div>
-          
+
           {/* Quick Links */}
           <div className="footer-col">
             <h3 className="footer-title">Quick Links</h3>
@@ -44,17 +44,20 @@ export default function Footer() {
           {/* Social */}
           <div className="footer-col">
             <h3 className="footer-title">Follow Us</h3>
-            <div className="footer-social">
-              <a href="https://twitter.com" aria-label="Twitter">
-                <FaTwitter className="social-icon" />
-              </a>
-              <a href="https://linkedin.com" aria-label="LinkedIn">
-                <FaLinkedin className="social-icon" />
-              </a>
-              <a href="https://github.com" aria-label="GitHub">
-                <FaGithub className="social-icon" />
-              </a>
-            </div>            
+              <div className="footer-social">
+                <a href="https://twitter.com" aria-label="Twitter">
+                  <FaTwitter className="social-icon" />
+                </a>
+                <a href="https://linkedin.com" aria-label="LinkedIn">
+                  <FaLinkedin className="social-icon" />
+                </a>
+                <a href="https://github.com" aria-label="GitHub">
+                  <FaGithub className="social-icon" />
+                </a>
+              </div>            
+          </div>
+
+            {/* Footer Bottom */}
             <div className="footer-bottom">
               <div className="footer-left">
                 © {new Date().getFullYear()} Fleetly
@@ -62,7 +65,6 @@ export default function Footer() {
               <div className="footer-right">
                 Powered by <strong>Eman</strong>
               </div>
-            </div>
           </div>          
         </div>
       </div>
