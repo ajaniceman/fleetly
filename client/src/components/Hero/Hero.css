@@ -89,13 +89,13 @@
 }
 
 .form-floating input {
-  padding-right: 3rem; /* Space for the toggle button */
+  padding-right:2.5rem; /* Space for the toggle button */
 }
 
 .form-floating label {
   position: absolute;
   top: 0.75rem;
-  left: 1rem;
+  left: 0.5rem;
   pointer-events: none;
   transition: all 0.2s ease;
 }
@@ -160,7 +160,7 @@
 .password-group .show-btn {
   position: absolute;
   top: 50%;
-  right: 0.75rem;
+  right: 0.4rem;
   transform: translateY(-50%);
   background: transparent;
   border: none;

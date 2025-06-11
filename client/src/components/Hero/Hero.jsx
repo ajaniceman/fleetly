@@ -58,7 +58,6 @@ export default function Hero() {
             <input
               type={showPwd ? 'text' : 'password'}
               className="form-control"
-              id="password"
               name="password"
               required
               value={form.password}
