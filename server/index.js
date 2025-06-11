@@ -9,7 +9,13 @@ app.use(cors());
 app.use(express.json());
 
 const authRoutes = require('./routes/authRoutes');
+const vehicleRoutes = require('./routes/vehicleRoutes');
+const serviceRoutes = require('./routes/serviceRoutes');
+
 app.use('/api/auth', authRoutes);
+app.use('/api/vehicles', authenticate, vehicleRoutes);
+app.use('/api/services', authenticate, serviceRoutes);
+
 
 // Simple health check endpoint
 app.get('/api/health', async (req, res) => {
