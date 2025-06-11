@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import './Hero.css';
 
-export default function Hero() {
-  const [mode, setMode] = useState('login');
+export default function Hero({ mode = 'login' }) {
+  const { login, register } = useAuth();
   const [form, setForm] = useState({ email: '', password: '' });
 
   const switchMode = m => {
@@ -16,15 +16,17 @@ export default function Hero() {
 
   const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const submit = async e => {
+  const submit = async (e) => {
     e.preventDefault();
-    const res = await fetch(`/api/auth/${mode}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
-    });
-    const json = await res.json();
-    alert(json.message);
+    const result = mode === 'login' 
+      ? await login(form) 
+      : await register(form);
+    
+    if (!result.error) {
+      // Success handled by useAuth's navigation
+    } else {
+      alert(result.message);
+    }
   };
 
   return (
