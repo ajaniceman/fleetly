@@ -12,12 +12,12 @@ export default function Home() {
         <div className="hero-content container">
           <div className="title-wrapper">
             <div className="pre-title">Smart. Reliable. Effortless.</div>
-          <h1>
-            <span className="title-br">Fleet Maintenance Made Easy</span>
+          <h1 className="hero-title">
+            Fleet <span className="highlight">Maintenance</span> Made Easy
           </h1>
           </div>
           <p className="subtitle">
-            Take control of your vehicles with automated tracking for maintenance, registrations, and inspections—all in one place.
+            Simplify vehicle tracking with automatic reminders for maintenance, registrations, and inspections — all in one place.
           </p>
           <div className="cta-buttons">
             <Link to="/register" className="btn primary">
