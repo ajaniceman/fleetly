@@ -16,6 +16,18 @@ const reviews = [
     role: "Independent Driver",
     avatar: "https://i.pravatar.cc/150?img=11",
   },
+  {
+    quote: "Tracking my fleet's maintenance has never been easier. Fleetly pays for itself in avoided repair costs.",
+    name: "David R.",
+    role: "Fleet Manager",
+    avatar: "https://i.pravatar.cc/150?img=7",
+  },
+  {
+    quote: "The registration reminders alone are worth it. No more last-minute DMV runs!",
+    name: "Lisa M.",
+    role: "Rideshare Driver",
+    avatar: "https://i.pravatar.cc/150?img=9",
+  }
 ];
 
 export default function Testimonials() {
