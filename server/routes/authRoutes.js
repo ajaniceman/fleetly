@@ -14,9 +14,13 @@ const generateToken = (userId) => {
 
 // REGISTER
 router.post('/register', async (req, res) => {
-  const { email, password, name } = req.body;
-
+  console.log('[REGISTER] body:', req.body);
+  
   try {
+    const { email, password, name } = req.body;
+    await pool.query('SELECT 1'); // Test DB connection
+    console.log('[REGISTER] DB is alive');
+
     // 1. Validation
     if (!email || !password || !name) {
       return res.status(400).json({ error: 'All fields are required' });
@@ -42,10 +46,10 @@ router.post('/register', async (req, res) => {
 
     // 4. Create user
     const [result] = await pool.query(
-      `INSERT INTO users (email, password_hash, name) 
-       VALUES (?, ?, ?)`,
+      'INSERT INTO users (email, password_hash, name) VALUES (?, ?, ?)',
       [email, hashedPassword, name]
     );
+    console.log('[REGISTER] Insert succeeded, ID:', result.insertId);
 
     // 5. Generate token
     const token = generateToken(result.insertId);

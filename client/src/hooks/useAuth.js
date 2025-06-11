@@ -22,7 +22,19 @@ export function useAuth() {
   };
 
   const register = async (userData) => {
-    // Similar to login
+    const res = await fetch('/api/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(userData),
+    });
+    const json = await res.json();
+    console.log('Register response:', json);
+    if (res.ok) {
+      setUser(json.user);
+      localStorage.setItem('token', json.token);
+      navigate('/');
+    }
+    return json;
   };
 
   const logout = () => {
