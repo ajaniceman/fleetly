@@ -6,7 +6,7 @@ import Hero from './components/Hero/Hero';
 import Footer from './components/Footer/Footer';
 import Dashboard from './pages/Dashboard'; // Adjusted import path to 'Dashboard'
 import VehicleServices from './pages/VehicleServices'; // Adjusted import path to 'VehicleServices'
-import VehicleDatesPage from './pages/VehicleDatesPage/VehicleDatesPage'; // Import the new dates page
+import VehicleDatesPage from './pages/VehicleDatesPage'; // Import the new dates page
 
 function App() {
   const { user } = useAuth();
