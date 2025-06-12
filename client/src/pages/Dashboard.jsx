@@ -7,25 +7,39 @@ export default function Dashboard() {
   const { user, logout } = useAuth();
   const [vehicles, setVehicles] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/vehicles', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }})
+    fetch('/api/vehicles', {
+      headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+    })
       .then(res => res.json())
-      .then(setVehicles);
+      .then(data => setVehicles(data))
+      .finally(() => setLoading(false));
   }, []);
 
   const handleAdd = async (data) => {
     const res = await fetch('/api/vehicles', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
       body: JSON.stringify(data)
     });
     if (res.ok) {
-      const vehicle = await res.json();
-      setVehicles([vehicle, ...vehicles]);
+      const newV = await res.json();
+      setVehicles([newV, ...vehicles]);
       setShowForm(false);
     }
   };
+
+  const handleAction = (action, v) => {
+    // Stub for actions: edit, service, delete
+    alert(`${action} on ${v.maker} ${v.model}`);
+  };
+
+  if (loading) return <div className="loading">Loading...</div>;
 
   return (
     <div className="dashboard">
@@ -41,19 +55,25 @@ export default function Dashboard() {
       )}
 
       <div className="vehicle-table">
-        {/* Table header same as before */}
+        <div className="table-header">
+          <div>Type</div><div>Maker</div><div>Model</div><div>Engine</div><div>Reg. Date</div><div>Actions</div>
+        </div>
+
         {vehicles.length === 0 ? (
-          <div>No vehicles. Add one!</div>
-        ) : vehicles.map(v => (
-          <div key={v.id} className="table-row">
-            <div>{v.maker}</div><div>{v.model}</div><div>{v.engine}</div>
-            <div>{new Date(v.registration_date).toLocaleDateString()}</div>
+          <div className="no-vehicles">No vehicles added yet!</div>
+        ) : vehicles.map((v, i) => (
+          <div key={v.id} className={`table-row animated-row`}>
             <div>{v.type}</div>
+            <div>{v.maker}</div>
+            <div>{v.model}</div>
+            <div>{v.engine}</div>
+            <div>{new Date(v.registration_date).toLocaleDateString()}</div>
             <div className="actions">
-              <select onChange={(e) => { /* handle edit/service/delete */ e.target.value = ''; }}>
-                <option>Actions</option>
+              <select onChange={e => handleAction(e.target.value, v)}>
+                <option value="">Actions</option>
+                <option value="service">Services</option>
+                <option value="dates">Dates</option>
                 <option value="edit">Edit</option>
-                <option value="service">Service</option>
                 <option value="delete">Delete</option>
               </select>
             </div>
