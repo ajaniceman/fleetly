@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ServiceForm from '../components/ServiceForm/ServiceForm'; // Corrected import path
-import './VehicleServices.css'; // Keep this name for the CSS file for consistency
+import './VehicleServicesPage.css'; // Keep this name for the CSS file for consistency
 
 export default function VehicleServices() { // Renamed component for consistency with your file name
   const { id } = useParams(); // Get the vehicle ID from the URL
@@ -132,7 +132,8 @@ export default function VehicleServices() { // Renamed component for consistency
   return (
     <div className="vehicle-services-page">
       <div className="services-header">
-        <h1>Services for {vehicle.make} {vehicle.model} ({vehicle.licensePlate || 'N/A'})</h1>
+        {/* Updated heading to only show make and model */}
+        <h1>Services for {vehicle.make} {vehicle.model}</h1>
         <button onClick={() => navigate('/dashboard')} className="back-to-dashboard-btn">
           Back to Dashboard
         </button>
