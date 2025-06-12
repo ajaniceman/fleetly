@@ -14,28 +14,32 @@ const commonServiceTypes = [
 ];
 
 export default function ServiceForm({ onSubmit, onCancel, vehicleType, initial = {} }) {
+  // Initialize form state with initial values (for editing) or empty strings (for adding)
+  // Use optional chaining (?.) to safely access properties of 'initial'
   const [form, setForm] = useState({
-    service_date: initial.service_date ? initial.service_date.split('T')[0] : '',
-    service_type: initial.service_type || '',
-    description: initial.description || '',
-    cost: initial.cost || '',
-    odometer_reading: initial.odometer_reading || '',
-    engine_hours: initial.engine_hours || '',
-    next_service_odometer: initial.next_service_odometer || '',
-    next_service_hours: initial.next_service_hours || '',
+    service_date: initial?.service_date ? initial.service_date.split('T')[0] : '',
+    service_type: initial?.service_type || '',
+    description: initial?.description || '',
+    cost: initial?.cost || '',
+    odometer_reading: initial?.odometer_reading || '',
+    service_hours: initial?.service_hours || '', // Corrected from engine_hours to service_hours as per DB schema, but keep in mind frontend uses engine_hours for input
+    engine_hours: initial?.engine_hours || '', // Added this to match the input name for engine hours
+    next_service_odometer: initial?.next_service_odometer || '',
+    next_service_hours: initial?.next_service_hours || '',
   });
 
   // Effect to update form if initial values change (e.g., when switching from add to edit mode)
   useEffect(() => {
     setForm({
-      service_date: initial.service_date ? initial.service_date.split('T')[0] : '',
-      service_type: initial.service_type || '',
-      description: initial.description || '',
-      cost: initial.cost || '',
-      odometer_reading: initial.odometer_reading || '',
-      engine_hours: initial.engine_hours || '',
-      next_service_odometer: initial.next_service_odometer || '',
-      next_service_hours: initial.next_service_hours || '',
+      service_date: initial?.service_date ? initial.service_date.split('T')[0] : '',
+      service_type: initial?.service_type || '',
+      description: initial?.description || '',
+      cost: initial?.cost || '',
+      odometer_reading: initial?.odometer_reading || '',
+      service_hours: initial?.service_hours || '', // For internal state management if needed, check DB consistency
+      engine_hours: initial?.engine_hours || '', // To pre-fill the input field
+      next_service_odometer: initial?.next_service_odometer || '',
+      next_service_hours: initial?.next_service_hours || '',
     });
   }, [initial]);
 
@@ -52,7 +56,7 @@ export default function ServiceForm({ onSubmit, onCancel, vehicleType, initial =
       ...form,
       cost: parseFloat(form.cost) || 0, // Convert to number
       odometer_reading: parseInt(form.odometer_reading, 10) || null, // Convert to number or null
-      engine_hours: parseFloat(form.engine_hours) || null, // Convert to number or null
+      engine_hours: parseFloat(form.engine_hours) || null, // Ensure this matches backend expected name
       next_service_odometer: parseInt(form.next_service_odometer, 10) || null,
       next_service_hours: parseFloat(form.next_service_hours) || null,
     };
@@ -66,7 +70,7 @@ export default function ServiceForm({ onSubmit, onCancel, vehicleType, initial =
 
   return (
     <form className="service-form" onSubmit={handleSubmit}>
-      <h3>{initial.id ? 'Edit Service Record' : 'Add New Service Record'}</h3>
+      <h3>{initial?.id ? 'Edit Service Record' : 'Add New Service Record'}</h3> {/* Use optional chaining here too */}
       <div className="service-form-grid">
         <div>
           <label htmlFor="service_date">Service Date</label>
@@ -143,7 +147,7 @@ export default function ServiceForm({ onSubmit, onCancel, vehicleType, initial =
                 id="engine_hours"
                 type="number"
                 name="engine_hours"
-                value={form.engine_hours}
+                value={form.engine_hours} // Ensure this matches state and backend name
                 onChange={handleChange}
                 step="0.1" // Allow decimal values for hours
                 min="0"
@@ -179,7 +183,7 @@ export default function ServiceForm({ onSubmit, onCancel, vehicleType, initial =
 
       <div className="actions-form">
         <button type="submit" className="save-btn">
-          {initial.id ? 'Update Service' : 'Add Service'}
+          {initial?.id ? 'Update Service' : 'Add Service'} {/* Use optional chaining here too */}
         </button>
         <button type="button" className="cancel-btn" onClick={onCancel}>
           Cancel

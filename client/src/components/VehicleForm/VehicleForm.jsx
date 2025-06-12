@@ -5,16 +5,32 @@ const types = ['Car', 'Truck', 'Excavator', 'Roller', 'Van', 'Bus'];
 
 export default function VehicleForm({ onSubmit, onCancel, initial = {} }) {
   // Initialize form state with initial values (for editing) or empty strings (for adding)
+  // Use optional chaining (?.) to safely access properties of 'initial'
   const [form, setForm] = useState({
-    type: initial.type || '',
-    make: initial.make || '', // Changed from 'maker' to 'make' to match SQL
-    model: initial.model || '',
-    year: initial.year || '', // New field
-    licensePlate: initial.licensePlate || '', // New field, matches SQL 'license_plate'
-    vin: initial.vin || '', // New field
-    engine: initial.engine || '',
-    registration_date: initial.registration_date ? initial.registration_date.split('T')[0] : '' // Format date for input type="date"
+    type: initial?.type || '',
+    make: initial?.make || '', // Changed from 'maker' to 'make' to match SQL
+    model: initial?.model || '',
+    year: initial?.year || '', // New field
+    licensePlate: initial?.licensePlate || '', // New field, matches SQL 'license_plate'
+    vin: initial?.vin || '', // New field
+    engine: initial?.engine || '',
+    registration_date: initial?.registration_date ? initial.registration_date.split('T')[0] : '' // Format date for input type="date"
   });
+
+  // Effect to update form if initial values change (e.g., when switching from add to edit mode)
+  // Also using optional chaining here
+  useEffect(() => {
+    setForm({
+      type: initial?.type || '',
+      make: initial?.make || '',
+      model: initial?.model || '',
+      year: initial?.year || '',
+      licensePlate: initial?.licensePlate || '',
+      vin: initial?.vin || '',
+      engine: initial?.engine || '',
+      registration_date: initial?.registration_date ? initial.registration_date.split('T')[0] : ''
+    });
+  }, [initial]);
 
   // Handle input changes, updating the corresponding state field
   const handleChange = (e) => {
