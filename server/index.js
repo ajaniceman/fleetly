@@ -49,7 +49,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(clientBuildPath));
 
   // For any other GET request, serve the index.html
-  app.get('/*', (req, res) => { // Changed from '/*splat' for broader catch-all
+  app.get('/*splat', (req, res) => { // Changed from '/*splat' for broader catch-all
     res.sendFile(path.join(clientBuildPath, 'index.html'));
   });
 }
