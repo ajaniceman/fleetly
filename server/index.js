@@ -1,27 +1,35 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const path = require('path'); // Add this line
+const path = require('path');
 const pool = require('./config/dbPool');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Import authentication middleware
+const authenticateToken = require('./middleware/auth'); // Make sure this path is correct
+
+// Import routes
 const authRoutes = require('./routes/authRoutes');
 const vehicleRoutes = require('./routes/vehicleRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
 
+// Public routes (authentication is not required)
 app.use('/api/auth', authRoutes);
-app.use('/api/vehicles', vehicleRoutes);
-app.use('/api/services', serviceRoutes);
+
+// Protected routes (authentication IS required)
+// Apply the authenticateToken middleware before the route handlers
+app.use('/api/vehicles', authenticateToken, vehicleRoutes);
+app.use('/api/services', authenticateToken, serviceRoutes); // Assuming service routes also require authentication
 
 
 // Simple health check endpoint
 app.get('/api/health', async (req, res) => {
   try {
     await pool.query('SELECT 1');
-    res.json({ 
+    res.json({
       status: 'ok',
       database: 'connected',
       message: 'Fleetly API is running'
@@ -37,13 +45,13 @@ app.get('/api/health', async (req, res) => {
 
 // Serve static files from React in production
 if (process.env.NODE_ENV === 'production') {
-    const clientBuildPath = path.join(__dirname, 'public');    
-    app.use(express.static(clientBuildPath));
+  const clientBuildPath = path.join(__dirname, 'public');
+  app.use(express.static(clientBuildPath));
 
-    app.get('/*splat', (req, res) => {
-      res.sendFile(path.join(clientBuildPath, 'index.html'));
-});
-
+  // For any other GET request, serve the index.html
+  app.get('/*', (req, res) => { // Changed from '/*splat' for broader catch-all
+    res.sendFile(path.join(clientBuildPath, 'index.html'));
+  });
 }
 
 const PORT = process.env.PORT || 5555;
