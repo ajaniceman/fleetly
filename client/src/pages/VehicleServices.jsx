@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ServiceForm from '../components/ServiceForm/ServiceForm'; // Corrected import path
-import './VehicleServicesPage.css'; // Keep this name for the CSS file for consistency
+import './VehicleServices.css'; // Keep this name for the CSS file for consistency
 
 export default function VehicleServices() { // Renamed component for consistency with your file name
   const { id } = useParams(); // Get the vehicle ID from the URL
