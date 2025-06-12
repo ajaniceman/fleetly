@@ -1,19 +1,19 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'; // Removed BrowserRouter
 import { useAuth } from './hooks/useAuth';
 import Home from './pages/Home';
 import Hero from './components/Hero/Hero';
 import Footer from './components/Footer/Footer';
-import Dashboard from './pages/Dashboard'; // Ensure correct path if it's Dashboard/index.js
-import VehicleServicesPage from './components/ServiceForm/ServiceForm'; // Import the new services page
+import Dashboard from './pages/Dashboard';
+import VehicleServicesPage from './pages/VehicleServices';
 
 function App() {
   const { user } = useAuth();
 
   return (
-    <BrowserRouter> {/* Added BrowserRouter here as it's the top-level router */}
+    <> {/* Removed BrowserRouter and its closing tag */}
       <Routes>
-        <Route path="/" element={<HomeWithFooter />} /> {/* Use the helper component */}
+        <Route path="/" element={<HomeWithFooter />} />
         <Route path="/login" element={!user ? <AuthPage mode="login"/> : <Navigate to="/dashboard" replace />} />
         <Route path="/register" element={!user ? <AuthPage mode="register"/> : <Navigate to="/dashboard" replace />} />
 
@@ -25,7 +25,7 @@ function App() {
         {/* Fallback route - redirects based on user login status */}
         <Route path="*" element={<Navigate to={user ? "/dashboard" : "/"} replace />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 
