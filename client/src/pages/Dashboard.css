@@ -1,6 +1,6 @@
 .dashboard {
   padding: 2rem;
-  max-width: 1000px;
+  max-width: 1200px; /* Increased max-width to accommodate more columns */
   margin: auto;
   font-family: 'Inter', sans-serif;
 }
@@ -9,6 +9,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1.5rem; /* Added some margin for spacing */
+}
+
+.dashboard-header h1 {
+  color: #333;
+  font-size: 2em;
 }
 
 .logout-btn {
@@ -16,62 +22,117 @@
   color: white;
   border: none;
   border-radius: 4px;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem; /* Slightly larger padding */
   cursor: pointer;
+  font-size: 0.9em;
+  transition: background 0.2s ease;
 }
 .logout-btn:hover { background: #c0392b; }
 
 .add-btn {
-  background: #3498db;
+  background: #28a745; /* Changed to a more "add" friendly green */
   color: white;
-  padding: 0.75rem 1.25rem;
+  padding: 0.85rem 1.5rem; /* Slightly larger padding */
   border-radius: 4px;
   border: none;
-  margin: 1rem 0;
+  margin: 1.5rem 0; /* Adjusted margin */
   cursor: pointer;
+  font-size: 1em;
+  font-weight: 500;
+  transition: background 0.2s ease;
 }
-.add-btn:hover { background: #2980b9; }
+.add-btn:hover { background: #218838; } /* Darker green on hover */
 
 .vehicle-table {
   border: 1px solid #ddd;
-  border-radius: 6px;
+  border-radius: 8px; /* Slightly more rounded corners */
   overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Added a subtle shadow */
 }
 
 .table-header, .table-row {
+  /* Updated grid-template-columns for the new fields */
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 150px;
-  padding: 0.75rem 1rem;
+  grid-template-columns: 0.5fr 1fr 1.2fr 1.2fr 0.7fr 1.5fr 1.5fr 1.2fr; /* Adjusted column widths */
+  padding: 0.9rem 1.2rem; /* Increased padding for better spacing */
+  align-items: center;
+  border-bottom: 1px solid #eee; /* Light border between rows */
 }
 
 .table-header {
-  background: #f5f5f5;
+  background: #e9ecef; /* Lighter header background */
   font-weight: 600;
+  color: #495057;
+  text-transform: uppercase;
+  font-size: 0.85em;
+  letter-spacing: 0.5px;
 }
 
 .table-row {
   background: white;
-  transition: background 0.2s;
+  transition: background 0.2s ease;
+  font-size: 0.9em;
+}
+.table-row:last-child {
+  border-bottom: none; /* No border for the last row */
 }
 .table-row:hover {
-  background: #f0f8ff;
+  background: #f8f9fa; /* Lighter hover background */
 }
 
 .actions select {
-  padding: 0.4rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  font-size: 0.9em;
+  width: 100%; /* Make select fill the column */
+}
+.actions select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .loading, .no-vehicles {
-  padding: 1.5rem;
+  padding: 2rem; /* Increased padding */
   text-align: center;
-  color: #666;
+  color: #777;
+  font-size: 1.1em;
+}
+
+.no-vehicles {
+  background-color: #fdfefe;
+  border-radius: 8px;
+  margin-top: 1rem;
 }
 
 /* Animation */
 @keyframes rowFadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(15px); } /* Slightly larger initial translate */
   to { opacity: 1; transform: translateY(0px); }
 }
 .animated-row {
-  animation: rowFadeIn 0.4s ease-out;
+  animation: rowFadeIn 0.5s ease-out forwards; /* Longer animation, stays at end state */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 1rem;
+  }
+  .table-header, .table-row {
+    grid-template-columns: repeat(2, 1fr); /* Simpler grid for small screens */
+    gap: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  .table-header div, .table-row div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .table-header div:nth-child(n+5), .table-row div:nth-child(n+5) { /* Hide less critical columns on small screens */
+    display: none;
+  }
 }
