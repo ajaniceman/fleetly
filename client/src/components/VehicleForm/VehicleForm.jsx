@@ -4,6 +4,9 @@ import './VehicleForm.css';
 const types = ['Car', 'Truck', 'Excavator', 'Roller', 'Van', 'Bus'];
 
 export default function VehicleForm({ onSubmit, onCancel, initial = {} }) {
+  // Determine if registration date should be required based on initial type or form type
+  const isRegistrationRequired = (type) => ['Car', 'Truck', 'Van', 'Bus'].includes(type);
+
   // Initialize form state with initial values (for editing) or empty strings (for adding)
   // Use optional chaining (?.) to safely access properties of 'initial'
   const [form, setForm] = useState({
@@ -41,10 +44,15 @@ export default function VehicleForm({ onSubmit, onCancel, initial = {} }) {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Call the onSubmit prop with the current form data
-    // Ensure 'make' is used instead of 'maker' for consistency with backend
+
+    // If registration is not required for the current type, ensure it's not sent as empty string if left blank
+    const dataToSubmit = { ...form };
+    if (!isRegistrationRequired(form.type) && !dataToSubmit.registration_date) {
+        dataToSubmit.registration_date = null; // Send null or undefined to the backend
+    }
+
     onSubmit({
-      ...form,
+      ...dataToSubmit, // Use the potentially modified dataToSubmit
       // Convert year to a number, as it's an INT in SQL
       year: parseInt(form.year, 10),
     });
@@ -87,7 +95,14 @@ export default function VehicleForm({ onSubmit, onCancel, initial = {} }) {
         </div>
         <div>
           <label htmlFor="registration_date">Registration Date</label>
-          <input id="registration_date" type="date" name="registration_date" value={form.registration_date} onChange={handleChange} required />
+          <input
+            id="registration_date"
+            type="date"
+            name="registration_date"
+            value={form.registration_date}
+            onChange={handleChange}
+            required={isRegistrationRequired(form.type)} // Make required conditional
+          />
         </div>
       </div>
       <div className="actions-form">
