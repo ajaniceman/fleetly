@@ -8,6 +8,7 @@ export default function Dashboard() {
   const { user, logout } = useAuth();
   const [vehicles, setVehicles] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [editingVehicle, setEditingVehicle] = useState(null); // New state to hold the vehicle being edited
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate(); // Initialize useNavigate
 
@@ -29,28 +30,54 @@ export default function Dashboard() {
       .finally(() => setLoading(false));
   }, []);
 
-  const handleAdd = async (data) => {
+  // Combined function to handle both adding and editing (saving) a vehicle
+  const handleSave = async (formData) => {
+    let res;
+    let url;
+    let method;
+
+    if (editingVehicle) {
+      // If editingVehicle is set, it's an UPDATE (PUT) operation
+      url = `/api/vehicles/${editingVehicle.id}`;
+      method = 'PUT';
+    } else {
+      // Otherwise, it's a new ADD (POST) operation
+      url = '/api/vehicles';
+      method = 'POST';
+    }
+
     try {
-      const res = await fetch('/api/vehicles', {
-        method: 'POST',
+      res = await fetch(url, {
+        method: method,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(formData)
       });
+
       if (res.ok) {
-        const newV = await res.json();
-        setVehicles([newV, ...vehicles]);
-        setShowForm(false);
+        const savedVehicle = await res.json();
+        setVehicles(prevVehicles => {
+          if (editingVehicle) {
+            // Update the existing vehicle in the list
+            return prevVehicles.map(v => v.id === savedVehicle.id ? savedVehicle : v);
+          } else {
+            // Add new vehicle to the top of the list
+            return [savedVehicle, ...prevVehicles];
+          }
+        });
+        setShowForm(false); // Hide the form
+        setEditingVehicle(null); // Clear the editing state
+        alert(`Vehicle ${editingVehicle ? 'updated' : 'added'} successfully!`);
       } else {
         // Handle API errors, e.g., show a message to the user
         const errorData = await res.json();
-        alert(`Failed to add vehicle: ${errorData.message || res.statusText}`);
+        alert(`Failed to ${editingVehicle ? 'update' : 'add'} vehicle: ${errorData.message || res.statusText}`);
       }
     } catch (error) {
-      console.error("Error adding vehicle:", error);
-      alert("An unexpected error occurred while adding the vehicle.");
+      console.error(`Error ${editingVehicle ? 'updating' : 'adding'} vehicle:`, error);
+      alert(`An unexpected error occurred while ${editingVehicle ? 'updating' : 'adding'} the vehicle.`);
     }
   };
 
@@ -86,10 +113,8 @@ export default function Dashboard() {
         navigate(`/vehicles/${vehicle.id}/dates`);
         break;
       case 'edit':
-        // This will likely involve opening the VehicleForm in edit mode,
-        // or navigating to a dedicated edit page.
-        // For now, let's just log and you can implement the form pre-population.
-        navigate(`/vehicles/${vehicle.id}/edit`);
+        setEditingVehicle(vehicle); // Set the vehicle to be edited
+        setShowForm(true); // Show the form
         break;
       case 'delete':
         handleDelete(vehicle.id);
@@ -108,10 +133,21 @@ export default function Dashboard() {
         <button onClick={logout} className="logout-btn">Logout</button>
       </div>
 
+      {/* Conditionally render VehicleForm or Add Vehicle button */}
       {showForm ? (
-        <VehicleForm onSubmit={handleAdd} onCancel={() => setShowForm(false)} />
+        <VehicleForm
+          onSubmit={handleSave} // Form submits to the new handleSave function
+          onCancel={() => {
+            setShowForm(false);
+            setEditingVehicle(null); // Clear editing state on cancel
+          }}
+          initial={editingVehicle} // Pass the editingVehicle for pre-population
+        />
       ) : (
-        <button onClick={() => setShowForm(true)} className="add-btn">+ Add Vehicle</button>
+        <button onClick={() => {
+          setEditingVehicle(null); // Ensure no vehicle is being edited when adding
+          setShowForm(true); // Show the form for adding
+        }} className="add-btn">+ Add Vehicle</button>
       )}
 
       <div className="vehicle-table">
