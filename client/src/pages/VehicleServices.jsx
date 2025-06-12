@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './VehicleServices.css'; // We'll create this CSS file next
+import ServiceForm from '../../components/ServiceForm/ServiceForm';
 
 export default function VehicleServicesPage() {
   const { id } = useParams(); // Get the vehicle ID from the URL
