@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import DateForm from '../../components/DateForm/DateForm'; // We'll create this next
+import DateForm from '../components/DateForm/DateForm'; // We'll create this next
 import './VehicleDatesPage.css'; // We'll create this CSS file next
 
 export default function VehicleDatesPage() {
