@@ -4,8 +4,8 @@ import { useAuth } from './hooks/useAuth';
 import Home from './pages/Home';
 import Hero from './components/Hero/Hero';
 import Footer from './components/Footer/Footer';
-import Dashboard from './pages/Dashboard/Dashboard'; // Ensure correct path if it's Dashboard/index.js
-import VehicleServicesPage from './pages/VehicleServicesPage/VehicleServicesPage'; // Import the new services page
+import Dashboard from './pages/Dashboard'; // Ensure correct path if it's Dashboard/index.js
+import VehicleServicesPage from './components/ServiceForm/ServiceForm'; // Import the new services page
 
 function App() {
   const { user } = useAuth();
