@@ -1,0 +1,110 @@
+.date-form {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.date-form h3 {
+  color: #34495e;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.6em;
+  text-align: center;
+}
+
+.date-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.date-form label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95em;
+}
+
+.date-form input[type="text"],
+.date-form input[type="number"],
+.date-form input[type="date"],
+.date-form select,
+.date-form textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+.date-form input:focus,
+.date-form select:focus,
+.date-form textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.date-form textarea {
+  resize: vertical; /* Allow vertical resizing */
+  min-height: 80px;
+}
+
+.full-width {
+  grid-column: 1 / -1; /* Make notes take full width */
+}
+
+.actions-form {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.save-btn, .cancel-btn {
+  border: none;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 500;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.save-btn {
+  background: #28a745; /* Green */
+}
+.save-btn:hover {
+  background: #218838;
+  transform: translateY(-1px);
+}
+.cancel-btn {
+  background: #6c757d; /* Grey */
+}
+.cancel-btn:hover {
+  background: #5a6268;
+  transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .date-form-grid {
+    grid-template-columns: 1fr; /* Stack columns on small screens */
+  }
+  .actions-form {
+    flex-direction: column; /* Stack buttons on small screens */
+    align-items: stretch;
+  }
+  .save-btn, .cancel-btn {
+    width: 100%; /* Full width buttons */
+  }
+}
