@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import './VehicleServices.css'; // We'll create this CSS file next
-import ServiceForm from '../components/ServiceForm/ServiceForm';
+import ServiceForm from '../components/ServiceForm/ServiceForm'; // Corrected import path
+import './VehicleServices.css'; // Keep this name for the CSS file for consistency
 
-export default function VehicleServicesPage() {
+export default function VehicleServices() { // Renamed component for consistency with your file name
   const { id } = useParams(); // Get the vehicle ID from the URL
   const navigate = useNavigate();
   const [vehicle, setVehicle] = useState(null); // To store the specific vehicle's details
@@ -175,12 +175,26 @@ export default function VehicleServicesPage() {
             </div>
             {services.map(s => (
               <div key={s.id} className="table-row">
-                <div>{new Date(s.service_date).toLocaleDateString()}</div>
-                <div>{s.service_type}</div>
+                {/* Safely display date, checking if it's a valid date string */}
+                <div>
+                  {s.serviceDate && !isNaN(new Date(s.serviceDate)) // Check if date exists and is valid
+                    ? new Date(s.serviceDate).toLocaleDateString()
+                    : 'N/A'}
+                </div>
+                <div>{s.serviceType || 'N/A'}</div> {/* Use s.serviceType for camelCase */}
                 <div>{s.description || 'N/A'}</div>
-                <div>${s.cost ? s.cost.toFixed(2) : '0.00'}</div>
-                {['Car', 'Truck', 'Van', 'Bus'].includes(vehicle.type) && <div>{s.odometer_reading || 'N/A'}</div>}
-                {['Excavator', 'Roller'].includes(vehicle.type) && <div>{s.engine_hours || 'N/A'}</div>}
+                {/* Safely display cost, ensuring it's a number */}
+                <div>
+                  ${s.cost !== null && s.cost !== undefined && !isNaN(s.cost)
+                    ? s.cost.toFixed(2)
+                    : '0.00'}
+                </div>
+                {['Car', 'Truck', 'Van', 'Bus'].includes(vehicle.type) && (
+                  <div>{s.odometerReading || 'N/A'}</div> // Use s.odometerReading for camelCase
+                )}
+                {['Excavator', 'Roller'].includes(vehicle.type) && (
+                  <div>{s.engineHours || 'N/A'}</div> // Use s.engineHours for camelCase
+                )}
                 <div className="actions">
                   <button onClick={() => {
                     setEditingService(s);
