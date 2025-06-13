@@ -1,0 +1,112 @@
+/* Reusing variables from global styles */
+:root {
+  --primary-color: #3498db; /* Blue */
+  --secondary-color: #2ecc71; /* Green */
+  --dark-background: #2c3e50; /* Dark Blue-Grey */
+  --light-background: #f8f9fa; /* Off-White */
+  --text-dark: #333;
+  --border-color: #e0e0e0;
+  --error-color: #e74c3c;
+  --success-color: #27ae60;
+}
+
+.verify-email-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--dark-background), var(--primary-color));
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.verify-email-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 450px;
+  padding: 2.5rem;
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+}
+
+.status-icon {
+  font-size: 3em;
+  margin-bottom: 1rem;
+}
+
+.verify-email-card h2 {
+  font-size: 2em;
+  color: var(--dark-background);
+  margin-bottom: 1rem;
+}
+
+.verification-status {
+  font-size: 1.1em;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  padding: 0.8rem;
+  border-radius: 8px;
+}
+
+.verification-status.success {
+  color: var(--success-color);
+  background-color: #d4edda; /* Light green */
+  border: 1px solid var(--success-color);
+}
+
+.verification-status.failure {
+  color: var(--error-color);
+  background-color: #f8d7da; /* Light red */
+  border: 1px solid var(--error-color);
+}
+
+.login-button, .back-home-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.login-button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.9rem 2.2rem;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.login-button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+.back-home-link {
+  color: var(--primary-color);
+  margin-left: 1rem; /* Spacing if two buttons are side-by-side */
+  padding: 0.9rem 1.5rem;
+  border: 2px solid var(--primary-color);
+  background-color: transparent;
+}
+
+.back-home-link:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .verify-email-card {
+    padding: 1.5rem;
+  }
+  .login-button, .back-home-link {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 1rem; /* Stack buttons */
+  }
+}
