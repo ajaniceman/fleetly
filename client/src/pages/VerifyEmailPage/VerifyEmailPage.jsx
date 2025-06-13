@@ -20,6 +20,7 @@ export default function VerifyEmailPage() {
       }
 
       try {
+        // This is the crucial API call to your backend's verification endpoint
         const response = await fetch(`/api/auth/verify-email?token=${token}`);
         const data = await response.json();
 
@@ -40,7 +41,7 @@ export default function VerifyEmailPage() {
     };
 
     verifyEmail();
-  }, [token]);
+  }, [token]); // Rerun effect if token changes (though it shouldn't for this page)
 
   return (
     <div className="verify-email-page-container">
