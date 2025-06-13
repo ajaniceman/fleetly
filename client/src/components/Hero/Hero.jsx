@@ -15,6 +15,12 @@ export default function Hero() {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    // Reset form and error when switching mode
+    setForm({ email: '', password: '', name: '' });
+    setError('');
+  }, [mode]);
+
+  useEffect(() => {
     const pwd = form.password;
     setPwdChecks({
       minLength: pwd.length >= 8,
@@ -28,53 +34,82 @@ export default function Hero() {
 
   const submit = async (e) => {
     e.preventDefault();
-    setError('');
-    const result = mode === 'login'
-      ? await login(form)
-      : await register(form);
+    setError(''); // Clear previous errors
+
+    let result;
+    if (mode === 'login') {
+      result = await login(form);
+    } else {
+      // Basic frontend validation for register mode
+      if (!pwdChecks.minLength || !pwdChecks.hasNumber) {
+        setError('Password must be at least 8 characters and contain a number.');
+        return;
+      }
+      result = await register(form);
+    }
 
     if (result.error) {
       setError(result.error);
-      if (mode === 'login') setForm(prev => ({ ...prev, password: '' }));
+      if (mode === 'login') setForm(prev => ({ ...prev, password: '' })); // Clear password on login error
     }
   };
 
   return (
-    <div className="hero">
-      <div className="auth-widget">
-        <div className="mode-switch">
-          <Link to="/login" className={mode === 'login' ? 'active' : ''}>Login</Link>
-          <Link to="/register" className={mode === 'register' ? 'active' : ''}>Register</Link>
+    <div className="auth-page-container">
+      <div className="auth-card animate-scale-in">
+        <div className="card-header">
+          <Link to="/" className="back-home-link">
+            <FaArrowLeft className="back-arrow-icon" /> Back to Home
+          </Link>
+          <h2>{mode === 'login' ? 'Welcome Back!' : 'Join Fleetly Today'}</h2>
+          <p className="card-subtitle">
+            {mode === 'login' ? 'Sign in to access your dashboard.' : 'Manage your fleet smarter, not harder.'}
+          </p>
         </div>
 
-        <form id="auth-form" onSubmit={submit}>
+        <div className="mode-switch-tabs">
+          <Link to="/login" className={`tab-item ${mode === 'login' ? 'active' : ''}`}>
+            Login
+          </Link>
+          <Link to="/register" className={`tab-item ${mode === 'register' ? 'active' : ''}`}>
+            Register
+          </Link>
+        </div>
+
+        <form id="auth-form" onSubmit={submit} className="auth-form-content">
+          {error && <div className="form-error-message">{error}</div>}
+
           <div className="input-group">
             <label htmlFor="email">Email</label>
             <input
               id="email"
               name="email"
               type="email"
-              placeholder="Email"
+              placeholder="your@example.com"
               required
               value={form.email}
               onChange={handleChange}
+              className="input-field"
             />
           </div>
 
           <div className="input-group password-group">
+            <label htmlFor="password">Password</label>
             <input
+              id="password"
               name="password"
               type={showPwd ? 'text' : 'password'}
-              placeholder="Password"
+              placeholder="••••••••"
               required
               value={form.password}
               onChange={handleChange}
+              className="input-field"
             />
             <button
               type="button"
-              className="show-btn"
+              className="show-pwd-btn"
               onClick={() => setShowPwd(v => !v)}
-              tabIndex={-1} // prevents tab focus on the button
+              tabIndex={-1}
             >
               {showPwd ? <FaEyeSlash /> : <FaEye />}
             </button>
@@ -83,10 +118,10 @@ export default function Hero() {
           {mode === 'register' && (
             <ul className="password-checklist">
               <li className={pwdChecks.minLength ? 'valid' : ''}>
-                {pwdChecks.minLength ? '✅' : '❌'} At least 8 characters
+                <span className="check-icon">{pwdChecks.minLength ? '✅' : '❌'}</span> At least 8 characters
               </li>
               <li className={pwdChecks.hasNumber ? 'valid' : ''}>
-                {pwdChecks.hasNumber ? '✅' : '❌'} Contains a number
+                <span className="check-icon">{pwdChecks.hasNumber ? '✅' : '❌'}</span> Contains a number
               </li>
             </ul>
           )}
@@ -98,23 +133,18 @@ export default function Hero() {
                 id="name"
                 name="name"
                 type="text"
-                placeholder="Name"
+                placeholder="Your Full Name"
                 required
                 value={form.name}
                 onChange={handleChange}
+                className="input-field"
               />
             </div>
           )}
 
-          {error && <div className="form-error">{error}</div>}
-
-          <button type="submit" className="cta-btn">
-            {mode === 'login' ? 'Log In' : 'Register'}
+          <button type="submit" className="submit-btn primary-cta">
+            {mode === 'login' ? 'Log In' : 'Register Account'}
           </button>
-
-          <Link to="/" className="back-link">
-            Back to Home
-          </Link>
         </form>
       </div>
     </div>
