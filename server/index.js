@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config(); // Ensure dotenv is loaded at the very top
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -9,22 +9,21 @@ app.use(cors());
 app.use(express.json());
 
 // Import authentication middleware
-const authenticateToken = require('./middleware/auth'); // Make sure this path is correct
+const authenticateToken = require('./middleware/auth');
 
 // Import routes
 const authRoutes = require('./routes/authRoutes');
 const vehicleRoutes = require('./routes/vehicleRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
-const dateRoutes = require('./routes/dateRoutes'); // Import the new date routes
+const dateRoutes = require('./routes/dateRoutes');
 
-// Public routes (authentication is not required)
-app.use('/api/auth', authRoutes);
+// Public routes (authentication is not required for auth itself, but some auth routes might use middleware internally)
+app.use('/api/auth', authRoutes); // Auth routes should handle their own authentication needs
 
 // Protected routes (authentication IS required)
-// Apply the authenticateToken middleware before the route handlers
 app.use('/api/vehicles', authenticateToken, vehicleRoutes);
 app.use('/api/services', authenticateToken, serviceRoutes);
-app.use('/api/dates', authenticateToken, dateRoutes); // Apply middleware to date routes
+app.use('/api/dates', authenticateToken, dateRoutes);
 
 
 // Simple health check endpoint
@@ -50,7 +49,6 @@ if (process.env.NODE_ENV === 'production') {
   const clientBuildPath = path.join(__dirname, 'public');
   app.use(express.static(clientBuildPath));
 
-  // For any other GET request, serve the index.html
   app.get('/*splat', (req, res) => {
     res.sendFile(path.join(clientBuildPath, 'index.html'));
   });
