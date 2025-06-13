@@ -15,6 +15,7 @@ const authenticateToken = require('./middleware/auth'); // Make sure this path i
 const authRoutes = require('./routes/authRoutes');
 const vehicleRoutes = require('./routes/vehicleRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
+const dateRoutes = require('./routes/dateRoutes'); // Import the new date routes
 
 // Public routes (authentication is not required)
 app.use('/api/auth', authRoutes);
@@ -22,7 +23,8 @@ app.use('/api/auth', authRoutes);
 // Protected routes (authentication IS required)
 // Apply the authenticateToken middleware before the route handlers
 app.use('/api/vehicles', authenticateToken, vehicleRoutes);
-app.use('/api/services', authenticateToken, serviceRoutes); // Assuming service routes also require authentication
+app.use('/api/services', authenticateToken, serviceRoutes);
+app.use('/api/dates', authenticateToken, dateRoutes); // Apply middleware to date routes
 
 
 // Simple health check endpoint
@@ -49,7 +51,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(clientBuildPath));
 
   // For any other GET request, serve the index.html
-  app.get('/*splat', (req, res) => { // Changed from '/*splat' for broader catch-all
+  app.get('/*splat', (req, res) => {
     res.sendFile(path.join(clientBuildPath, 'index.html'));
   });
 }
