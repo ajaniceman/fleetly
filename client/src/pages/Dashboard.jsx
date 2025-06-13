@@ -152,7 +152,7 @@ export default function Dashboard() {
 
       <div className="vehicle-table">
         <div className="table-header">
-          <div>ID</div>
+          {/* Removed ID column header */}
           <div>Type</div>
           <div>Make</div>
           <div>Model</div>
@@ -166,7 +166,7 @@ export default function Dashboard() {
           <div className="no-vehicles">No vehicles added yet! Click "Add Vehicle" to get started!</div>
         ) : vehicles.map((v, i) => (
           <div key={v.id} className={`table-row animated-row`}>
-            <div>{v.id}</div>
+            {/* Removed ID display */}
             <div>{v.type}</div>
             <div>{v.make}</div>
             <div>{v.model}</div>

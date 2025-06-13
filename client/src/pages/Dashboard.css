@@ -51,9 +51,9 @@
 }
 
 .table-header, .table-row {
-  /* Updated grid-template-columns for the new fields */
+  /* Updated grid-template-columns for the new fields - now 6 columns instead of 7 */
   display: grid;
-  grid-template-columns: 0.5fr 1fr 1.2fr 1.2fr 0.7fr 1.5fr 1.5fr 1.2fr; /* Adjusted column widths */
+  grid-template-columns: 1fr 1.2fr 1.2fr 0.7fr 1.5fr 1.5fr 1.2fr; /* Removed the first column for ID */
   padding: 0.9rem 1.2rem; /* Increased padding for better spacing */
   align-items: center;
   border-bottom: 1px solid #eee; /* Light border between rows */
