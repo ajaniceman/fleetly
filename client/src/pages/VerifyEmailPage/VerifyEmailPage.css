@@ -41,6 +41,8 @@
   font-size: 2em;
   color: var(--dark-background);
   margin-bottom: 1rem;
+  /* Added margin-top to create space below the absolute positioned link */
+  margin-top: 1.5rem;
 }
 
 .verification-status {
@@ -63,6 +65,7 @@
   border: 1px solid var(--error-color);
 }
 
+/* Unified button/link styles to ensure proper appearance */
 .login-button, .back-home-link {
   display: inline-block;
   margin-top: 1.5rem;
@@ -70,43 +73,62 @@
   font-weight: 600;
   border-radius: 8px;
   transition: all 0.3s ease;
+  /* General padding for call-to-action buttons/links */
+  padding: 0.9rem 2.2rem;
 }
 
-.login-button {
+/* Specific styling for login button (primary CTA) */
+.login-button.primary-cta {
   background-color: var(--primary-color);
   color: white;
-  padding: 0.9rem 2.2rem;
+  border: 2px solid var(--primary-color); /* Explicit border for consistency */
   box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
 }
 
-.login-button:hover {
+.login-button.primary-cta:hover {
   background-color: #2980b9;
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
 }
 
+/* Specific styling for back-home-link (secondary style - text link) */
 .back-home-link {
+  position: absolute; /* Keep it positioned relative to the card */
+  top: 1.5rem; /* Adjust its position */
+  left: 1.5rem;
   color: var(--primary-color);
-  margin-left: 1rem; /* Spacing if two buttons are side-by-side */
-  padding: 0.9rem 1.5rem;
-  border: 2px solid var(--primary-color);
-  background-color: transparent;
+  background-color: transparent; /* Ensure no background */
+  border: none; /* Ensure no border */
+  padding: 0; /* No padding */
+  display: flex; /* For icon and text alignment */
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95em;
+  cursor: pointer;
 }
 
 .back-home-link:hover {
-  background-color: var(--primary-color);
-  color: white;
-  transform: translateY(-2px);
+  color: #2980b9;
+  text-decoration: underline; /* Underline on hover for link appearance */
+  transform: none; /* No translateY on hover for a subtle text link */
 }
+
 
 /* Responsive */
 @media (max-width: 500px) {
   .verify-email-card {
     padding: 1.5rem;
   }
-  .login-button, .back-home-link {
+  .login-button {
     width: 100%;
     margin-left: 0;
     margin-top: 1rem; /* Stack buttons */
+  }
+  .back-home-link {
+    width: auto; /* Allow auto width */
+    position: absolute; /* Keep absolute position */
+    top: 1rem; /* Adjust for very small screens */
+    left: 1rem;
+    font-size: 0.85em;
   }
 }
