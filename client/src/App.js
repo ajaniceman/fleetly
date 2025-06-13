@@ -6,7 +6,7 @@ import Hero from './components/Hero/Hero'; // Your Auth/Login/Register component
 import Footer from './components/Footer/Footer';
 import Dashboard from './pages/Dashboard';
 import VehicleServices from './pages/VehicleServices';
-import VehicleDatesPage from './pages/VehicleDatesPage/VehicleDatesPage';
+import VehicleDatesPage from './pages/VehicleDatesPage';
 import VerifyEmailPage from './pages/VerifyEmailPage/VerifyEmailPage'; // Import the new verification page
 
 function App() {
