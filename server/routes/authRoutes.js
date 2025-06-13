@@ -21,9 +21,9 @@ router.post('/register', async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // 3. Insert user into database, with is_verified = FALSE
+    // 3. Insert user into database, with is_verified = FALSE using 'password_hash' column
     const [result] = await pool.query(
-      'INSERT INTO users (name, email, password, is_verified) VALUES (?, ?, ?, FALSE)', // Set is_verified to FALSE
+      'INSERT INTO users (name, email, password_hash, is_verified) VALUES (?, ?, ?, FALSE)', // Changed 'password' to 'password_hash'
       [name, email, hashedPassword]
     );
     const userId = result.insertId;
@@ -70,8 +70,8 @@ router.post('/login', async (req, res) => {
       return res.status(403).json({ message: 'Please verify your email address to log in.' });
     }
 
-    // 3. Compare passwords
-    const isMatch = await bcrypt.compare(password, user.password);
+    // 3. Compare passwords using 'password_hash' from the database
+    const isMatch = await bcrypt.compare(password, user.password_hash); // Changed 'user.password' to 'user.password_hash'
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials.' });
     }
@@ -82,7 +82,7 @@ router.post('/login', async (req, res) => {
         id: user.id,
         name: user.name,
         email: user.email,
-        // Do NOT include password or other sensitive info in the token
+        // Do NOT include password_hash or other sensitive info in the token
       },
     };
 
