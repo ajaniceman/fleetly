@@ -80,7 +80,6 @@ export default function Home() {
       {/* Testimonials */}
       <section className="testimonials-section section-padding bg-light">
         <div className="container">
-          <h2 className="section-title">What Our Users Say</h2>
           <Testimonials /> {/* Your existing Testimonials component */}
         </div>
       </section>
