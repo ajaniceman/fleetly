@@ -146,9 +146,10 @@ body {
 
 .show-pwd-btn {
   position: absolute;
-  right: 1rem;
-  top: 50%; /* Adjust based on label height */
+  /* Adjusted top property to better align with the input field */
+  top: calc(50% + 0.7rem); /* Adjusted for label height and input padding */
   transform: translateY(-50%);
+  right: 1rem;
   background: none;
   border: none;
   cursor: pointer;
