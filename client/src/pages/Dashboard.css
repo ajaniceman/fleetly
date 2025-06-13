@@ -1,68 +1,202 @@
-.dashboard {
-  padding: 2rem;
-  max-width: 1200px; /* Increased max-width to accommodate more columns */
-  margin: auto;
-  font-family: 'Inter', sans-serif;
+/* Reusing variables from global styles or defining locally for consistency */
+:root {
+  --primary-color: #3498db; /* Blue */
+  --secondary-color: #2ecc71; /* Green */
+  --dark-background: #2c3e50; /* Dark Blue-Grey */
+  --light-background: #f8f9fa; /* Off-White */
+  --text-dark: #333;
+  --border-color: #e0e0e0;
 }
 
-.dashboard-header {
+.dashboard {
+  padding: 2.5rem; /* Increased padding */
+  max-width: 1300px; /* Wider max-width */
+  margin: auto;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--light-background); /* Soft background */
+  min-height: 100vh;
+}
+
+.dashboard-header-main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem; /* Added some margin for spacing */
+  margin-bottom: 2.5rem; /* More space below header */
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+  gap: 1rem;
 }
 
-.dashboard-header h1 {
-  color: #333;
-  font-size: 2em;
+.dashboard-greeting h1 {
+  color: var(--dark-background);
+  font-size: 2.8em; /* Larger title */
+  margin: 0;
+  font-weight: 700;
+}
+
+.dashboard-greeting .dashboard-subtitle {
+  color: #666;
+  font-size: 1.1em;
+  margin-top: 0.5rem;
 }
 
 .logout-btn {
   background: #e74c3c;
   color: white;
   border: none;
-  border-radius: 4px;
-  padding: 0.6rem 1.2rem; /* Slightly larger padding */
-  cursor: pointer;
-  font-size: 0.9em;
-  transition: background 0.2s ease;
-}
-.logout-btn:hover { background: #c0392b; }
-
-.add-btn {
-  background: #28a745; /* Changed to a more "add" friendly green */
-  color: white;
-  padding: 0.85rem 1.5rem; /* Slightly larger padding */
-  border-radius: 4px;
-  border: none;
-  margin: 1.5rem 0; /* Adjusted margin */
+  border-radius: 8px; /* More rounded */
+  padding: 0.7rem 1.4rem; /* Slightly larger padding */
   cursor: pointer;
   font-size: 1em;
   font-weight: 500;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.2);
 }
-.add-btn:hover { background: #218838; } /* Darker green on hover */
+.logout-btn:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
 
-.vehicle-table {
-  border: 1px solid #ddd;
-  border-radius: 8px; /* Slightly more rounded corners */
+/* Dashboard Stats Grid */
+.dashboard-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem; /* Spacing between cards */
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align content to start */
+  gap: 0.8rem;
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+.stat-card .stat-icon {
+  font-size: 2.5em; /* Larger icons */
+  color: var(--primary-color); /* Primary color for icons */
+  margin-bottom: 0.5rem;
+}
+
+.stat-card .stat-value {
+  font-size: 2.8em; /* Large, bold number */
+  font-weight: 700;
+  color: var(--dark-background);
+  line-height: 1; /* Adjust line height */
+}
+
+.stat-card .stat-label {
+  font-size: 1.1em;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+/* Specific card colors (optional) */
+.stat-card.expired-dates .stat-icon { color: #e74c3c; } /* Red for expired */
+.stat-card.upcoming-dates .stat-icon { color: #f39c12; } /* Orange for upcoming */
+
+
+/* Actions Row (Add Button + Search) */
+.dashboard-actions-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap; /* Allow wrapping */
+}
+
+.add-btn {
+  background: var(--primary-color); /* Consistent primary color */
+  color: white;
+  padding: 0.85rem 1.75rem; /* Larger padding */
+  border-radius: 8px; /* More rounded */
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: background 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+.add-btn:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+/* Search Bar */
+.search-bar {
+  position: relative;
+  flex-grow: 1; /* Allow search bar to grow */
+  max-width: 400px; /* Limit search bar width */
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.8rem 2.5rem 0.8rem 1.2rem; /* Space for clear button */
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1em;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.clear-search-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.clear-search-btn:hover {
+  color: #666;
+}
+
+
+/* Vehicle Table */
+.vehicle-table-container { /* New container for table with shadow */
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 12px; /* More rounded corners */
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Added a subtle shadow */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08); /* More prominent shadow */
 }
 
 .table-header, .table-row {
-  /* Updated grid-template-columns for the new fields - now 6 columns instead of 7 */
   display: grid;
-  grid-template-columns: 1fr 1.2fr 1.2fr 0.7fr 1.5fr 1.5fr 1.2fr; /* Removed the first column for ID */
-  padding: 0.9rem 1.2rem; /* Increased padding for better spacing */
+  grid-template-columns: 1fr 1.2fr 1.2fr 0.7fr 1.5fr 1.5fr 1.2fr;
+  padding: 1rem 1.5rem; /* Increased padding */
   align-items: center;
-  border-bottom: 1px solid #eee; /* Light border between rows */
+  border-bottom: 1px solid #f0f0f0; /* Lighter border */
 }
 
 .table-header {
-  background: #e9ecef; /* Lighter header background */
+  background: var(--light-background); /* Lighter header background */
   font-weight: 600;
-  color: #495057;
+  color: var(--dark-background);
   text-transform: uppercase;
   font-size: 0.85em;
   letter-spacing: 0.5px;
@@ -71,68 +205,128 @@
 .table-row {
   background: white;
   transition: background 0.2s ease;
-  font-size: 0.9em;
+  font-size: 0.95em; /* Slightly larger row text */
 }
 .table-row:last-child {
-  border-bottom: none; /* No border for the last row */
+  border-bottom: none;
 }
 .table-row:hover {
-  background: #f8f9fa; /* Lighter hover background */
+  background: #fdfefe; /* Even lighter hover background */
 }
 
 .actions select {
-  padding: 0.5rem;
-  border-radius: 4px;
+  padding: 0.6rem; /* Slightly larger padding */
+  border-radius: 6px; /* More rounded */
   border: 1px solid #ccc;
   background-color: white;
   cursor: pointer;
   font-size: 0.9em;
-  width: 100%; /* Make select fill the column */
+  width: 100%;
+  max-width: 120px; /* Optional: limit select width */
 }
 .actions select:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
 }
 
 .loading, .no-vehicles {
-  padding: 2rem; /* Increased padding */
+  padding: 2.5rem; /* Increased padding */
   text-align: center;
   color: #777;
-  font-size: 1.1em;
+  font-size: 1.2em;
+  background-color: white; /* Ensure background is white */
 }
 
 .no-vehicles {
   background-color: #fdfefe;
   border-radius: 8px;
-  margin-top: 1rem;
+  margin-top: 0; /* Remove top margin as it's inside container */
 }
 
 /* Animation */
 @keyframes rowFadeIn {
-  from { opacity: 0; transform: translateY(15px); } /* Slightly larger initial translate */
+  from { opacity: 0; transform: translateY(15px); }
   to { opacity: 1; transform: translateY(0px); }
 }
 .animated-row {
-  animation: rowFadeIn 0.5s ease-out forwards; /* Longer animation, stays at end state */
+  animation: rowFadeIn 0.5s ease-out forwards;
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
-  .dashboard {
-    padding: 1rem;
+@media (max-width: 992px) {
+  .dashboard-stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
   .table-header, .table-row {
-    grid-template-columns: repeat(2, 1fr); /* Simpler grid for small screens */
-    gap: 10px;
-    border-bottom: 1px solid #eee;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; /* Reduce columns displayed */
+    font-size: 0.85em;
   }
-  .table-header div, .table-row div {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .table-header div:nth-child(n+5), .table-row div:nth-child(n+5) { /* Hide less critical columns on small screens */
+  .table-header div:nth-child(5), .table-row div:nth-child(5) { /* Hide License Plate on smaller tablet views */
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 1.5rem;
+  }
+  .dashboard-header-main {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .logout-btn {
+    align-self: flex-end; /* Push logout to bottom right */
+    margin-top: 1rem;
+  }
+  .dashboard-stats-grid {
+    grid-template-columns: 1fr; /* Stack cards on mobile */
+    gap: 1.5rem;
+  }
+  .stat-card {
+    padding: 1.5rem;
+  }
+  .dashboard-actions-row {
+    flex-direction: column;
+    align-items: stretch; /* Stretch items to full width */
+  }
+  .add-btn {
+    width: 100%;
+  }
+  .search-bar {
+    max-width: 100%; /* Full width search bar */
+  }
+  .table-header, .table-row {
+    grid-template-columns: repeat(2, 1fr) 100px; /* Type, Make, Actions on mobile */
+    gap: 8px;
+    padding: 0.8rem 1rem;
+    font-size: 0.8em;
+  }
+  .table-header div:nth-child(n+3), .table-row div:nth-child(n+3) { /* Hide everything after Model */
+    display: none;
+  }
+  .table-header div:nth-child(6), .table-row div:nth-child(6) { /* Make sure Actions is the third column */
+    display: block; /* Override previous display: none */
+    grid-column: 3; /* Position it as the third column */
+  }
+  .table-row .actions {
+    display: flex; /* Ensure actions div is a flex container */
+    justify-content: center; /* Center content within actions div */
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-greeting h1 {
+    font-size: 2.2em;
+  }
+  .dashboard-greeting .dashboard-subtitle {
+    font-size: 0.9em;
+  }
+  .stat-card .stat-value {
+    font-size: 2.2em;
+  }
+  .stat-card .stat-label {
+    font-size: 0.9em;
   }
 }

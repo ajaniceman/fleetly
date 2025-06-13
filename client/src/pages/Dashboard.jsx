@@ -1,47 +1,101 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import VehicleForm from '../components/VehicleForm/VehicleForm';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for routing
+import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
   const [vehicles, setVehicles] = useState([]);
+  const [allDates, setAllDates] = useState([]); // State to hold all date records for summary stats
   const [showForm, setShowForm] = useState(false);
-  const [editingVehicle, setEditingVehicle] = useState(null); // New state to hold the vehicle being edited
+  const [editingVehicle, setEditingVehicle] = useState(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [searchTerm, setSearchTerm] = useState(''); // State for search input
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('/api/vehicles', {
-      headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-    })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Failed to fetch vehicles');
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          navigate('/login'); // Redirect to login if not authenticated
+          return;
         }
-        return res.json();
-      })
-      .then(data => setVehicles(data))
-      .catch(error => {
-        console.error("Error fetching vehicles:", error);
-        // Optionally, display an error message to the user
-      })
-      .finally(() => setLoading(false));
-  }, []);
 
-  // Combined function to handle both adding and editing (saving) a vehicle
+        // Fetch vehicles
+        const vehiclesRes = await fetch('/api/vehicles', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (!vehiclesRes.ok) throw new Error('Failed to fetch vehicles');
+        const vehiclesData = await vehiclesRes.json();
+        setVehicles(vehiclesData);
+
+        // Fetch all dates for the user's vehicles (for dashboard summary)
+        const datesRes = await fetch('/api/dates/user', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (!datesRes.ok) throw new Error('Failed to fetch dates');
+        const datesData = await datesRes.json();
+        setAllDates(datesData);
+
+      } catch (error) {
+        console.error("Error fetching dashboard data:", error);
+        alert(`Error loading dashboard data: ${error.message}`);
+        // Consider more robust error handling for user, e.g., show an error message on screen
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [navigate]); // Added navigate to dependency array
+
+  // Calculate dashboard statistics (memoized or calculated on demand for simplicity)
+  const totalVehiclesCount = vehicles.length;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Normalize to start of day
+
+  const thirtyDaysFromNow = new Date();
+  thirtyDaysFromNow.setDate(today.getDate() + 30);
+  thirtyDaysFromNow.setHours(23, 59, 59, 999); // Normalize to end of day
+
+  const expiredDatesCount = allDates.filter(date => {
+    // Ensure date.dueDate is valid before creating a Date object
+    if (!date.dueDate || isNaN(new Date(date.dueDate))) return false;
+    const dueDate = new Date(date.dueDate);
+    dueDate.setHours(0, 0, 0, 0);
+    return dueDate < today;
+  }).length;
+
+  const upcomingDatesCount = allDates.filter(date => {
+    // Ensure date.dueDate is valid
+    if (!date.dueDate || isNaN(new Date(date.dueDate))) return false;
+    const dueDate = new Date(date.dueDate);
+    dueDate.setHours(0, 0, 0, 0);
+    // Date is upcoming if it's today or in the future, up to 30 days from now
+    return dueDate >= today && dueDate <= thirtyDaysFromNow;
+  }).length;
+
+
+  // Filter vehicles based on search term for the table
+  const filteredVehicles = vehicles.filter(v =>
+    v.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    v.make.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    v.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (v.licensePlate && v.licensePlate.toLowerCase().includes(searchTerm.toLowerCase())) || // Check for existence
+    (v.vin && v.vin.toLowerCase().includes(searchTerm.toLowerCase())) // Check for existence
+  );
+
   const handleSave = async (formData) => {
     let res;
     let url;
     let method;
 
     if (editingVehicle) {
-      // If editingVehicle is set, it's an UPDATE (PUT) operation
       url = `/api/vehicles/${editingVehicle.id}`;
       method = 'PUT';
     } else {
-      // Otherwise, it's a new ADD (POST) operation
       url = '/api/vehicles';
       method = 'POST';
     }
@@ -67,11 +121,19 @@ export default function Dashboard() {
             return [savedVehicle, ...prevVehicles];
           }
         });
-        setShowForm(false); // Hide the form
-        setEditingVehicle(null); // Clear the editing state
+        setShowForm(false);
+        setEditingVehicle(null);
         alert(`Vehicle ${editingVehicle ? 'updated' : 'added'} successfully!`);
+        // Crucially, re-fetch all dates after a vehicle save/update
+        // This ensures dashboard stats are up-to-date if vehicle affects dates
+        const datesRes = await fetch('/api/dates/user', {
+          headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+        });
+        if (datesRes.ok) {
+          const datesData = await datesRes.json();
+          setAllDates(datesData);
+        }
       } else {
-        // Handle API errors, e.g., show a message to the user
         const errorData = await res.json();
         alert(`Failed to ${editingVehicle ? 'update' : 'add'} vehicle: ${errorData.message || res.statusText}`);
       }
@@ -92,6 +154,9 @@ export default function Dashboard() {
         });
         if (res.ok) {
           setVehicles(vehicles.filter(v => v.id !== vehicleId));
+          // After deleting a vehicle, also filter out its associated dates
+          setAllDates(prevDates => prevDates.filter(d => d.vehicleId !== vehicleId));
+          // (If you had a similar "all services" state, you'd update that too)
           alert("Vehicle deleted successfully!");
         } else {
           const errorData = await res.json();
@@ -113,8 +178,8 @@ export default function Dashboard() {
         navigate(`/vehicles/${vehicle.id}/dates`);
         break;
       case 'edit':
-        setEditingVehicle(vehicle); // Set the vehicle to be edited
-        setShowForm(true); // Show the form
+        setEditingVehicle(vehicle);
+        setShowForm(true);
         break;
       case 'delete':
         handleDelete(vehicle.id);
@@ -124,35 +189,70 @@ export default function Dashboard() {
     }
   };
 
-  if (loading) return <div className="loading">Loading vehicles...</div>;
+  if (loading) return <div className="loading">Loading dashboard...</div>;
 
   return (
     <div className="dashboard">
-      <div className="dashboard-header">
-        <h1>Welcome, {user.name}!</h1>
+      <div className="dashboard-header-main">
+        <div className="dashboard-greeting">
+          <h1>Welcome, {user.name}!</h1>
+          <p className="dashboard-subtitle">Here's an overview of your fleet.</p>
+        </div>
         <button onClick={logout} className="logout-btn">Logout</button>
       </div>
 
-      {/* Conditionally render VehicleForm or Add Vehicle button */}
-      {showForm ? (
-        <VehicleForm
-          onSubmit={handleSave} // Form submits to the new handleSave function
-          onCancel={() => {
-            setShowForm(false);
-            setEditingVehicle(null); // Clear editing state on cancel
-          }}
-          initial={editingVehicle} // Pass the editingVehicle for pre-population
-        />
-      ) : (
-        <button onClick={() => {
-          setEditingVehicle(null); // Ensure no vehicle is being edited when adding
-          setShowForm(true); // Show the form for adding
-        }} className="add-btn">+ Add Vehicle</button>
-      )}
+      {/* Dashboard Stats Overview */}
+      <div className="dashboard-stats-grid">
+        <div className="stat-card total-vehicles">
+          <div className="stat-icon">🚗</div>
+          <div className="stat-value">{totalVehiclesCount}</div>
+          <div className="stat-label">Total Vehicles</div>
+        </div>
+        <div className="stat-card expired-dates">
+          <div className="stat-icon">⚠️</div> {/* Changed icon to a warning sign */}
+          <div className="stat-value">{expiredDatesCount}</div>
+          <div className="stat-label">Expired Dates</div>
+        </div>
+        <div className="stat-card upcoming-dates">
+          <div className="stat-icon">🔔</div>
+          <div className="stat-value">{upcomingDatesCount}</div>
+          <div className="stat-label">Upcoming Dates (30 Days)</div>
+        </div>
+      </div>
 
-      <div className="vehicle-table">
+      <div className="dashboard-actions-row">
+        {showForm ? (
+          <VehicleForm
+            onSubmit={handleSave}
+            onCancel={() => {
+              setShowForm(false);
+              setEditingVehicle(null);
+            }}
+            initial={editingVehicle}
+          />
+        ) : (
+          <button onClick={() => {
+            setEditingVehicle(null);
+            setShowForm(true);
+          }} className="add-btn">+ Add New Vehicle</button>
+        )}
+
+        <div className="search-bar">
+          <input
+            type="text"
+            placeholder="Search vehicles..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+          />
+          {searchTerm && (
+            <button onClick={() => setSearchTerm('')} className="clear-search-btn">✖</button>
+          )}
+        </div>
+      </div>
+
+      <div className="vehicle-table-container">
         <div className="table-header">
-          {/* Removed ID column header */}
           <div>Type</div>
           <div>Make</div>
           <div>Model</div>
@@ -162,11 +262,12 @@ export default function Dashboard() {
           <div>Actions</div>
         </div>
 
-        {vehicles.length === 0 ? (
-          <div className="no-vehicles">No vehicles added yet! Click "Add Vehicle" to get started!</div>
-        ) : vehicles.map((v, i) => (
+        {filteredVehicles.length === 0 ? (
+          <div className="no-vehicles">
+            {searchTerm ? `No vehicles found for "${searchTerm}"` : `No vehicles added yet! Click "Add New Vehicle" to get started!`}
+          </div>
+        ) : filteredVehicles.map((v) => ( // Removed 'i' as it's not used
           <div key={v.id} className={`table-row animated-row`}>
-            {/* Removed ID display */}
             <div>{v.type}</div>
             <div>{v.make}</div>
             <div>{v.model}</div>
