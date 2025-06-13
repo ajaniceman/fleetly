@@ -42,6 +42,24 @@ router.get('/vehicle/:vehicleId', async (req, res) => {
   }
 });
 
+// NEW ROUTE: GET all dates for all vehicles owned by the authenticated user
+router.get('/user', async (req, res) => {
+  try {
+    // Join vehicle_dates with vehicles to filter by the authenticated user's ID
+    const [dates] = await pool.query(
+      `SELECT vd.* FROM vehicle_dates vd
+       JOIN vehicles v ON vd.vehicle_id = v.id
+       WHERE v.user_id = ? ORDER BY vd.due_date ASC`,
+      [req.user.id]
+    );
+    res.json(toCamelCase(dates)); // Convert to camelCase for frontend
+  } catch (error) {
+    console.error(`Error fetching all dates for user ${req.user.id}:`, error);
+    res.status(500).json({ message: "Error fetching all dates", error: error.message });
+  }
+});
+
+
 // POST a new date record (protected)
 router.post('/', async (req, res) => {
   const { vehicle_id, date_type, due_date, notes } = req.body;
