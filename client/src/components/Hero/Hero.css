@@ -60,7 +60,8 @@ body {
 
 .back-home-link {
   position: absolute;
-  top: 1.5rem;
+  /* Adjusted top property to move it further down, preventing overlap */
+  top: 2.5rem; /* Increased from 1.5rem */
   left: 1.5rem;
   display: flex;
   align-items: center;
@@ -146,8 +147,8 @@ body {
 
 .show-pwd-btn {
   position: absolute;
-  /* Adjusted top property to better align with the input field */
-  top: calc(50% + 0.85rem); /* Adjusted for label height and input padding */
+  /* Adjusted top property for better alignment */
+  top: calc(50% + 0.85rem); /* This remains the same as our last fix for the eye icon itself */
   transform: translateY(-50%);
   right: 1rem;
   background: none;
@@ -245,7 +246,8 @@ body {
     font-size: 1em;
   }
   .back-home-link {
-    top: 0.8rem;
+    /* Adjust for smaller screens as well if needed */
+    top: 1.5rem; /* Revert to a slightly smaller top margin on very small screens */
     left: 0.8rem;
     font-size: 0.85em;
   }
