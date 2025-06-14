@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const pool = require('./config/dbPool');
+const cron = require('node-cron'); // Import node-cron
+const checkAndSendDateNotifications = require('./tasks/checkDateNotifications'); // Import your notification job
 
 const app = express();
 app.use(cors());
@@ -57,4 +59,18 @@ if (process.env.NODE_ENV === 'production') {
 const PORT = process.env.PORT || 5555;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
+
+  // Schedule the notification job to run daily
+  // This cron schedule '0 8 * * *' means "at 0 minutes past the 8th hour (8 AM) every day"
+  // You can adjust this to a time that makes sense for your users (e.g., 5 AM, 9 AM)
+  cron.schedule('0 8 * * *', () => {
+    console.log('Running daily scheduled task: Checking for date notifications...');
+    checkAndSendDateNotifications();
+  }, {
+    timezone: "Europe/Sarajevo" 
+  });
+
+  // Optional: Run the check once immediately on server start for testing
+  // Remove or comment out this line in production if you don't want it to run on every restart
+  // checkAndSendDateNotifications();
 });
