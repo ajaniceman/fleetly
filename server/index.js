@@ -71,6 +71,6 @@ app.listen(PORT, '0.0.0.0', () => {
   });
 
   // Optional: Run the check once immediately on server start for testing
-  // Remove or comment out this line in production if you don't want it to run on every restart
-  // checkAndSendDateNotifications();
+  // REMEMBER TO COMMENT THIS LINE OUT IN PRODUCTION!
+  checkAndSendDateNotifications();
 });
