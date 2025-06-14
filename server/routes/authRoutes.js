@@ -23,7 +23,7 @@ router.post('/register', async (req, res) => {
 
     // 3. Insert user into database, with is_verified = FALSE
     const [result] = await pool.query(
-      'INSERT INTO users (name, email, password_hash, is_verified) VALUES (?, ?, ?, FALSE)', // Changed 'password' to 'password_hash'
+      'INSERT INTO users (name, email, password_hash, is_verified) VALUES (?, ?, ?, FALSE)', // Using 'password_hash'
       [name, email, hashedPassword]
     );
     const userId = result.insertId;
@@ -33,9 +33,10 @@ router.post('/register', async (req, res) => {
     const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // Token valid for 24 hours
 
     // 5. Save verification token in the database
+    // THIS IS THE FIX: Ensure 'expiresAt' is used here, not 'verificationAt'
     await pool.query(
       'INSERT INTO email_verification_tokens (user_id, token, expires_at) VALUES (?, ?, ?)',
-      [userId, verificationAt]
+      [userId, verificationToken, expiresAt] // Corrected variable name from verificationAt to expiresAt
     );
 
     // 6. Send verification email
@@ -71,16 +72,15 @@ router.post('/login', async (req, res) => {
     }
 
     // 3. Compare passwords using 'password_hash' from the database
-    const isMatch = await bcrypt.compare(password, user.password_hash); // Changed 'user.password' to 'user.password_hash'
+    const isMatch = await bcrypt.compare(password, user.password_hash);
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials.' });
     }
 
     // 4. Generate JWT
     const payload = {
-      // Ensure 'id' is directly available under the 'user' object in the payload
       user: {
-        id: user.id, // THIS IS THE CRUCIAL FIX: Ensure user.id is correctly passed from the database query
+        id: user.id, // Ensure user.id is correctly passed from the database query
         name: user.name,
         email: user.email,
       },
