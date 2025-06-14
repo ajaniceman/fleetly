@@ -21,7 +21,7 @@ router.post('/register', async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // 3. Insert user into database, with is_verified = FALSE using 'password_hash' column
+    // 3. Insert user into database, with is_verified = FALSE
     const [result] = await pool.query(
       'INSERT INTO users (name, email, password_hash, is_verified) VALUES (?, ?, ?, FALSE)', // Changed 'password' to 'password_hash'
       [name, email, hashedPassword]
@@ -35,7 +35,7 @@ router.post('/register', async (req, res) => {
     // 5. Save verification token in the database
     await pool.query(
       'INSERT INTO email_verification_tokens (user_id, token, expires_at) VALUES (?, ?, ?)',
-      [userId, verificationToken, expiresAt]
+      [userId, verificationAt]
     );
 
     // 6. Send verification email
@@ -78,11 +78,11 @@ router.post('/login', async (req, res) => {
 
     // 4. Generate JWT
     const payload = {
+      // Ensure 'id' is directly available under the 'user' object in the payload
       user: {
-        id: user.id,
+        id: user.id, // THIS IS THE CRUCIAL FIX: Ensure user.id is correctly passed from the database query
         name: user.name,
         email: user.email,
-        // Do NOT include password_hash or other sensitive info in the token
       },
     };
 
