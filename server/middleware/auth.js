@@ -17,7 +17,7 @@ const authenticateToken = (req, res, next) => {
   }
 
   // Verify the token using your JWT_SECRET from environment variables
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+  jwt.verify(token, process.env.JWT_SECRET, (err, decodedPayload) => { // Renamed 'user' to 'decodedPayload' for clarity
     // If verification fails (e.g., token expired, invalid signature, malformed), return 403 Forbidden
     if (err) {
       console.error("Auth Middleware: Token verification failed:", err.message);
@@ -31,10 +31,16 @@ const authenticateToken = (req, res, next) => {
       return res.status(403).json({ message: "Invalid authentication token." });
     }
 
-    // If verification is successful, attach the decoded user payload to the request object
-    req.user = user;
-    console.log("Auth Middleware: Token verified. User ID:", req.user.id);
-    next(); // Proceed to the next middleware or route handler
+    // CRUCIAL FIX: Assign the nested 'user' object from the decoded payload to req.user
+    // The payload itself contains { user: { id: ..., name: ..., email: ... } }
+    if (decodedPayload && decodedPayload.user) {
+      req.user = decodedPayload.user;
+      console.log("Auth Middleware: Token verified. User ID:", req.user.id);
+      next(); // Proceed to the next middleware or route handler
+    } else {
+      console.error("Auth Middleware: Decoded token payload is missing 'user' object or is malformed.");
+      return res.status(403).json({ message: "Invalid token payload structure." });
+    }
   });
 };
 
