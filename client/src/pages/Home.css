@@ -28,13 +28,14 @@ body {
 }
 
 .bg-dark {
-  background-color: var(--background-secondary); /* Secondary background in dark mode, usually darker */
+  /* This class should *always* provide a dark background, regardless of general theme */
+  background-color: var(--heading-color); /* Use a dark color for sections with bg-dark class in light mode */
   color: var(--text-light); /* Text for dark backgrounds */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 /* Ensure dark theme sets the correct background for sections with bg-dark class */
 html[data-theme='dark'] .bg-dark {
-  background-color: var(--background-secondary); /* This will make sections with bg-dark class use secondary background in dark mode */
+  background-color: var(--background-secondary); /* Use secondary background in dark mode for sections with bg-dark */
 }
 
 
@@ -299,11 +300,11 @@ html[data-theme='dark'] .how-it-works-section {
 .final-cta-section {
   padding: 6rem 0;
   /* Use explicit background color from theme variables, not just bg-dark utility */
-  background-color: var(--background-primary); /* Default for light theme */
+  background-color: var(--heading-color); /* Use a dark color for this section in light mode */
   transition: background-color 0.3s ease;
 }
 html[data-theme='dark'] .final-cta-section {
-  background-color: var(--background-secondary); /* A darker background for dark theme if needed, or primary */
+  background-color: var(--background-secondary); /* Use a darker background for dark theme */
 }
 
 
