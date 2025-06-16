@@ -163,12 +163,29 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .dates-header {
+    flex-direction: column; /* Stack title and button */
+    align-items: flex-start; /* Align stacked items to the left */
+    gap: 1rem; /* Space between title and button */
+    padding-bottom: 0.5rem; /* Less padding */
+  }
+  .dates-header h1 {
+    font-size: 1.8em; /* Reduce font size */
+    text-align: left; /* Ensure it aligns left when stacked */
+    width: 100%; /* Take full width */
+  }
+  .back-to-dashboard-btn {
+    width: 100%; /* Make button full width when stacked */
+    margin-top: 1rem; /* More space from title */
+  }
+
   .dates-table .table-header,
   .dates-table .table-row {
-    /* CRITICAL CHANGE: Only show Type, Due Date, Status, and Actions */
-    grid-template-columns: 1fr 1fr 0.8fr 100px; /* Type, Due Date, Status, Actions */
-    gap: 8px; /* Slightly smaller gap */
-    padding: 0.8rem 1rem; /* Reduce padding */
+    /* Optimized widths for Type, Due Date, Status, and Actions */
+    grid-template-columns: 0.9fr 1.2fr 0.7fr 90px; /* Type, Due Date, Status, Actions */
+    gap: 6px; /* Even smaller gap to maximize content space */
+    padding: 0.6rem 0.8rem; /* Further reduce padding */
+    font-size: 0.85em; /* Reduce overall table font size */
   }
   .dates-table .table-header div:nth-child(4), /* Hide Notes for small screens */
   .dates-table .table-row div:nth-child(4) {
@@ -177,7 +194,13 @@
   /* The "Status" column is 3rd child, ensure it's not hidden by mistake from generic rules */
   .dates-table .table-header div:nth-child(3),
   .dates-table .table-row div:nth-child(3) {
-    display: block; /* Override any potential display: none from broader rules */
+    display: block;
+  }
+
+  .actions .edit-date-btn, .actions .delete-date-btn {
+    padding: 0.3rem 0.5rem; /* Smaller button padding */
+    font-size: 0.7em; /* Smaller button text */
+    margin-right: 0.3rem; /* Smaller margin */
   }
 }
 
@@ -185,11 +208,12 @@
 @media (max-width: 480px) {
   .dates-table .table-header,
   .dates-table .table-row {
-    grid-template-columns: 1fr 1fr 0.8fr 80px; /* Adjust actions width for tiny screens */
-    font-size: 0.9em;
+    grid-template-columns: 0.8fr 1.1fr 0.7fr 75px; /* Adjust actions width for tiny screens */
+    font-size: 0.8em; /* Even smaller font size */
+    padding: 0.5rem 0.6rem;
   }
   .actions .edit-date-btn, .actions .delete-date-btn {
-    font-size: 0.75em;
-    padding: 0.4rem 0.6rem;
+    font-size: 0.65em; /* Even smaller button text */
+    padding: 0.2rem 0.4rem;
   }
 }
