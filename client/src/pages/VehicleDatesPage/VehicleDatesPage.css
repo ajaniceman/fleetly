@@ -61,7 +61,9 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  overflow: hidden;
+  /* CRITICAL: Ensure overflow-x is active on the container */
+  overflow-x: auto; /* Allows horizontal scrolling if table content is wider */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   margin-top: 2rem;
 }
 
@@ -75,12 +77,14 @@
 }
 
 .dates-table {
-  width: 100%;
+  width: 100%; /* Ensure table itself takes full width of its container */
+  min-width: 480px; /* Give it a minimum width to ensure columns are not too squeezed on very small screens */
 }
 
 .dates-table .table-header,
 .dates-table .table-row {
   display: grid;
+  /* Define columns for larger screens */
   grid-template-columns: 1.2fr 1fr 0.8fr 1.5fr 150px; /* Type, Date, Status, Notes, Actions */
   gap: 10px;
   padding: 1rem 1.5rem;
@@ -99,6 +103,10 @@
 .dates-table .table-row {
   background: white;
   font-size: 0.95em;
+}
+
+.dates-table .table-row:last-child {
+  border-bottom: none; /* No border for the last row */
 }
 
 .dates-table .table-row:hover {
@@ -182,13 +190,13 @@
 
   .dates-table .table-header,
   .dates-table .table-row {
-    /* Optimized widths for Type, Due Date, Status, and Actions */
-    /* Increased widths for Type and Due Date, slightly more for Status */
-    grid-template-columns: 1.1fr 1.5fr 0.7fr 90px; /* Type, Due Date, Status, Actions */
+    /* CRITICAL CHANGE: Proportional widths + fixed actions. Min-width on table itself will prevent too much squeeze. */
+    /* Type, Due Date, Status, Actions */
+    grid-template-columns: 1fr 1.2fr 0.8fr 100px;
     gap: 5px; /* Even smaller gap to maximize content space */
     padding: 0.6rem 0.8rem; /* Further reduce padding */
     font-size: 0.85em; /* Reduce overall table font size */
-    overflow-x: hidden; /* Prevent horizontal scroll in row itself */
+    overflow-x: hidden; /* Prevent horizontal scroll in row itself, rely on parent overflow-x: auto */
   }
 
   /* Make sure content inside cells doesn't force new lines unless necessary */
@@ -212,8 +220,8 @@
     display: flex; /* Ensure actions container is flex for button alignment */
     justify-content: center; /* Center buttons within action column */
     align-items: center;
-    min-width: 90px; /* Ensure enough space for buttons */
-    /* Adjust width to be flexible but bounded if needed: flex-shrink: 0; */
+    min-width: 90px; /* Ensure enough space for buttons to prevent squeezing */
+    flex-shrink: 0; /* Prevent the actions column from shrinking below its content size */
   }
 
   .actions .edit-date-btn, .actions .delete-date-btn {
@@ -229,19 +237,22 @@
 
 /* Further refinements for very small mobile screens if necessary */
 @media (max-width: 480px) {
+  .dates-table {
+     min-width: 400px; /* Ensure table has enough minimum width for columns on very small screens */
+  }
   .dates-table .table-header,
   .dates-table .table-row {
     /* Adjust actions width for tiny screens, more balanced proportions */
-    grid-template-columns: 1fr 1.5fr 0.6fr 70px; /* Type, Due Date, Status, Actions */
-    font-size: 0.75em; /* Even smaller font size */
+    grid-template-columns: 1fr 1.3fr 0.6fr 80px; /* Type, Due Date, Status, Actions */
+    font-size: 0.7em; /* Even smaller font size */
     padding: 0.4rem 0.5rem;
-    gap: 4px; /* Minimal gap for very small screens */
+    gap: 3px; /* Minimal gap for very small screens */
   }
   .actions {
-     min-width: 70px; /* Ensure enough space for buttons on very small screens */
+     min-width: 80px; /* Ensure enough space for buttons on very small screens */
   }
   .actions .edit-date-btn, .actions .delete-date-btn {
-    font-size: 0.6em; /* Even smaller button text */
-    padding: 0.1rem 0.25rem; /* Reduced padding */
+    font-size: 0.55em; /* Even smaller button text */
+    padding: 0.1rem 0.2rem; /* Reduced padding */
   }
 }
