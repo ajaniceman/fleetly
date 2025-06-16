@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
+import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
 import VehicleForm from '../components/VehicleForm/VehicleForm';
 import { useNavigate } from 'react-router-dom';
-import './Dashboard.css';
+import './Dashboard.css'; // Keep existing CSS
 
 export default function Dashboard() {
-  const { user, logout, fetchWithAuth } = useAuth(); // Destructure fetchWithAuth
+  const { user, logout, fetchWithAuth } = useAuth();
+  const { theme, toggleTheme } = useTheme(); // Destructure theme and toggleTheme
   const [vehicles, setVehicles] = useState([]);
   const [allDates, setAllDates] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -17,13 +19,11 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch vehicles using fetchWithAuth
         const vehiclesRes = await fetchWithAuth('/api/vehicles');
         if (!vehiclesRes.ok) throw new Error('Failed to fetch vehicles');
         const vehiclesData = await vehiclesRes.json();
         setVehicles(vehiclesData);
 
-        // Fetch all dates for the user's vehicles using fetchWithAuth
         const datesRes = await fetchWithAuth('/api/dates/user');
         if (!datesRes.ok) throw new Error('Failed to fetch dates');
         const datesData = await datesRes.json();
@@ -31,7 +31,6 @@ export default function Dashboard() {
 
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
-        // Only show alert if it's not the "Session expired" error handled by fetchWithAuth
         if (!error.message.includes("Session expired")) {
             alert(`Error loading dashboard data: ${error.message}`);
         }
@@ -41,7 +40,7 @@ export default function Dashboard() {
     };
 
     fetchData();
-  }, [fetchWithAuth]); // Add fetchWithAuth to dependency array
+  }, [fetchWithAuth]);
 
   const totalVehiclesCount = vehicles.length;
   const today = new Date();
@@ -87,7 +86,7 @@ export default function Dashboard() {
     }
 
     try {
-      res = await fetchWithAuth(url, { // Use fetchWithAuth
+      res = await fetchWithAuth(url, {
         method: method,
         headers: {
           'Content-Type': 'application/json',
@@ -107,8 +106,7 @@ export default function Dashboard() {
         setShowForm(false);
         setEditingVehicle(null);
         alert(`Vehicle ${editingVehicle ? 'updated' : 'added'} successfully!`);
-        // Re-fetch all dates for dashboard stats
-        const datesRes = await fetchWithAuth('/api/dates/user'); // Use fetchWithAuth
+        const datesRes = await fetchWithAuth('/api/dates/user');
         if (datesRes.ok) {
           const datesData = await datesRes.json();
           setAllDates(datesData);
@@ -128,7 +126,7 @@ export default function Dashboard() {
   const handleDelete = async (vehicleId) => {
     if (window.confirm("Are you sure you want to delete this vehicle?")) {
       try {
-        const res = await fetchWithAuth(`/api/vehicles/${vehicleId}`, { // Use fetchWithAuth
+        const res = await fetchWithAuth(`/api/vehicles/${vehicleId}`, {
           method: 'DELETE',
         });
         if (res.ok) {
@@ -177,7 +175,12 @@ export default function Dashboard() {
           <h1>Welcome, {user.name}!</h1>
           <p className="dashboard-subtitle">Here's an overview of your fleet.</p>
         </div>
-        <button onClick={logout} className="logout-btn">Logout</button>
+        <div className="header-buttons"> {/* New container for buttons */}
+          <button onClick={toggleTheme} className="theme-toggle-btn">
+            {theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
+          </button>
+          <button onClick={logout} className="logout-btn">Logout</button>
+        </div>
       </div>
 
       <div className="dashboard-stats-grid">
