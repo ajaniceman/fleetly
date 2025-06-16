@@ -27,10 +27,16 @@ body {
 }
 
 .bg-dark {
-  background-color: var(--dark-background); /* Use theme variable */
+  /* This needs to be explicitly handled by global variables */
+  background-color: var(--background-primary); /* Default to primary background if no specific dark-background var */
   color: var(--text-light); /* Use theme variable */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+/* If you want a specific "dark" background for sections, add this to index.css and use here */
+html[data-theme='dark'] .bg-dark {
+  background-color: var(--background-primary); /* This should also come from a specific variable if different */
+}
+
 
 .text-center {
   text-align: center;
@@ -107,7 +113,8 @@ body {
 /* --- Hero Section --- */
 .hero-section {
   position: relative;
-  background-color: var(--dark-background); /* Use theme variable */
+  /* Use direct theme-aware gradient variables */
+  background: linear-gradient(135deg, var(--hero-gradient-start-light), var(--hero-gradient-end-light));
   color: var(--text-light); /* Use theme variable */
   min-height: 80vh;
   display: flex;
@@ -118,16 +125,15 @@ body {
   padding: 4rem 0; /* Add padding for smaller screens */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+/* Apply dark gradient specifically for dark theme */
+html[data-theme='dark'] .hero-section {
+  background: linear-gradient(135deg, var(--hero-gradient-start-dark), var(--hero-gradient-end-dark));
+}
 
 .hero-background-gradient {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* Use theme variables for gradient colors if desired, or keep fixed for effect */
-  background: linear-gradient(135deg, var(--heading-color), var(--cta-primary-bg));
-  z-index: 0;
+  /* This element is now redundant if hero-section background is directly themed */
+  /* If you want an *additional* gradient overlay, keep it and adjust its colors */
+  display: none; /* Hide if hero-section takes over the main gradient */
 }
 
 .hero-content {
@@ -155,7 +161,7 @@ body {
   transition: color 0.3s ease;
 }
 .hero-title .highlight {
-  color: var(--secondary-color); /* Use theme variable */
+  color: var(--cta-primary-bg); /* Use theme variable (secondary color is not defined here) */
 }
 
 .subtitle {
@@ -205,7 +211,7 @@ body {
 .stat-number {
   font-size: 2.2em;
   font-weight: 700;
-  color: var(--secondary-color); /* Use theme variable */
+  color: var(--cta-primary-bg); /* Use theme variable (secondary color is not defined here) */
 }
 
 .stat-label {
@@ -276,9 +282,14 @@ body {
 /* --- Final CTA Section --- */
 .final-cta-section {
   padding: 6rem 0;
-  background-color: var(--dark-background); /* Ensure consistency for dark background */
+  /* Use explicit background color from theme variables, not just bg-dark utility */
+  background-color: var(--background-primary); /* Default for light theme */
   transition: background-color 0.3s ease;
 }
+html[data-theme='dark'] .final-cta-section {
+  background-color: var(--background-secondary); /* A darker background for dark theme if needed, or primary */
+}
+
 
 .final-cta-section .section-title {
   margin-bottom: 1.5rem;

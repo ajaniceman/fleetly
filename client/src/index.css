@@ -48,6 +48,12 @@ body {
   --table-header-bg: #e9ecef; /* Light grey for table headers */
   --table-header-text: #495057;
   --table-row-hover-bg: #f0f8ff; /* Light blue on row hover */
+
+  /* Gradient colors for light mode (existing) */
+  --hero-gradient-start-light: #2c3e50; /* Dark blue-grey */
+  --hero-gradient-end-light: #3498db;   /* Primary blue */
+  --auth-gradient-start-light: #2c3e50;
+  --auth-gradient-end-light: #3498db;
 }
 
 /* Dark Theme Colors */
@@ -88,6 +94,12 @@ html[data-theme='dark'] {
   --table-header-bg: #34495e; /* Darker table header */
   --table-header-text: #f0f0f0;
   --table-row-hover-bg: #3b5a77; /* Darker blue on row hover */
+
+  /* NEW: Gradient colors for dark mode */
+  --hero-gradient-start-dark: #1f1d36; /* Very dark blue/purple */
+  --hero-gradient-end-dark: #2a316b;   /* Slightly lighter dark blue */
+  --auth-gradient-start-dark: #1f1d36;
+  --auth-gradient-end-dark: #2a316b;
 }
 
 /* Apply theme variables to common elements */
@@ -96,9 +108,20 @@ body {
   color: var(--text-primary);
 }
 
+/* GRADIETNS: Use conditional variables for gradients based on theme */
 .auth-page-container {
-  background: linear-gradient(135deg, var(--heading-color), var(--cta-primary-bg));
+  background: linear-gradient(135deg,
+    var(--auth-gradient-start-light),
+    var(--auth-gradient-end-light)
+  );
 }
+html[data-theme='dark'] .auth-page-container {
+  background: linear-gradient(135deg,
+    var(--auth-gradient-start-dark),
+    var(--auth-gradient-end-dark)
+  );
+}
+
 
 .auth-card,
 .verify-email-card,
@@ -184,8 +207,9 @@ input, select, textarea {
   background-color: var(--background-secondary); /* Match card background */
 }
 input:focus, select:focus, textarea:focus {
+  outline: none;
   border-color: var(--input-focus-border);
-  box-shadow: 0 0 0 0.2rem var(--input-focus-border); /* Use the focus border for shadow */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 /* Table specific styling */

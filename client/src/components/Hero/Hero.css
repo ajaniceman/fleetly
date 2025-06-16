@@ -3,10 +3,15 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  /* Use theme variables */
-  background: linear-gradient(135deg, var(--heading-color), var(--cta-primary-bg));
+  /* Use theme variables for gradients, default to light */
+  background: linear-gradient(135deg, var(--auth-gradient-start-light), var(--auth-gradient-end-light));
   padding: 1rem;
   box-sizing: border-box;
+  transition: background 0.3s ease; /* Smooth transition for gradient change */
+}
+/* Apply dark gradient specifically for dark theme */
+html[data-theme='dark'] .auth-page-container {
+  background: linear-gradient(135deg, var(--auth-gradient-start-dark), var(--auth-gradient-end-dark));
 }
 
 .auth-card {
@@ -97,14 +102,15 @@
 }
 
 .form-error-message {
-  background-color: #f8d7da; /* Light red */
-  color: #721c24; /* Dark red */
-  border: 1px solid #f5c6cb;
+  background-color: var(--status-expired-bg); /* Use theme variable */
+  color: var(--status-expired-text); /* Use theme variable */
+  border: 1px solid var(--status-expired-text); /* Adjusted border for clarity */
   padding: 0.8rem;
   margin-bottom: 1.5rem;
   border-radius: 6px;
   font-size: 0.9em;
   text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .input-group {
