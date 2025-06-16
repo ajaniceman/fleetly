@@ -5,63 +5,53 @@ import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 
 export default function Dashboard() {
-  const { user, logout } = useAuth();
+  const { user, logout, fetchWithAuth } = useAuth(); // Destructure fetchWithAuth
   const [vehicles, setVehicles] = useState([]);
-  const [allDates, setAllDates] = useState([]); // State to hold all date records for summary stats
+  const [allDates, setAllDates] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [editingVehicle, setEditingVehicle] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState(''); // State for search input
+  const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          navigate('/login'); // Redirect to login if not authenticated
-          return;
-        }
-
-        // Fetch vehicles
-        const vehiclesRes = await fetch('/api/vehicles', {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
+        // Fetch vehicles using fetchWithAuth
+        const vehiclesRes = await fetchWithAuth('/api/vehicles');
         if (!vehiclesRes.ok) throw new Error('Failed to fetch vehicles');
         const vehiclesData = await vehiclesRes.json();
         setVehicles(vehiclesData);
 
-        // Fetch all dates for the user's vehicles (for dashboard summary)
-        const datesRes = await fetch('/api/dates/user', {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
+        // Fetch all dates for the user's vehicles using fetchWithAuth
+        const datesRes = await fetchWithAuth('/api/dates/user');
         if (!datesRes.ok) throw new Error('Failed to fetch dates');
         const datesData = await datesRes.json();
         setAllDates(datesData);
 
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
-        alert(`Error loading dashboard data: ${error.message}`);
-        // Consider more robust error handling for user, e.g., show an error message on screen
+        // Only show alert if it's not the "Session expired" error handled by fetchWithAuth
+        if (!error.message.includes("Session expired")) {
+            alert(`Error loading dashboard data: ${error.message}`);
+        }
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [navigate]); // Added navigate to dependency array
+  }, [fetchWithAuth]); // Add fetchWithAuth to dependency array
 
-  // Calculate dashboard statistics (memoized or calculated on demand for simplicity)
   const totalVehiclesCount = vehicles.length;
   const today = new Date();
-  today.setHours(0, 0, 0, 0); // Normalize to start of day
+  today.setHours(0, 0, 0, 0);
 
   const thirtyDaysFromNow = new Date();
   thirtyDaysFromNow.setDate(today.getDate() + 30);
-  thirtyDaysFromNow.setHours(23, 59, 59, 999); // Normalize to end of day
+  thirtyDaysFromNow.setHours(23, 59, 59, 999);
 
   const expiredDatesCount = allDates.filter(date => {
-    // Ensure date.dueDate is valid before creating a Date object
     if (!date.dueDate || isNaN(new Date(date.dueDate))) return false;
     const dueDate = new Date(date.dueDate);
     dueDate.setHours(0, 0, 0, 0);
@@ -69,22 +59,18 @@ export default function Dashboard() {
   }).length;
 
   const upcomingDatesCount = allDates.filter(date => {
-    // Ensure date.dueDate is valid
     if (!date.dueDate || isNaN(new Date(date.dueDate))) return false;
     const dueDate = new Date(date.dueDate);
     dueDate.setHours(0, 0, 0, 0);
-    // Date is upcoming if it's today or in the future, up to 30 days from now
     return dueDate >= today && dueDate <= thirtyDaysFromNow;
   }).length;
 
-
-  // Filter vehicles based on search term for the table
   const filteredVehicles = vehicles.filter(v =>
     v.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
     v.make.toLowerCase().includes(searchTerm.toLowerCase()) ||
     v.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (v.licensePlate && v.licensePlate.toLowerCase().includes(searchTerm.toLowerCase())) || // Check for existence
-    (v.vin && v.vin.toLowerCase().includes(searchTerm.toLowerCase())) // Check for existence
+    (v.licensePlate && v.licensePlate.toLowerCase().includes(searchTerm.toLowerCase())) ||
+    (v.vin && v.vin.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   const handleSave = async (formData) => {
@@ -101,11 +87,10 @@ export default function Dashboard() {
     }
 
     try {
-      res = await fetch(url, {
+      res = await fetchWithAuth(url, { // Use fetchWithAuth
         method: method,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify(formData)
       });
@@ -114,21 +99,16 @@ export default function Dashboard() {
         const savedVehicle = await res.json();
         setVehicles(prevVehicles => {
           if (editingVehicle) {
-            // Update the existing vehicle in the list
             return prevVehicles.map(v => v.id === savedVehicle.id ? savedVehicle : v);
           } else {
-            // Add new vehicle to the top of the list
             return [savedVehicle, ...prevVehicles];
           }
         });
         setShowForm(false);
         setEditingVehicle(null);
         alert(`Vehicle ${editingVehicle ? 'updated' : 'added'} successfully!`);
-        // Crucially, re-fetch all dates after a vehicle save/update
-        // This ensures dashboard stats are up-to-date if vehicle affects dates
-        const datesRes = await fetch('/api/dates/user', {
-          headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-        });
+        // Re-fetch all dates for dashboard stats
+        const datesRes = await fetchWithAuth('/api/dates/user'); // Use fetchWithAuth
         if (datesRes.ok) {
           const datesData = await datesRes.json();
           setAllDates(datesData);
@@ -139,24 +119,21 @@ export default function Dashboard() {
       }
     } catch (error) {
       console.error(`Error ${editingVehicle ? 'updating' : 'adding'} vehicle:`, error);
-      alert(`An unexpected error occurred while ${editingVehicle ? 'updating' : 'adding'} the vehicle.`);
+      if (!error.message.includes("Session expired")) {
+        alert(`An unexpected error occurred while ${editingVehicle ? 'updating' : 'adding'} the vehicle.`);
+      }
     }
   };
 
   const handleDelete = async (vehicleId) => {
     if (window.confirm("Are you sure you want to delete this vehicle?")) {
       try {
-        const res = await fetch(`/api/vehicles/${vehicleId}`, {
+        const res = await fetchWithAuth(`/api/vehicles/${vehicleId}`, { // Use fetchWithAuth
           method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
         });
         if (res.ok) {
           setVehicles(vehicles.filter(v => v.id !== vehicleId));
-          // After deleting a vehicle, also filter out its associated dates
           setAllDates(prevDates => prevDates.filter(d => d.vehicleId !== vehicleId));
-          // (If you had a similar "all services" state, you'd update that too)
           alert("Vehicle deleted successfully!");
         } else {
           const errorData = await res.json();
@@ -164,7 +141,9 @@ export default function Dashboard() {
         }
       } catch (error) {
         console.error("Error deleting vehicle:", error);
-        alert("An unexpected error occurred while deleting the vehicle.");
+        if (!error.message.includes("Session expired")) {
+            alert("An unexpected error occurred while deleting the vehicle.");
+        }
       }
     }
   };
@@ -201,7 +180,6 @@ export default function Dashboard() {
         <button onClick={logout} className="logout-btn">Logout</button>
       </div>
 
-      {/* Dashboard Stats Overview */}
       <div className="dashboard-stats-grid">
         <div className="stat-card total-vehicles">
           <div className="stat-icon">🚗</div>
@@ -209,7 +187,7 @@ export default function Dashboard() {
           <div className="stat-label">Total Vehicles</div>
         </div>
         <div className="stat-card expired-dates">
-          <div className="stat-icon">⚠️</div> {/* Changed icon to a warning sign */}
+          <div className="stat-icon">⚠️</div>
           <div className="stat-value">{expiredDatesCount}</div>
           <div className="stat-label">Expired Dates</div>
         </div>
@@ -266,7 +244,7 @@ export default function Dashboard() {
           <div className="no-vehicles">
             {searchTerm ? `No vehicles found for "${searchTerm}"` : `No vehicles added yet! Click "Add New Vehicle" to get started!`}
           </div>
-        ) : filteredVehicles.map((v) => ( // Removed 'i' as it's not used
+        ) : filteredVehicles.map((v) => (
           <div key={v.id} className={`table-row animated-row`}>
             <div>{v.type}</div>
             <div>{v.make}</div>
