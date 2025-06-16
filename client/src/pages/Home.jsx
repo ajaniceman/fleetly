@@ -1,39 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Features from '../features/Features/Features'; // Assuming this component is robust
-import Testimonials from '../features/Testimonials/Testimonials'; // Assuming this component is robust
+import Features from '../features/Features/Features';
+import Testimonials from '../features/Testimonials/Testimonials';
 import './Home.css';
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 export default function Home() {
+  const { t } = useTranslation(); // Initialize the translation hook
+
   return (
     <div className="home-page">
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-background-gradient"></div> {/* For a subtle background effect */}
         <div className="hero-content container">
-          <div className="pre-title animate-fade-in-up-delay-1">Smart. Seamless. Powerful.</div>
+          <div className="pre-title animate-fade-in-up-delay-1">{t('fleetly_slogan_pre_title')}</div>
           <h1 className="hero-title animate-fade-in-up-delay-2">
-            Master Your Fleet with <span className="highlight">Effortless</span> Management
+            {t('fleetly_title_part1')} <span className="highlight">{t('fleetly_title_highlight')}</span> {t('fleetly_title_part2')}
           </h1>
           <p className="subtitle animate-fade-in-up-delay-3">
-            Streamline vehicle tracking, maintenance schedules, and critical date reminders. Fleetly is your all-in-one solution for optimal fleet performance.
+            {t('fleetly_subtitle')}
           </p>
           <div className="cta-buttons animate-fade-in-up-delay-4">
-            <Link to="/register" className="btn primary-cta">Get Started Free</Link>
-            <Link to="/login" className="btn secondary-cta">Login to Dashboard</Link>
+            <Link to="/register" className="btn primary-cta">{t('get_started_free_btn')}</Link>
+            <Link to="/login" className="btn secondary-cta">{t('login_to_dashboard_btn')}</Link>
           </div>
           <div className="stats-grid animate-fade-in-up-delay-5">
             <div className="stat-item">
               <span className="stat-number">98%</span>
-              <span className="stat-label">Compliance Success</span>
+              <span className="stat-label">{t('compliance_success_stat')}</span>
             </div>
             <div className="stat-item">
               <span className="stat-number">40%</span>
-              <span className="stat-label">Maintenance Savings</span>
+              <span className="stat-label">{t('maintenance_savings_stat')}</span>
             </div>
             <div className="stat-item">
               <span className="stat-number">24/7</span>
-              <span className="stat-label">Accessible Anytime</span>
+              <span className="stat-label">{t('accessible_anytime_stat')}</span>
             </div>
           </div>
         </div>
@@ -42,9 +45,9 @@ export default function Home() {
       {/* Why Choose Fleetly? (Features) */}
       <section className="features-preview section-padding bg-light">
         <div className="container">
-          <h2 className="section-title">Unlock Efficiency with Fleetly's Core Features</h2>
+          <h2 className="section-title">{t('unlock_efficiency_title')}</h2>
           <p className="section-subtitle">
-            From comprehensive vehicle profiles to smart reminders, Fleetly keeps you ahead.
+            {t('unlock_efficiency_subtitle')}
           </p>
           <Features /> {/* Your existing Features component */}
         </div>
@@ -53,25 +56,25 @@ export default function Home() {
       {/* How It Works Section */}
       <section className="how-it-works-section section-padding">
         <div className="container">
-          <h2 className="section-title">Simple Steps to Smarter Fleet Management</h2>
+          <h2 className="section-title">{t('simple_steps_title')}</h2>
           <p className="section-subtitle">
-            Getting started with Fleetly is quick and easy.
+            {t('simple_steps_subtitle')}
           </p>
           <div className="steps-grid">
             <div className="step-item">
               <div className="step-icon">🚗</div>
-              <h3>1. Register Your Account</h3>
-              <p>Sign up in minutes and set up your personalized fleet dashboard.</p>
+              <h3>{t('register_account_step_title')}</h3>
+              <p>{t('register_account_step_description')}</p>
             </div>
             <div className="step-item">
               <div className="step-icon">⚙️</div>
-              <h3>2. Add Your Vehicles</h3>
-              <p>Easily input vehicle details, including type, make, model, and key dates.</p>
+              <h3>{t('add_vehicles_step_title')}</h3>
+              <p>{t('add_vehicles_step_description')}</p>
             </div>
             <div className="step-item">
               <div className="step-icon">📅</div>
-              <h3>3. Track & Optimize</h3>
-              <p>Receive smart reminders for services and inspections. Stay compliant, save costs.</p>
+              <h3>{t('track_optimize_step_title')}</h3>
+              <p>{t('track_optimize_step_description')}</p>
             </div>
           </div>
         </div>
@@ -80,6 +83,7 @@ export default function Home() {
       {/* Testimonials */}
       <section className="testimonials-section section-padding bg-light">
         <div className="container">
+          <h2 className="section-title">{t('what_our_users_say_title')}</h2>
           <Testimonials /> {/* Your existing Testimonials component */}
         </div>
       </section>
@@ -87,10 +91,10 @@ export default function Home() {
       {/* Final CTA */}
       <section className="final-cta-section section-padding bg-dark">
         <div className="container text-center">
-          <h2 className="section-title text-white">Ready to elevate your fleet's performance?</h2>
-          <p className="section-subtitle text-white">Join countless fleet managers simplifying their operations with Fleetly.</p>
+          <h2 className="section-title text-white">{t('final_cta_title')}</h2>
+          <p className="section-subtitle text-white">{t('final_cta_subtitle')}</p>
           <Link to="/register" className="btn primary-cta large-btn">
-            Start Your Free Trial Today
+            {t('start_free_trial_btn')}
           </Link>
         </div>
       </section>

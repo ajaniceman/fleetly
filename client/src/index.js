@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import './styles/global.css';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './hooks/useAuth';
+import './i18n'; // Import the i18n configuration
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
