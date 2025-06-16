@@ -30,13 +30,13 @@ html[data-theme='dark'] .auth-page-container {
 .card-header {
   margin-bottom: 2rem;
   position: relative; /* For back-home-link positioning */
-  padding-top: 2rem; /* Add padding to the top of the header to make space for the button */
+  padding-top: 3rem; /* INCREASED: Added more padding to the top of the header for the button */
 }
 
 .back-home-link {
   position: absolute;
-  top: 1.5rem;      /* Adjusted for better spacing */
-  left: 1.5rem;     /* Adjusted for better spacing */
+  top: 1rem;      /* Adjusted: Move slightly down to accommodate top padding */
+  left: 1.5rem;     /* Keep consistent with card padding */
   display: flex;
   align-items: center;
   gap: 0.5rem;
