@@ -2,19 +2,19 @@
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Creates responsive columns */
+  gap: 2rem; /* Space between the cards */
   margin-top: 3rem;
 }
 
 .feature-card {
-  background-color: var(--background-secondary); /* Use theme variable */
+  background-color: var(--background-secondary); /* Use theme variable for card background */
   padding: 2.5rem;
   border-radius: 12px;
   box-shadow: 0 8px 25px var(--box-shadow-md); /* Use general shadow variable */
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
-  border: 1px solid var(--border-color); /* Use theme variable */
+  border: 1px solid var(--border-color); /* Use theme variable for card border */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,13 +22,13 @@
 
 .feature-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 35px var(--box-shadow-lg); /* Use general shadow variable */
+  box-shadow: 0 12px 35px var(--box-shadow-lg); /* Use general shadow variable for hover */
 }
 
 .feature-icon {
-  font-size: 3.5em; /* Use large emojis or icons */
+  font-size: 3.5em; /* Size of the emoji/icon */
   margin-bottom: 1.5rem;
-  display: block;
+  display: block; /* Ensures margin works */
 }
 
 .feature-card h3 {
@@ -40,16 +40,16 @@
 }
 
 .feature-card p {
-  color: var(--text-secondary); /* Use theme variable */
+  color: var(--text-secondary); /* Use theme variable for feature description text */
   font-size: 1em;
   line-height: 1.6;
   transition: color 0.3s ease;
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
   .features-grid {
-    grid-template-columns: 1fr; /* Stack on smaller screens */
+    grid-template-columns: 1fr; /* Stack on very small screens */
   }
   .feature-card {
     padding: 1.8rem;

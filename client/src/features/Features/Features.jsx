@@ -1,35 +1,57 @@
-// src/components/Features.jsx
 import React from 'react';
-import './Features.css';
+import './Features.css'; // Make sure this CSS file exists and is linked
 
-const features = [
+// Example Feature Data (Replace with your actual features if you have them)
+const featureData = [
   {
-    icon: "🔧",  // Or use a wrench icon from React Icons
-    title: "Service History",
-    desc: "Log past services and view maintenance records."
+    id: 1,
+    icon: '📊', // Emoji for icon
+    title: 'Intuitive Dashboard',
+    description: 'Get a real-time overview of your entire fleet at a glance, with key metrics and insights.',
   },
   {
-    icon: "📅",
-    title: "Registration Tracker",
-    desc: "Get alerts for upcoming vehicle registration renewals."
+    id: 2,
+    icon: '🗺️', // Emoji for icon
+    title: 'Advanced Tracking',
+    description: 'Monitor vehicle locations and routes to optimize dispatch and enhance efficiency.',
   },
   {
-    icon: "⏰",
-    title: "Maintenance Reminders",
-    desc: "Schedule oil changes, tire rotations, and more."
+    id: 3,
+    icon: '🛠️', // Emoji for icon
+    title: 'Proactive Maintenance',
+    description: 'Never miss a service with automated reminders and detailed service history logs.',
+  },
+  {
+    id: 4,
+    icon: '🗓️', // Emoji for icon
+    title: 'Critical Date Reminders',
+    description: 'Stay compliant with timely alerts for registrations, inspections, and license renewals.',
+  },
+  {
+    id: 5,
+    icon: '📉', // Emoji for icon
+    title: 'Cost Optimization',
+    description: 'Track expenses and identify areas for savings to improve your fleet’s profitability.',
+  },
+  {
+    id: 6,
+    icon: '📱', // Emoji for icon
+    title: 'Mobile Accessibility',
+    description: 'Manage your fleet on the go with a fully responsive and optimized mobile experience.',
   },
 ];
 
 export default function Features() {
   return (
-    <section className="features">
-      {features.map((f, i) => (
-        <div className="feature-card" key={i}>
-          <div className="icon">{f.icon}</div>
-          <h3>{f.title}</h3>
-          <p>{f.desc}</p>
+    // This div applies the grid layout defined in Features.css
+    <div className="features-grid">
+      {featureData.map(feature => (
+        <div key={feature.id} className="feature-card">
+          <div className="feature-icon">{feature.icon}</div>
+          <h3>{feature.title}</h3>
+          <p>{feature.description}</p>
         </div>
       ))}
-    </section>
+    </div>
   );
 }

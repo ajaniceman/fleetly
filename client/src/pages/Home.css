@@ -21,19 +21,20 @@ body {
   padding: 5rem 0;
 }
 
+/* Updated bg-light and bg-dark to use theme variables directly */
 .bg-light {
-  background-color: var(--background-primary); /* Use theme variable */
+  background-color: var(--background-primary); /* Primary background in both themes */
   transition: background-color 0.3s ease;
 }
 
 .bg-dark {
-  background-color: var(--background-primary); /* Default to primary background, if no specific dark-background var for sections */
-  color: var(--text-light); /* Use theme variable */
+  background-color: var(--background-secondary); /* Secondary background in dark mode, usually darker */
+  color: var(--text-light); /* Text for dark backgrounds */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-/* If you want a specific "dark" background for sections, ensure it's defined and used */
+/* Ensure dark theme sets the correct background for sections with bg-dark class */
 html[data-theme='dark'] .bg-dark {
-  background-color: var(--background-secondary); /* Using secondary background for contrast in dark mode */
+  background-color: var(--background-secondary); /* This will make sections with bg-dark class use secondary background in dark mode */
 }
 
 
@@ -85,14 +86,12 @@ html[data-theme='dark'] .bg-dark {
 .primary-cta {
   background-color: var(--cta-primary-bg); /* Use theme variable */
   color: white;
-  /* Adjust box-shadow RGBA for better visibility on dark backgrounds */
-  box-shadow: 0 4px 15px rgba(var(--cta-primary-rgb-shadow, 52, 152, 219), 0.3);
+  box-shadow: 0 4px 15px rgba(var(--cta-primary-rgb-shadow), 0.3); /* Use new RGB variable */
 }
 .primary-cta:hover {
   background-color: var(--cta-primary-hover-bg); /* Use theme variable */
   transform: translateY(-2px);
-  /* Adjust box-shadow RGBA for better visibility on dark backgrounds */
-  box-shadow: 0 6px 20px rgba(var(--cta-primary-rgb-shadow, 52, 152, 219), 0.4);
+  box-shadow: 0 6px 20px rgba(var(--cta-primary-rgb-shadow), 0.4); /* Use new RGB variable */
 }
 
 .secondary-cta {
@@ -188,15 +187,16 @@ html[data-theme='dark'] .hero-section {
   margin-top: 3rem;
   padding: 1.5rem;
   background-color: var(--background-secondary); /* Use theme variable for stats background */
-  /* REMOVED OPACITY for clear background */
+  /* REMOVED OPACITY: Make stats grid opaque */
   border-radius: 12px;
   border: 1px solid var(--border-color); /* Use theme variable */
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 4px 15px var(--box-shadow-md); /* Use general shadow variable */
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .stat-item {
   background-color: var(--background-secondary); /* Use theme variable */
-  /* REMOVED OPACITY for clear background */
+  /* REMOVED OPACITY: Make stat items opaque */
   padding: 1.2rem;
   border-radius: 10px;
   display: flex;
@@ -204,7 +204,8 @@ html[data-theme='dark'] .hero-section {
   align-items: center;
   gap: 0.5rem;
   border: 1px solid var(--border-color); /* Use theme variable */
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 2px 8px var(--box-shadow-sm); /* Use general shadow variable */
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .stat-number {
@@ -222,6 +223,14 @@ html[data-theme='dark'] .hero-section {
 }
 
 /* --- Features Preview Section --- */
+.features-preview { /* Added class to target this section's background */
+  background-color: var(--background-primary); /* Default primary background for the section */
+  transition: background-color 0.3s ease;
+}
+html[data-theme='dark'] .features-preview {
+  background-color: var(--background-secondary); /* Make this section background different in dark mode for alternation */
+}
+
 .features-preview .section-title,
 .features-preview .section-subtitle {
   color: var(--heading-color); /* Use theme variable */
@@ -234,7 +243,7 @@ html[data-theme='dark'] .hero-section {
   transition: background-color 0.3s ease;
 }
 html[data-theme='dark'] .how-it-works-section {
-  background-color: var(--background-secondary); /* Make this section background different in dark mode */
+  background-color: var(--background-primary); /* Keep primary background in dark mode for alternation */
 }
 
 .how-it-works-section .steps-grid {
@@ -248,14 +257,14 @@ html[data-theme='dark'] .how-it-works-section {
   background-color: var(--background-secondary); /* Use theme variable */
   padding: 2.5rem;
   border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 25px var(--box-shadow-md); /* Use general shadow variable */
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
   border: 1px solid var(--border-color); /* Use theme variable */
 }
 .how-it-works-section .step-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 35px var(--box-shadow-lg); /* Use general shadow variable */
 }
 
 .how-it-works-section .step-icon {
