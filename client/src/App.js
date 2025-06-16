@@ -2,16 +2,16 @@ import React from 'react';
 // Removed BrowserRouter from this import, as it should be in index.js
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from './hooks/useAuth';
-import Home from './pages/Home/Home'; // Ensure path is correct, e.g., './pages/Home/Home' if it's a folder
+import Home from './pages/Home'; // Ensure path is correct, e.g., './pages/Home/Home' if it's a folder
 import Hero from './components/Hero/Hero'; // Your Auth/Login/Register component
 import Footer from './components/Footer/Footer';
-import Dashboard from './pages/Dashboard/Dashboard'; // Ensure path is correct
+import Dashboard from './pages/Dashboard'; // Ensure path is correct
 import VehicleServices from './pages/VehicleServices/VehicleServices';
 import VehicleDatesPage from './pages/VehicleDatesPage/VehicleDatesPage';
 import VerifyEmailPage from './pages/VerifyEmailPage/VerifyEmailPage'; // Import the new verification page
 import NotFound from './pages/NotFound/NotFound'; // Import the NotFound component
 import NavBar from './components/NavBar/NavBar'; // Import NavBar here to be used globally
-import { ThemeProvider } from './context/ThemeContext'; // Corrected path to 'context'
+import { ThemeProvider } from './contexts/ThemeContext'; // Corrected path to 'context'
 // NEW: Import useTranslation for language switching
 import { useTranslation } from 'react-i18next';
 
