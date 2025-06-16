@@ -5,7 +5,7 @@ import { useAuth } from '../../hooks/useAuth'; // Import useAuth
 import './VehicleDatesPage.css';
 
 export default function VehicleDatesPage() {
-  const { id } = useParams();
+  const { vehicleId } = useParams(); // Changed 'id' to 'vehicleId' to match route parameter
   const navigate = useNavigate();
   const { fetchWithAuth } = useAuth(); // Destructure fetchWithAuth
   const [vehicle, setVehicle] = useState(null);
@@ -18,7 +18,7 @@ export default function VehicleDatesPage() {
     const fetchVehicleAndDates = async () => {
       try {
         // Fetch vehicle details using fetchWithAuth
-        const vehicleRes = await fetchWithAuth(`/api/vehicles/${id}`);
+        const vehicleRes = await fetchWithAuth(`/api/vehicles/${vehicleId}`); // Use vehicleId
         if (!vehicleRes.ok) {
           throw new Error('Failed to fetch vehicle details');
         }
@@ -26,7 +26,7 @@ export default function VehicleDatesPage() {
         setVehicle(vehicleData);
 
         // Fetch dates for this vehicle using fetchWithAuth
-        const datesRes = await fetchWithAuth(`/api/dates/vehicle/${id}`);
+        const datesRes = await fetchWithAuth(`/api/dates/vehicle/${vehicleId}`); // Use vehicleId
         if (!datesRes.ok) {
           throw new Error('Failed to fetch dates');
         }
@@ -44,17 +44,17 @@ export default function VehicleDatesPage() {
       }
     };
 
-    if (id) {
+    if (vehicleId) { // Check if vehicleId exists before fetching
       fetchVehicleAndDates();
     }
-  }, [id, navigate, fetchWithAuth]); // Add fetchWithAuth to dependency array
+  }, [vehicleId, navigate, fetchWithAuth]); // Add fetchWithAuth to dependency array
 
   const handleSaveDate = async (formData) => {
     let res;
     let url;
     let method;
 
-    formData.vehicle_id = id;
+    formData.vehicle_id = vehicleId; // Use vehicleId here
 
     if (editingDate) {
       url = `/api/dates/${editingDate.id}`;
@@ -69,6 +69,7 @@ export default function VehicleDatesPage() {
         method: method,
         headers: {
           'Content-Type': 'application/json',
+          // Authorization header is handled by fetchWithAuth now
         },
         body: JSON.stringify(formData)
       });

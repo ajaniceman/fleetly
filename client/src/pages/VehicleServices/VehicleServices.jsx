@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ServiceForm from '../../components/ServiceForm/ServiceForm';
 import './VehicleServices.css'; // The CSS file will still be named this
+import { useAuth } from '../../hooks/useAuth'; // Import useAuth to use fetchWithAuth
 
 export default function VehicleServices() {
-  const { id } = useParams();
+  const { vehicleId } = useParams(); // Changed 'id' to 'vehicleId' to match route parameter
   const navigate = useNavigate();
+  const { fetchWithAuth } = useAuth(); // Destructure fetchWithAuth
   const [vehicle, setVehicle] = useState(null);
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,26 +17,16 @@ export default function VehicleServices() {
   useEffect(() => {
     const fetchVehicleAndServices = async () => {
       try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          navigate('/login');
-          return;
-        }
-
-        // Fetch vehicle details
-        const vehicleRes = await fetch(`/api/vehicles/${id}`, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
+        // Fetch vehicle details using fetchWithAuth
+        const vehicleRes = await fetchWithAuth(`/api/vehicles/${vehicleId}`); // Use vehicleId
         if (!vehicleRes.ok) {
           throw new Error('Failed to fetch vehicle details');
         }
         const vehicleData = await vehicleRes.json();
         setVehicle(vehicleData);
 
-        // Fetch services for this vehicle
-        const servicesRes = await fetch(`/api/services/vehicle/${id}`, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
+        // Fetch services for this vehicle using fetchWithAuth
+        const servicesRes = await fetchWithAuth(`/api/services/vehicle/${vehicleId}`); // Use vehicleId
         if (!servicesRes.ok) {
           throw new Error('Failed to fetch services');
         }
@@ -43,24 +35,27 @@ export default function VehicleServices() {
 
       } catch (error) {
         console.error("Error loading vehicle services:", error);
-        alert(`Error loading services: ${error.message}`);
-        navigate('/dashboard');
+        // Only alert if the error isn't a session expiration handled by fetchWithAuth
+        if (!error.message.includes("Session expired")) {
+          alert(`Error loading services: ${error.message}`);
+          navigate('/dashboard'); // Go back to dashboard on other errors
+        }
       } finally {
         setLoading(false);
       }
     };
 
-    if (id) {
+    if (vehicleId) { // Check if vehicleId exists before fetching
       fetchVehicleAndServices();
     }
-  }, [id, navigate]);
+  }, [vehicleId, navigate, fetchWithAuth]); // Add fetchWithAuth to dependency array
 
   const handleSaveService = async (formData) => {
     let res;
     let url;
     let method;
 
-    formData.vehicle_id = id;
+    formData.vehicle_id = vehicleId; // Use vehicleId here
 
     if (editingService) {
       url = `/api/services/${editingService.id}`;
@@ -71,11 +66,11 @@ export default function VehicleServices() {
     }
 
     try {
-      res = await fetch(url, {
+      res = await fetchWithAuth(url, { // Use fetchWithAuth
         method: method,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          // Authorization header is handled by fetchWithAuth now
         },
         body: JSON.stringify(formData)
       });
@@ -84,13 +79,17 @@ export default function VehicleServices() {
         const savedService = await res.json();
         setServices(prevServices => {
           if (editingService) {
+            // Update the existing service
             return prevServices.map(s => s.id === savedService.id ? savedService : s);
           } else {
+            // Add new service to the beginning of the list
             return [savedService, ...prevServices];
           }
         });
         setShowServiceForm(false);
         setEditingService(null);
+        // Using alert from context, not window.alert
+        // You might want to replace this with a custom modal if you have one
         alert(`Service ${editingService ? 'updated' : 'added'} successfully!`);
       } else {
         const errorData = await res.json();
@@ -98,16 +97,19 @@ export default function VehicleServices() {
       }
     } catch (error) {
       console.error(`Error ${editingService ? 'updating' : 'adding'} service:`, error);
-      alert(`An unexpected error occurred while ${editingService ? 'updating' : 'adding'} the service.`);
+      // Only alert if the error isn't a session expiration handled by fetchWithAuth
+      if (!error.message.includes("Session expired")) {
+        alert(`An unexpected error occurred while ${editingService ? 'updating' : 'adding'} the service.`);
+      }
     }
   };
 
   const handleDeleteService = async (serviceId) => {
+    // Replace window.confirm with a custom modal if you have one
     if (window.confirm("Are you sure you want to delete this service record?")) {
       try {
-        const res = await fetch(`/api/services/${serviceId}`, {
+        const res = await fetchWithAuth(`/api/services/${serviceId}`, { // Use fetchWithAuth
           method: 'DELETE',
-          headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
         if (res.ok) {
           setServices(prevServices => prevServices.filter(s => s.id !== serviceId));
@@ -118,7 +120,10 @@ export default function VehicleServices() {
         }
       } catch (error) {
         console.error("Error deleting service record:", error);
-        alert("An unexpected error occurred while deleting the service record.");
+        // Only alert if the error isn't a session expiration handled by fetchWithAuth
+        if (!error.message.includes("Session expired")) {
+          alert("An unexpected error occurred while deleting the service record.");
+        }
       }
     }
   };
@@ -163,6 +168,7 @@ export default function VehicleServices() {
               <div>Type</div>
               <div>Description</div>
               <div>Cost</div>
+              {/* Conditional columns for Odometer/Engine Hours based on vehicle type */}
               {['Car', 'Truck', 'Van', 'Bus'].includes(vehicle.type) && <div>Odometer (KM)</div>}
               {['Excavator', 'Roller'].includes(vehicle.type) && <div>Engine Hours</div>}
               <div>Actions</div>
