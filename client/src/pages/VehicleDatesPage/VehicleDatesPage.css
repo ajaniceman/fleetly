@@ -1,10 +1,13 @@
+/* client/src/pages/VehicleDatesPage/VehicleDatesPage.css */
+
 .vehicle-dates-page {
-  padding: 2rem;
-  max-width: 1000px;
+  padding: 2.5rem; /* Consistent padding */
+  max-width: 1200px;
   margin: auto;
   font-family: 'Inter', sans-serif;
   color: var(--text-primary); /* Use theme variable */
   background-color: var(--background-primary); /* Use theme variable */
+  min-height: 100vh;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -12,63 +15,72 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem; /* More space below header */
   border-bottom: 1px solid var(--border-color); /* Use theme variable */
-  padding-bottom: 1rem;
+  padding-bottom: 1.5rem; /* More padding */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: 1rem;
   transition: border-color 0.3s ease;
 }
 
 .dates-header h1 {
-  font-size: 2.2em;
+  font-size: 2.8em; /* Larger title */
   color: var(--heading-color); /* Use theme variable */
   margin: 0;
+  font-weight: 700;
   transition: color 0.3s ease;
 }
 
+/* Back to Dashboard Button */
 .back-to-dashboard-btn {
   background-color: var(--button-back); /* Use theme variable */
   color: var(--text-light); /* Use theme variable */
-  padding: 0.8rem 1.5rem;
+  padding: 0.7rem 1.4rem; /* Consistent button padding */
   border: none;
-  border-radius: 6px;
+  border-radius: 8px; /* More rounded */
   cursor: pointer;
   font-size: 1em;
   font-weight: 500;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px var(--box-shadow-sm); /* Use general shadow variable */
 }
 
 .back-to-dashboard-btn:hover {
   background-color: var(--button-back-hover); /* Use theme variable */
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--box-shadow-md); /* Use general shadow variable */
 }
 
+/* Add New Date Button */
 .add-date-btn {
   background-color: var(--cta-primary-bg); /* Use theme variable */
   color: var(--text-light); /* Use theme variable */
-  padding: 0.8rem 1.5rem;
+  padding: 0.85rem 1.75rem; /* Consistent button padding */
   border: none;
-  border-radius: 6px;
+  border-radius: 8px; /* More rounded */
   cursor: pointer;
   font-size: 1em;
-  font-weight: 500;
-  margin-bottom: 1.5rem;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  font-weight: 600;
+  margin-bottom: 2rem; /* More margin below button */
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 15px rgba(var(--cta-primary-rgb-shadow), 0.3); /* Use RGB variable */
 }
 
 .add-date-btn:hover {
   background-color: var(--cta-primary-hover-bg); /* Use theme variable */
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(var(--cta-primary-rgb-shadow), 0.4); /* Use RGB variable */
 }
 
+/* Dates Table Container (The "Box" around the table) */
 .dates-table-container {
   background: var(--background-secondary); /* Use theme variable */
   border: 1px solid var(--border-color); /* Use theme variable */
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  overflow-x: auto; /* Enable horizontal scrolling for the table if needed */
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  border-radius: 12px; /* More rounded corners for the container */
+  box-shadow: 0 8px 25px var(--box-shadow-md); /* Use general shadow variable */
+  overflow: hidden; /* Ensures rounded corners clip table content */
   margin-top: 2rem;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .dates-table-container h2 {
@@ -77,24 +89,27 @@
   padding: 1.5rem;
   margin: 0;
   border-bottom: 1px solid var(--border-color); /* Use theme variable */
-  background-color: var(--background-primary); /* Use theme variable */
+  background-color: var(--table-header-bg); /* Consistent header background */
+  font-weight: 600;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Dates Table */
 .dates-table {
   width: 100%;
-  min-width: 480px; /* Give it a minimum width to ensure columns are not too squeezed on very small screens */
+  border-collapse: collapse; /* Ensure table borders collapse */
 }
 
 .dates-table .table-header,
 .dates-table .table-row {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 0.8fr 1.5fr 150px; /* Type, Date, Status, Notes, Actions */
-  gap: 10px;
-  padding: 1rem 1.5rem;
+  /* Updated grid template for clear columns and better spacing */
+  grid-template-columns: 1.2fr 1.2fr 0.8fr 2fr 1.2fr; /* Type, Due Date, Status, Notes, Actions */
+  gap: 10px; /* Space between grid items */
+  padding: 1.2rem 1.5rem; /* Increased padding within rows/headers for more space */
   border-bottom: 1px solid var(--border-color); /* Use theme variable */
   align-items: center;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .dates-table .table-header {
@@ -102,41 +117,88 @@
   font-weight: 600;
   color: var(--table-header-text); /* Use theme variable */
   text-transform: uppercase;
-  font-size: 0.85em;
+  font-size: 0.85em; /* Slightly smaller for headers */
+  letter-spacing: 0.5px;
 }
 
 .dates-table .table-row {
   background: var(--background-secondary); /* Use theme variable */
-  font-size: 0.95em;
+  font-size: 0.95em; /* Standard text size for rows */
   color: var(--text-primary); /* Use theme variable */
   transition: background 0.2s ease, background-color 0.3s ease, color 0.3s ease;
 }
+
+.dates-table .table-row:nth-child(even) { /* Alternating row backgrounds */
+  background-color: var(--table-row-hover-bg); /* Use a lighter shade for even rows */
+}
+html[data-theme='dark'] .dates-table .table-row:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.05); /* Darker subtle shade for dark mode */
+}
+
 
 .dates-table .table-row:last-child {
   border-bottom: none; /* No border for the last row */
 }
 
 .dates-table .table-row:hover {
-  background: var(--table-row-hover-bg); /* Use theme variable */
+  background: var(--table-row-hover-bg); /* Highlight on hover */
+  filter: brightness(0.98); /* Slightly dim on hover for both themes */
+}
+html[data-theme='dark'] .dates-table .table-row:hover {
+  filter: brightness(1.1); /* Slightly brighten on hover for dark theme */
 }
 
+
+/* No Data Message */
 .no-dates-message, .loading, .error-message {
-  padding: 2rem;
+  padding: 2.5rem; /* Consistent padding */
   text-align: center;
   color: var(--text-secondary); /* Use theme variable */
-  font-size: 1.1em;
+  font-size: 1.2em;
   background-color: var(--background-secondary); /* Use theme variable */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.actions .edit-date-btn, .actions .delete-date-btn {
-  padding: 0.5rem 0.8rem;
+/* Date Status Styling (Enhanced) */
+.date-status {
+  padding: 0.4em 0.8em;
+  border-radius: 20px; /* More rounded "pill" shape */
+  font-size: 0.85em; /* Slightly smaller font for status tags */
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.date-status-expired {
+  background-color: var(--status-expired-bg);
+  color: var(--status-expired-text);
+}
+.date-status-due-soon {
+  background-color: var(--status-due-soon-bg);
+  color: var(--status-due-soon-text);
+}
+.date-status-valid {
+  background-color: var(--status-valid-bg);
+  color: var(--status-valid-text);
+}
+
+/* Actions Column Buttons (Edit/Delete) */
+.actions {
+  display: flex;
+  gap: 0.75rem; /* Space between action buttons */
+  justify-content: flex-end; /* Align actions to the right */
+}
+
+.actions .edit-date-btn,
+.actions .delete-date-btn {
+  padding: 0.6rem 1rem; /* Consistent button padding */
   border: none;
-  border-radius: 4px;
+  border-radius: 6px; /* More rounded */
   cursor: pointer;
-  font-size: 0.85em;
-  margin-right: 0.5rem;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 5px var(--box-shadow-sm); /* Use general shadow variable */
 }
 
 .actions .edit-date-btn {
@@ -157,113 +219,79 @@
   transform: translateY(-1px);
 }
 
-/* Date Status Styling */
-.date-status {
-  font-weight: 600;
-  padding: 0.3em 0.6em;
-  border-radius: 4px;
-  display: inline-block; /* To make padding/background work */
-}
-
-.date-status-expired {
-  background-color: var(--status-expired-bg); /* Use theme variable */
-  color: var(--status-expired-text); /* Use theme variable */
-}
-
-.date-status-due-soon {
-  background-color: var(--status-due-soon-bg); /* Use theme variable */
-  color: var(--status-due-soon-text); /* Use theme variable */
-}
-
-.date-status-valid {
-  background-color: var(--status-valid-bg); /* Use theme variable */
-  color: var(--status-valid-text); /* Use theme variable */
-}
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
-  .dates-header {
-    flex-direction: column; /* Stack title and button */
-    align-items: flex-start; /* Align stacked items to the left */
-    gap: 1rem; /* Space between title and button */
-    padding-bottom: 0.5rem; /* Less padding */
-  }
-  .dates-header h1 {
-    font-size: 1.8em; /* Reduce font size */
-    text-align: left; /* Ensure it aligns left when stacked */
-    width: 100%; /* Take full width */
-    line-height: 1.2; /* Adjust line height for multi-line titles */
-  }
-  .back-to-dashboard-btn {
-    width: 100%; /* Make button full width when stacked */
-    margin-top: 1rem; /* More space from title */
-  }
-
+@media (max-width: 992px) {
   .dates-table .table-header,
   .dates-table .table-row {
-    /* Optimized widths for Type, Due Date, Status, and Actions */
-    /* Increased widths for Type and Due Date, slightly more for Status */
-    grid-template-columns: 1.1fr 1.5fr 0.7fr 90px; /* Type, Due Date, Status, Actions */
-    gap: 5px; /* Even smaller gap to maximize content space */
-    padding: 0.6rem 0.8rem; /* Further reduce padding */
-    font-size: 0.85em; /* Reduce overall table font size */
-    overflow-x: hidden; /* Prevent horizontal scroll in row itself */
+    /* Adjust columns for smaller screens, perhaps hide 'Notes' or reduce its size */
+    grid-template-columns: 1fr 1fr 0.8fr 1.2fr; /* Type, Due Date, Status, Actions (Notes hidden) */
   }
-
-  /* Make sure content inside cells doesn't force new lines unless necessary */
-  .dates-table .table-row div {
-    white-space: nowrap; /* Prevent text wrapping inside cells */
-    overflow: hidden; /* Hide overflow */
-    text-overflow: ellipsis; /* Add ellipsis for overflowed text */
-  }
-
-  .dates-table .table-header div:nth-child(4), /* Hide Notes for small screens */
-  .dates-table .table-row div:nth-child(4) {
+  .dates-table .table-header div:nth-child(4), /* Hide Notes header */
+  .dates-table .table-row div:nth-child(4) { /* Hide Notes content */
     display: none;
-  }
-  /* The "Status" column is 3rd child, ensure it's not hidden by mistake from generic rules */
-  .dates-table .table-header div:nth-child(3),
-  .dates-table .table-row div:nth-child(3) {
-    display: block;
-  }
-
-  .actions {
-    display: flex; /* Ensure actions container is flex for button alignment */
-    justify-content: center; /* Center buttons within action column */
-    align-items: center;
-    min-width: 90px; /* Ensure enough space for buttons */
-    /* Adjust width to be flexible but bounded if needed: flex-shrink: 0; */
-  }
-
-  .actions .edit-date-btn, .actions .delete-date-btn {
-    padding: 0.3rem 0.5rem; /* Smaller button padding */
-    font-size: 0.7em; /* Smaller button text */
-    margin-right: 0.2rem; /* Small space between buttons */
-    flex-shrink: 0; /* Prevent buttons from shrinking */
-  }
-  .actions .delete-date-btn {
-    margin-right: 0; /* No right margin for the last button */
   }
 }
 
-/* Further refinements for very small mobile screens if necessary */
+@media (max-width: 768px) {
+  .vehicle-dates-page {
+    padding: 1.5rem;
+  }
+  .dates-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .back-to-dashboard-btn {
+    align-self: flex-end; /* Push logout to bottom right */
+    margin-top: 1rem;
+  }
+  .dates-header h1 {
+    font-size: 2em;
+  }
+  .add-date-btn {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .dates-table-container h2 {
+    padding: 1rem;
+    font-size: 1.5em;
+  }
+
+  .dates-table .table-header,
+  .dates-table .table-row {
+    /* Show only Type, Due Date, Status, Actions on small screens */
+    grid-template-columns: 1fr 1fr 0.8fr 1.2fr; /* Type, Due Date, Status, Actions */
+    gap: 8px;
+    padding: 0.8rem 1rem;
+    font-size: 0.8em;
+  }
+  .dates-table .table-row .actions {
+    justify-content: center; /* Center actions on small screen */
+    gap: 0.5rem; /* Adjust gap between buttons */
+  }
+  .actions .edit-date-btn, .actions .delete-date-btn {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.75em;
+  }
+}
+
 @media (max-width: 480px) {
-  .dates-table {
-     min-width: 400px; /* Ensure table has enough minimum width for columns on very small screens */
+  .dates-header h1 {
+    font-size: 1.8em;
   }
   .dates-table .table-header,
   .dates-table .table-row {
-    /* Adjust actions width for tiny screens, more balanced proportions */
-    grid-template-columns: 1fr 1.5fr 0.6fr 70px; /* Type, Due Date, Status, Actions */
-    font-size: 0.75em; /* Even smaller font size */
-    padding: 0.4rem 0.5rem;
-    gap: 4px; /* Minimal gap for very small screens */
+    grid-template-columns: 1fr 1fr 1fr; /* Type, Due Date, Actions (Status hidden) */
+    font-size: 0.7em;
+    padding: 0.6rem 0.8rem;
   }
-  .actions {
-     min-width: 70px; /* Ensure enough space for buttons on very small screens */
+  .dates-table .table-header div:nth-child(3), /* Hide Status header */
+  .dates-table .table-row div:nth-child(3) { /* Hide Status content */
+    display: none;
   }
   .actions .edit-date-btn, .actions .delete-date-btn {
-    font-size: 0.6em; /* Even smaller button text */
-    padding: 0.1rem 0.25rem; /* Reduced padding */
+    padding: 0.4rem 0.6rem;
+    font-size: 0.65em;
   }
 }
