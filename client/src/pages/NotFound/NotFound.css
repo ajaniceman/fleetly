@@ -1,0 +1,62 @@
+/* client/src/pages/NotFound/NotFound.css */
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+  background-color: var(--background-primary); /* Use theme variable */
+  color: var(--text-primary); /* Use theme variable */
+  padding: 20px;
+}
+
+.not-found-title {
+  font-size: 6em;
+  margin-bottom: 0.2em;
+  color: var(--heading-color); /* Use theme variable */
+}
+
+.not-found-message {
+  font-size: 1.5em;
+  margin-bottom: 1.5em;
+  color: var(--text-secondary); /* Use theme variable */
+}
+
+.not-found-link {
+  display: inline-block;
+  margin: 0.5em;
+  padding: 0.8em 1.5em;
+  background-color: var(--cta-primary-bg); /* Use theme variable */
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: 500;
+}
+
+.not-found-link:hover {
+  background-color: var(--cta-primary-hover-bg); /* Use theme variable */
+  transform: translateY(-2px);
+}
+
+.not-found-link.secondary {
+  background-color: var(--button-back); /* Use theme variable for a different look */
+}
+
+.not-found-link.secondary:hover {
+  background-color: var(--button-back-hover); /* Use theme variable */
+}
+
+@media (max-width: 600px) {
+  .not-found-title {
+    font-size: 4em;
+  }
+  .not-found-message {
+    font-size: 1.2em;
+  }
+  .not-found-link {
+    padding: 0.6em 1.2em;
+    font-size: 0.9em;
+  }
+}
