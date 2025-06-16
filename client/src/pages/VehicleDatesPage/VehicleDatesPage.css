@@ -165,13 +165,31 @@
 @media (max-width: 768px) {
   .dates-table .table-header,
   .dates-table .table-row {
-    grid-template-columns: repeat(2, 1fr) 100px; /* Simplified for small screens */
+    /* CRITICAL CHANGE: Only show Type, Due Date, Status, and Actions */
+    grid-template-columns: 1fr 1fr 0.8fr 100px; /* Type, Due Date, Status, Actions */
+    gap: 8px; /* Slightly smaller gap */
+    padding: 0.8rem 1rem; /* Reduce padding */
   }
-  .dates-table .table-header div:nth-child(n+4), /* Hide Notes for small screens */
-  .dates-table .table-row div:nth-child(n+4) {
+  .dates-table .table-header div:nth-child(4), /* Hide Notes for small screens */
+  .dates-table .table-row div:nth-child(4) {
     display: none;
   }
-  .dates-table .table-header div:nth-child(3) { /* Ensure status is visible */
-    grid-column: span 1;
+  /* The "Status" column is 3rd child, ensure it's not hidden by mistake from generic rules */
+  .dates-table .table-header div:nth-child(3),
+  .dates-table .table-row div:nth-child(3) {
+    display: block; /* Override any potential display: none from broader rules */
+  }
+}
+
+/* Further refinements for very small mobile screens if necessary */
+@media (max-width: 480px) {
+  .dates-table .table-header,
+  .dates-table .table-row {
+    grid-template-columns: 1fr 1fr 0.8fr 80px; /* Adjust actions width for tiny screens */
+    font-size: 0.9em;
+  }
+  .actions .edit-date-btn, .actions .delete-date-btn {
+    font-size: 0.75em;
+    padding: 0.4rem 0.6rem;
   }
 }
