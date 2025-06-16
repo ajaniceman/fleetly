@@ -2,7 +2,7 @@
 FROM node:18 as frontend-builder
 WORKDIR /app
 COPY client/package.json client/package-lock.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 COPY client .
 WORKDIR /app/client
 RUN npm run build
