@@ -1,46 +1,78 @@
-// client/src/pages/Dashboard/Dashboard.jsx
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+// REMOVED: import { useTheme } from '../contexts/ThemeContext'; // No longer needed directly in Dashboard for toggle button
 import VehicleForm from '../components/VehicleForm/VehicleForm';
-import './Dashboard.css'; // Assuming you have Dashboard.css
+import { useNavigate } from 'react-router-dom';
+import './Dashboard.css'; // Keep existing CSS
 
 export default function Dashboard() {
-  const { user, fetchWithAuth } = useAuth();
-  const navigate = useNavigate();
+  const { user, logout, fetchWithAuth } = useAuth();
+  // REMOVED: const { theme, toggleTheme } = useTheme(); // No longer needed here
   const [vehicles, setVehicles] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [showVehicleForm, setShowVehicleForm] = useState(false);
+  const [allDates, setAllDates] = useState([]);
+  const [showForm, setShowForm] = useState(false);
   const [editingVehicle, setEditingVehicle] = useState(null);
-  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
-  // Fetch vehicles on component mount
   useEffect(() => {
-    const fetchVehicles = async () => {
+    const fetchData = async () => {
       try {
-        const res = await fetchWithAuth('/api/vehicles');
-        if (!res.ok) {
-          throw new Error('Failed to fetch vehicles');
+        const vehiclesRes = await fetchWithAuth('/api/vehicles');
+        if (!vehiclesRes.ok) throw new Error('Failed to fetch vehicles');
+        const vehiclesData = await vehiclesRes.json();
+        setVehicles(vehiclesData);
+
+        const datesRes = await fetchWithAuth('/api/dates/user');
+        if (!datesRes.ok) throw new Error('Failed to fetch dates');
+        const datesData = await datesRes.json();
+        setAllDates(datesData);
+
+      } catch (error) {
+        console.error("Error fetching dashboard data:", error);
+        if (!error.message.includes("Session expired")) {
+            alert(`Error loading dashboard data: ${error.message}`);
         }
-        const data = await res.json();
-        setVehicles(data);
-      } catch (err) {
-        console.error("Error fetching vehicles:", err);
-        setError(err.message || "Failed to load vehicles.");
       } finally {
         setLoading(false);
       }
     };
 
-    if (user) { // Only fetch if user is authenticated
-      fetchVehicles();
-    } else {
-      setLoading(false);
-      navigate('/login'); // Redirect to login if no user
-    }
-  }, [user, navigate, fetchWithAuth]);
+    fetchData();
+  }, [fetchWithAuth]);
 
-  const handleSaveVehicle = async (formData) => {
+  const totalVehiclesCount = vehicles.length;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const thirtyDaysFromNow = new Date();
+  thirtyDaysFromNow.setDate(today.getDate() + 30);
+  thirtyDaysFromNow.setHours(23, 59, 59, 999);
+
+  const expiredDatesCount = allDates.filter(date => {
+    if (!date.dueDate || isNaN(new Date(date.dueDate))) return false;
+    const dueDate = new Date(date.dueDate);
+    dueDate.setHours(0, 0, 0, 0);
+    return dueDate < today;
+  }).length;
+
+  const upcomingDatesCount = allDates.filter(date => {
+    if (!date.dueDate || isNaN(new Date(date.dueDate))) return false;
+    const dueDate = new Date(date.dueDate);
+    dueDate.setHours(0, 0, 0, 0);
+    return dueDate >= today && dueDate <= thirtyDaysFromNow;
+  }).length;
+
+  const filteredVehicles = vehicles.filter(v =>
+    v.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    v.make.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    v.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (v.licensePlate && v.licensePlate.toLowerCase().includes(searchTerm.toLowerCase())) ||
+    (v.vin && v.vin.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
+  const handleSave = async (formData) => {
     let res;
     let url;
     let method;
@@ -71,108 +103,166 @@ export default function Dashboard() {
             return [savedVehicle, ...prevVehicles];
           }
         });
-        setShowVehicleForm(false);
+        setShowForm(false);
         setEditingVehicle(null);
         alert(`Vehicle ${editingVehicle ? 'updated' : 'added'} successfully!`);
+        const datesRes = await fetchWithAuth('/api/dates/user');
+        if (datesRes.ok) {
+          const datesData = await datesRes.json();
+          setAllDates(datesData);
+        }
       } else {
         const errorData = await res.json();
-        setError(errorData.message || res.statusText);
         alert(`Failed to ${editingVehicle ? 'update' : 'add'} vehicle: ${errorData.message || res.statusText}`);
       }
-    } catch (err) {
-      console.error(`Error ${editingVehicle ? 'updating' : 'adding'} vehicle:`, err);
-      setError(`An unexpected error occurred while ${editingVehicle ? 'updating' : 'adding'} the vehicle.`);
-      alert(`An unexpected error occurred while ${editingVehicle ? 'updating' : 'adding'} the vehicle.`);
+    } catch (error) {
+      console.error(`Error ${editingVehicle ? 'updating' : 'adding'} vehicle:`, error);
+      if (!error.message.includes("Session expired")) {
+        alert(`An unexpected error occurred while ${editingVehicle ? 'updating' : 'adding'} the vehicle.`);
+      }
     }
   };
 
-  const handleDeleteVehicle = async (vehicleId) => {
-    if (window.confirm("Are you sure you want to delete this vehicle and all its associated services and dates?")) {
+  const handleDelete = async (vehicleId) => {
+    if (window.confirm("Are you sure you want to delete this vehicle?")) {
       try {
         const res = await fetchWithAuth(`/api/vehicles/${vehicleId}`, {
           method: 'DELETE',
         });
         if (res.ok) {
-          setVehicles(prevVehicles => prevVehicles.filter(v => v.id !== vehicleId));
+          setVehicles(vehicles.filter(v => v.id !== vehicleId));
+          setAllDates(prevDates => prevDates.filter(d => d.vehicleId !== vehicleId));
           alert("Vehicle deleted successfully!");
         } else {
           const errorData = await res.json();
-          setError(errorData.message || res.statusText);
           alert(`Failed to delete vehicle: ${errorData.message || res.statusText}`);
         }
-      } catch (err) {
-        console.error("Error deleting vehicle:", err);
-        setError("An unexpected error occurred while deleting the vehicle.");
-        alert("An unexpected error occurred while deleting the vehicle.");
+      } catch (error) {
+        console.error("Error deleting vehicle:", error);
+        if (!error.message.includes("Session expired")) {
+            alert("An unexpected error occurred while deleting the vehicle.");
+        }
       }
     }
   };
 
-  if (loading) return <div className="loading">Loading vehicles...</div>;
-  if (error) return <div className="error-message">Error: {error}</div>; // Display error message
+  const handleAction = (action, vehicle) => {
+    switch (action) {
+      case 'services':
+        navigate(`/vehicles/${vehicle.id}/services`);
+        break;
+      case 'dates':
+        navigate(`/vehicles/${vehicle.id}/dates`);
+        break;
+      case 'edit':
+        setEditingVehicle(vehicle);
+        setShowForm(true);
+        break;
+      case 'delete':
+        handleDelete(vehicle.id);
+        break;
+      default:
+        console.log(`Action: ${action} on ${vehicle.make} ${vehicle.model} (ID: ${vehicle.id})`);
+    }
+  };
+
+  if (loading) return <div className="loading">Loading dashboard...</div>;
 
   return (
-    <div className="dashboard-page">
-      <div className="dashboard-header">
-        <h1>Welcome, {user?.name || 'User'}!</h1>
-        {/* REMOVED: Redundant Logout Button. The logout button is now handled by the global NavBar. */}
+    <div className="dashboard">
+      <div className="dashboard-header-main">
+        <div className="dashboard-greeting">
+          <h1>Welcome, {user.name}!</h1>
+          <p className="dashboard-subtitle">Here's an overview of your fleet.</p>
+        </div>
+        <div className="header-buttons"> {/* Container for logout button */}
+          {/* REMOVED: Theme toggle button is now global and outside this component */}
+        </div>
       </div>
 
-      {showVehicleForm ? (
-        <VehicleForm
-          onSubmit={handleSaveVehicle}
-          onCancel={() => {
-            setShowVehicleForm(false);
+      <div className="dashboard-stats-grid">
+        <div className="stat-card total-vehicles">
+          <div className="stat-icon">🚗</div>
+          <div className="stat-value">{totalVehiclesCount}</div>
+          <div className="stat-label">Total Vehicles</div>
+        </div>
+        <div className="stat-card expired-dates">
+          <div className="stat-icon">⚠️</div>
+          <div className="stat-value">{expiredDatesCount}</div>
+          <div className="stat-label">Expired Dates</div>
+        </div>
+        <div className="stat-card upcoming-dates">
+          <div className="stat-icon">🔔</div>
+          <div className="stat-value">{upcomingDatesCount}</div>
+          <div className="stat-label">Upcoming Dates (30 Days)</div>
+        </div>
+      </div>
+
+      <div className="dashboard-actions-row">
+        {showForm ? (
+          <VehicleForm
+            onSubmit={handleSave}
+            onCancel={() => {
+              setShowForm(false);
+              setEditingVehicle(null);
+            }}
+            initial={editingVehicle}
+          />
+        ) : (
+          <button onClick={() => {
             setEditingVehicle(null);
-          }}
-          initial={editingVehicle}
-        />
-      ) : (
-        <button
-          onClick={() => {
-            setEditingVehicle(null);
-            setShowVehicleForm(true);
-          }}
-          className="add-vehicle-btn"
-        >
-          + Add New Vehicle
-        </button>
-      )}
+            setShowForm(true);
+          }} className="add-btn">+ Add New Vehicle</button>
+        )}
+
+        <div className="search-bar">
+          <input
+            type="text"
+            placeholder="Search vehicles..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+          />
+          {searchTerm && (
+            <button onClick={() => setSearchTerm('')} className="clear-search-btn">✖</button>
+          )}
+        </div>
+      </div>
 
       <div className="vehicle-table-container">
-        <h2>Your Fleet</h2>
-        {vehicles.length === 0 ? (
-          <div className="no-vehicles-message">No vehicles added yet. Add your first vehicle to get started!</div>
-        ) : (
-          <div className="vehicle-table">
-            <div className="table-header">
-              <div>Type</div>
-              <div>Make</div>
-              <div>Model</div>
-              <div>Year</div>
-              <div>License Plate</div>
-              <div>Actions</div>
-            </div>
-            {vehicles.map(vehicle => (
-              <div key={vehicle.id} className="table-row">
-                <div>{vehicle.type}</div>
-                <div>{vehicle.make}</div>
-                <div>{vehicle.model}</div>
-                <div>{vehicle.year}</div>
-                <div>{vehicle.licensePlate || 'N/A'}</div>
-                <div className="actions">
-                  <button onClick={() => {
-                    setEditingVehicle(vehicle);
-                    setShowVehicleForm(true);
-                  }} className="edit-btn">Edit</button>
-                  <Link to={`/vehicles/${vehicle.id}/services`} className="services-btn">Services</Link>
-                  <Link to={`/vehicles/${vehicle.id}/dates`} className="dates-btn">Dates</Link>
-                  <button onClick={() => handleDeleteVehicle(vehicle.id)} className="delete-btn">Delete</button>
-                </div>
-              </div>
-            ))}
+        <div className="table-header">
+          <div>Type</div>
+          <div>Make</div>
+          <div>Model</div>
+          <div>Year</div>
+          <div>License Plate</div>
+          <div>VIN</div>
+          <div>Actions</div>
+        </div>
+
+        {filteredVehicles.length === 0 ? (
+          <div className="no-vehicles">
+            {searchTerm ? `No vehicles found for "${searchTerm}"` : `No vehicles added yet! Click "Add New Vehicle" to get started!`}
           </div>
-        )}
+        ) : filteredVehicles.map((v) => (
+          <div key={v.id} className={`table-row animated-row`}>
+            <div>{v.type}</div>
+            <div>{v.make}</div>
+            <div>{v.model}</div>
+            <div>{v.year}</div>
+            <div>{v.licensePlate || 'N/A'}</div>
+            <div>{v.vin || 'N/A'}</div>
+            <div className="actions">
+              <select onChange={e => handleAction(e.target.value, v)} defaultValue="">
+                <option value="" disabled>Select Action</option>
+                <option value="services">Services</option>
+                <option value="dates">Dates</option>
+                <option value="edit">Edit</option>
+                <option value="delete">Delete</option>
+              </select>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
