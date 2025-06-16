@@ -11,7 +11,7 @@
   background-color: var(--background-secondary); /* Use theme variable */
   padding: 2.5rem;
   border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 25px var(--box-shadow-md); /* Use general shadow variable */
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
   border: 1px solid var(--border-color); /* Use theme variable */
@@ -22,7 +22,7 @@
 
 .feature-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 35px var(--box-shadow-lg); /* Use general shadow variable */
 }
 
 .feature-icon {
