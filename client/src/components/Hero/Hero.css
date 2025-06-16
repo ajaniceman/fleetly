@@ -18,7 +18,7 @@ html[data-theme='dark'] .auth-page-container {
   background-color: var(--background-secondary); /* Use theme variable */
   border-radius: 12px;
   /* Increased shadow prominence with more opaque rgba */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+  box-shadow: 0 10px 30px var(--box-shadow-lg); /* Use general shadow variable */
   padding: 2.5rem;
   width: 100%;
   max-width: 450px;
@@ -30,12 +30,13 @@ html[data-theme='dark'] .auth-page-container {
 .card-header {
   margin-bottom: 2rem;
   position: relative; /* For back-home-link positioning */
+  padding-top: 2rem; /* Add padding to the top of the header to make space for the button */
 }
 
 .back-home-link {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 1.5rem;      /* Adjusted for better spacing */
+  left: 1.5rem;     /* Adjusted for better spacing */
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -237,5 +238,9 @@ html[data-theme='dark'] .auth-page-container {
   .submit-btn {
     padding: 0.9rem;
     font-size: 1em;
+  }
+  .back-home-link { /* Adjust for very small screens */
+    top: 1rem;
+    left: 1rem;
   }
 }
