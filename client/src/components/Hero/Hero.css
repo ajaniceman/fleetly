@@ -59,7 +59,7 @@ html[data-theme='dark'] .auth-page-container {
 .card-header h2 {
   font-size: 2.2em;
   color: var(--heading-color); /* Use theme variable */
-  margin-top: 0.5rem; /* Adjusted margin-top to ensure space *below* the absolute link */
+  margin-top: 3rem; /* ADJUSTED: Increased this value to push the text down */
   margin-bottom: 0.5rem;
 }
 
