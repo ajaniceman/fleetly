@@ -173,6 +173,7 @@
     font-size: 1.8em; /* Reduce font size */
     text-align: left; /* Ensure it aligns left when stacked */
     width: 100%; /* Take full width */
+    line-height: 1.2; /* Adjust line height for multi-line titles */
   }
   .back-to-dashboard-btn {
     width: 100%; /* Make button full width when stacked */
@@ -182,11 +183,20 @@
   .dates-table .table-header,
   .dates-table .table-row {
     /* Optimized widths for Type, Due Date, Status, and Actions */
-    grid-template-columns: 0.9fr 1.2fr 0.7fr 90px; /* Type, Due Date, Status, Actions */
-    gap: 6px; /* Even smaller gap to maximize content space */
+    grid-template-columns: 1fr 1.4fr 0.6fr 90px; /* Type, Due Date, Status, Actions */
+    gap: 5px; /* Even smaller gap to maximize content space */
     padding: 0.6rem 0.8rem; /* Further reduce padding */
     font-size: 0.85em; /* Reduce overall table font size */
+    overflow-x: hidden; /* Prevent horizontal scroll in row itself */
   }
+
+  /* Make sure content inside cells doesn't force new lines unless necessary */
+  .dates-table .table-row div {
+    white-space: nowrap; /* Prevent text wrapping inside cells */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+  }
+
   .dates-table .table-header div:nth-child(4), /* Hide Notes for small screens */
   .dates-table .table-row div:nth-child(4) {
     display: none;
@@ -197,10 +207,22 @@
     display: block;
   }
 
+  .actions {
+    display: flex; /* Ensure actions container is flex for button alignment */
+    justify-content: center; /* Center buttons within action column */
+    align-items: center;
+    min-width: 90px; /* Ensure enough space for buttons */
+    /* Adjust width to be flexible but bounded if needed: flex-shrink: 0; */
+  }
+
   .actions .edit-date-btn, .actions .delete-date-btn {
     padding: 0.3rem 0.5rem; /* Smaller button padding */
     font-size: 0.7em; /* Smaller button text */
-    margin-right: 0.3rem; /* Smaller margin */
+    margin-right: 0.2rem; /* Small space between buttons */
+    flex-shrink: 0; /* Prevent buttons from shrinking */
+  }
+  .actions .delete-date-btn {
+    margin-right: 0; /* No right margin for the last button */
   }
 }
 
@@ -208,12 +230,15 @@
 @media (max-width: 480px) {
   .dates-table .table-header,
   .dates-table .table-row {
-    grid-template-columns: 0.8fr 1.1fr 0.7fr 75px; /* Adjust actions width for tiny screens */
-    font-size: 0.8em; /* Even smaller font size */
-    padding: 0.5rem 0.6rem;
+    grid-template-columns: 0.8fr 1.3fr 0.6fr 75px; /* Adjust actions width for tiny screens */
+    font-size: 0.75em; /* Even smaller font size */
+    padding: 0.4rem 0.5rem;
+  }
+  .actions {
+     min-width: 75px; /* Ensure enough space for buttons on very small screens */
   }
   .actions .edit-date-btn, .actions .delete-date-btn {
     font-size: 0.65em; /* Even smaller button text */
-    padding: 0.2rem 0.4rem;
+    padding: 0.15rem 0.3rem;
   }
 }
