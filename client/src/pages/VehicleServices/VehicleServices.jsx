@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import ServiceForm from '../components/ServiceForm/ServiceForm';
+import ServiceForm from '../../components/ServiceForm/ServiceForm';
 import './VehicleServices.css'; // The CSS file will still be named this
 
 export default function VehicleServices() {
