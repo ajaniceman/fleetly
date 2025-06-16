@@ -10,7 +10,10 @@ import VehicleDatesPage from './pages/VehicleDatesPage/VehicleDatesPage';
 import VerifyEmailPage from './pages/VerifyEmailPage/VerifyEmailPage'; // Import the new verification page
 import NotFound from './pages/NotFound/NotFound'; // Import the NotFound component
 
+
 import { ThemeProvider } from './contexts/ThemeContext';
+// NEW: Import the global ThemeToggleButton
+import ThemeToggleButton from './components/ThemeToggleButton/ThemeToggleButton';
 
 // Helper component for Home and Footer
 function HomeWithFooter() {
@@ -35,6 +38,9 @@ function App() {
   return (
     // Wrap the entire application with ThemeProvider to make theme context available globally
     <ThemeProvider>
+      {/* The ThemeToggleButton is rendered here, outside of Routes, so it appears on all pages */}
+      <ThemeToggleButton />
+
       <Routes>
         <Route path="/" element={<HomeWithFooter />} />
         <Route path="/login" element={!user ? <AuthPage mode="login"/> : <Navigate to="/dashboard" replace />} />

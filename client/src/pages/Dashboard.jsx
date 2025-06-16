@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
-import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
+// REMOVED: import { useTheme } from '../contexts/ThemeContext'; // No longer needed directly in Dashboard for toggle button
 import VehicleForm from '../components/VehicleForm/VehicleForm';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css'; // Keep existing CSS
 
 export default function Dashboard() {
   const { user, logout, fetchWithAuth } = useAuth();
-  const { theme, toggleTheme } = useTheme(); // Destructure theme and toggleTheme
+  // REMOVED: const { theme, toggleTheme } = useTheme(); // No longer needed here
   const [vehicles, setVehicles] = useState([]);
   const [allDates, setAllDates] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -175,10 +175,8 @@ export default function Dashboard() {
           <h1>Welcome, {user.name}!</h1>
           <p className="dashboard-subtitle">Here's an overview of your fleet.</p>
         </div>
-        <div className="header-buttons"> {/* New container for buttons */}
-          <button onClick={toggleTheme} className="theme-toggle-btn">
-            {theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
-          </button>
+        <div className="header-buttons"> {/* Container for logout button */}
+          {/* REMOVED: Theme toggle button is now global and outside this component */}
           <button onClick={logout} className="logout-btn">Logout</button>
         </div>
       </div>
