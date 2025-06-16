@@ -1,332 +1,334 @@
-/* Reusing variables from global styles or defining locally for consistency */
-:root {
-  --primary-color: #3498db; /* Blue */
-  --secondary-color: #2ecc71; /* Green */
-  --dark-background: #2c3e50; /* Dark Blue-Grey */
-  --light-background: #f8f9fa; /* Off-White */
-  --text-dark: #333;
-  --border-color: #e0e0e0;
-}
-
+/* Dashboard Page Container */
 .dashboard {
-  padding: 2.5rem; /* Increased padding */
-  max-width: 1300px; /* Wider max-width */
-  margin: auto;
   font-family: 'Inter', sans-serif;
-  background-color: var(--light-background); /* Soft background */
-  min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f8f9fa; /* Light background for the dashboard area */
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.05);
+  min-height: 100vh; /* Ensure it takes full viewport height */
+  box-sizing: border-box; /* Include padding in element's total width and height */
 }
 
+/* Header Section */
 .dashboard-header-main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2.5rem; /* More space below header */
-  flex-wrap: wrap; /* Allow wrapping on small screens */
-  gap: 1rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1.5rem;
 }
 
 .dashboard-greeting h1 {
-  color: var(--dark-background);
-  font-size: 2.8em; /* Larger title */
-  margin: 0;
+  font-size: 2.5em;
+  color: #2c3e50; /* Dark blue-grey */
+  margin: 0 0 0.5rem 0;
   font-weight: 700;
 }
 
 .dashboard-greeting .dashboard-subtitle {
-  color: #666;
   font-size: 1.1em;
-  margin-top: 0.5rem;
+  color: #666;
+  margin: 0;
 }
 
 .logout-btn {
-  background: #e74c3c;
+  background-color: #e74c3c; /* Red color for logout */
   color: white;
+  padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 8px; /* More rounded */
-  padding: 0.7rem 1.4rem; /* Slightly larger padding */
+  border-radius: 6px;
   cursor: pointer;
   font-size: 1em;
   font-weight: 500;
-  transition: background 0.2s ease, transform 0.1s ease;
-  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.2);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
+
 .logout-btn:hover {
-  background: #c0392b;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+  background-color: #c0392b;
+  transform: translateY(-1px);
 }
 
 /* Dashboard Stats Grid */
 .dashboard-stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem; /* Spacing between cards */
+  gap: 1.5rem;
   margin-bottom: 3rem;
 }
 
 .stat-card {
   background-color: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  padding: 1.8rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Align content to start */
-  gap: 0.8rem;
-  border: 1px solid var(--border-color);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #ddd;
 }
+
 .stat-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
 }
 
-.stat-card .stat-icon {
-  font-size: 2.5em; /* Larger icons */
-  color: var(--primary-color); /* Primary color for icons */
-  margin-bottom: 0.5rem;
+.stat-icon {
+  font-size: 3em;
+  margin-bottom: 0.8rem;
 }
 
-.stat-card .stat-value {
-  font-size: 2.8em; /* Large, bold number */
+.stat-value {
+  font-size: 2.5em;
   font-weight: 700;
-  color: var(--dark-background);
-  line-height: 1; /* Adjust line height */
+  color: #3498db; /* Primary blue for numbers */
 }
 
-.stat-card .stat-label {
-  font-size: 1.1em;
-  color: #777;
+.stat-label {
+  font-size: 1em;
+  color: #555;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  font-weight: 500;
 }
 
-/* Specific card colors (optional) */
-.stat-card.expired-dates .stat-icon { color: #e74c3c; } /* Red for expired */
-.stat-card.upcoming-dates .stat-icon { color: #f39c12; } /* Orange for upcoming */
+/* Specific stat card colors */
+.stat-card.total-vehicles .stat-icon,
+.stat-card.total-vehicles .stat-value { color: #3498db; } /* Blue */
+
+.stat-card.expired-dates .stat-icon,
+.stat-card.expired-dates .stat-value { color: #e74c3c; } /* Red */
+
+.stat-card.upcoming-dates .stat-icon,
+.stat-card.upcoming-dates .stat-value { color: #f39c12; } /* Orange */
 
 
-/* Actions Row (Add Button + Search) */
+/* Actions Row (Add Button & Search Bar) */
 .dashboard-actions-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1.5rem;
   margin-bottom: 2rem;
-  flex-wrap: wrap; /* Allow wrapping */
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+  gap: 1.5rem; /* Gap between items when wrapped */
 }
 
 .add-btn {
-  background: var(--primary-color); /* Consistent primary color */
+  background-color: #2ecc71; /* Green color for add button */
   color: white;
-  padding: 0.85rem 1.75rem; /* Larger padding */
-  border-radius: 8px; /* More rounded */
+  padding: 0.8rem 1.5rem;
   border: none;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 1em;
-  font-weight: 600;
-  transition: background 0.2s ease, transform 0.1s ease;
-  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-}
-.add-btn:hover {
-  background: #2980b9;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  flex-shrink: 0; /* Prevent shrinking if space is tight */
 }
 
-/* Search Bar */
+.add-btn:hover {
+  background-color: #27ae60;
+  transform: translateY(-1px);
+}
+
 .search-bar {
-  position: relative;
-  flex-grow: 1; /* Allow search bar to grow */
+  display: flex;
+  gap: 0.5rem;
+  flex-grow: 1; /* Allows search bar to take available space */
   max-width: 400px; /* Limit search bar width */
 }
 
 .search-input {
-  width: 100%;
-  padding: 0.8rem 2.5rem 0.8rem 1.2rem; /* Space for clear button */
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
+  flex-grow: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
   font-size: 1em;
-  box-sizing: border-box;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
 }
 
 .search-input:focus {
   outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .clear-search-btn {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
   background: none;
   border: none;
   font-size: 1.2em;
   color: #999;
   cursor: pointer;
+  padding: 0 0.5rem;
   transition: color 0.2s ease;
 }
 .clear-search-btn:hover {
   color: #666;
 }
 
-
 /* Vehicle Table */
-.vehicle-table-container { /* New container for table with shadow */
-  background: white;
-  border: 1px solid var(--border-color);
-  border-radius: 12px; /* More rounded corners */
-  overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08); /* More prominent shadow */
+.vehicle-table-container {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  overflow-x: auto; /* Enable horizontal scrolling for the table if needed */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 .table-header, .table-row {
   display: grid;
-  grid-template-columns: 1fr 1.2fr 1.2fr 0.7fr 1.5fr 1.5fr 1.2fr;
-  padding: 1rem 1.5rem; /* Increased padding */
+  /* Define columns for larger screens */
+  grid-template-columns: 0.8fr 1fr 1fr 0.6fr 1fr 1.2fr 150px; /* Type, Make, Model, Year, License Plate, VIN, Actions */
+  gap: 10px;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #eee;
   align-items: center;
-  border-bottom: 1px solid #f0f0f0; /* Lighter border */
 }
 
 .table-header {
-  background: var(--light-background); /* Lighter header background */
+  background: #e9ecef;
   font-weight: 600;
-  color: var(--dark-background);
+  color: #495057;
   text-transform: uppercase;
   font-size: 0.85em;
-  letter-spacing: 0.5px;
+  position: sticky; /* Make header sticky for scrolling */
+  top: 0;
+  z-index: 1; /* Ensure header is above rows */
 }
 
 .table-row {
   background: white;
-  transition: background 0.2s ease;
-  font-size: 0.95em; /* Slightly larger row text */
+  font-size: 0.95em;
 }
+
 .table-row:last-child {
-  border-bottom: none;
+  border-bottom: none; /* No border for the last row */
 }
+
 .table-row:hover {
-  background: #fdfefe; /* Even lighter hover background */
+  background: #f0f8ff; /* Light blue on hover */
 }
 
 .actions select {
-  padding: 0.6rem; /* Slightly larger padding */
-  border-radius: 6px; /* More rounded */
+  padding: 0.5rem 0.8rem;
   border: 1px solid #ccc;
+  border-radius: 4px;
   background-color: white;
   cursor: pointer;
-  font-size: 0.9em;
-  width: 100%;
-  max-width: 120px; /* Optional: limit select width */
-}
-.actions select:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
+  font-size: 0.85em;
+  appearance: none; /* Remove default arrow */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13%205.7L146.2%20202.7%2018.6%2075.1a17.6%2017.6%200%200%200-25.3%2024.5l137%20137a17.6%2017.6%200%200%200%2025.3%200l137%20-137c6.5-6.5%206.5-17%200-23.5z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow */
+  background-repeat: no-repeat;
+  background-position: right 0.7em top 50%, 0 0;
+  background-size: 0.65em auto, 100%;
 }
 
-.loading, .no-vehicles {
-  padding: 2.5rem; /* Increased padding */
-  text-align: center;
-  color: #777;
-  font-size: 1.2em;
-  background-color: white; /* Ensure background is white */
+.actions select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .no-vehicles {
-  background-color: #fdfefe;
-  border-radius: 8px;
-  margin-top: 0; /* Remove top margin as it's inside container */
+  padding: 2rem;
+  text-align: center;
+  color: #777;
+  font-size: 1.1em;
 }
 
-/* Animation */
-@keyframes rowFadeIn {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0px); }
-}
-.animated-row {
-  animation: rowFadeIn 0.5s ease-out forwards;
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2em;
+  color: #555;
 }
 
-/* Responsive adjustments */
-@media (max-width: 992px) {
-  .dashboard-stats-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
-  .table-header, .table-row {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; /* Reduce columns displayed */
-    font-size: 0.85em;
-  }
-  .table-header div:nth-child(5), .table-row div:nth-child(5) { /* Hide License Plate on smaller tablet views */
-    display: none;
-  }
-}
-
+/* Responsive Adjustments */
 @media (max-width: 768px) {
   .dashboard {
-    padding: 1.5rem;
+    padding: 1rem; /* Reduce padding on small screens */
   }
+
   .dashboard-header-main {
-    flex-direction: column;
+    flex-direction: column; /* Stack header elements */
     align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .dashboard-greeting h1 {
+    font-size: 2em;
+  }
+  .dashboard-greeting .dashboard-subtitle {
+    font-size: 0.95em;
   }
   .logout-btn {
-    align-self: flex-end; /* Push logout to bottom right */
-    margin-top: 1rem;
+    width: 100%; /* Full width button */
   }
+
   .dashboard-stats-grid {
-    grid-template-columns: 1fr; /* Stack cards on mobile */
-    gap: 1.5rem;
+    grid-template-columns: 1fr; /* Stack stats cards */
+    gap: 1rem;
+    margin-bottom: 2rem;
   }
-  .stat-card {
-    padding: 1.5rem;
-  }
+
   .dashboard-actions-row {
-    flex-direction: column;
-    align-items: stretch; /* Stretch items to full width */
+    flex-direction: column; /* Stack actions */
+    align-items: stretch;
+    gap: 1rem;
   }
   .add-btn {
-    width: 100%;
+    width: 100%; /* Full width button */
   }
   .search-bar {
-    max-width: 100%; /* Full width search bar */
+    width: 100%; /* Full width search bar */
+    max-width: none; /* Remove max-width constraint */
   }
+
+  .vehicle-table-container {
+    border-radius: 4px; /* Slightly less rounded on mobile */
+  }
+
   .table-header, .table-row {
-    grid-template-columns: repeat(2, 1fr) 100px; /* Type, Make, Actions on mobile */
-    gap: 8px;
-    padding: 0.8rem 1rem;
-    font-size: 0.8em;
+    /* Critical Change: Redefine columns for mobile */
+    /* Ensure Type, Make, and Actions are visible. VIN and License Plate can be hidden/stacked. */
+    grid-template-columns: 1fr 1fr 100px; /* Type, Make, Actions */
+    gap: 8px; /* Slightly smaller gap */
+    padding: 0.8rem 1rem; /* Reduce padding */
   }
-  .table-header div:nth-child(n+3), .table-row div:nth-child(n+3) { /* Hide everything after Model */
+
+  /* Explicitly hide columns not needed on small screens for table-header */
+  .table-header div:nth-child(4), /* Year */
+  .table-header div:nth-child(5), /* License Plate */
+  .table-header div:nth-child(6) {  /* VIN */
     display: none;
   }
-  .table-header div:nth-child(6), .table-row div:nth-child(6) { /* Make sure Actions is the third column */
-    display: block; /* Override previous display: none */
-    grid-column: 3; /* Position it as the third column */
-  }
-  .table-row .actions {
-    display: flex; /* Ensure actions div is a flex container */
-    justify-content: center; /* Center content within actions div */
-    align-items: center;
+
+  /* Explicitly hide columns not needed on small screens for table-row */
+  .table-row div:nth-child(4), /* Year */
+  .table-row div:nth-child(5), /* License Plate */
+  .table-row div:nth-child(6) { /* VIN */
+    display: none;
   }
 }
 
+/* Further refinements for very small mobile screens if necessary */
 @media (max-width: 480px) {
   .dashboard-greeting h1 {
-    font-size: 2.2em;
+    font-size: 1.8em;
   }
-  .dashboard-greeting .dashboard-subtitle {
+  .table-header, .table-row {
+    grid-template-columns: 1fr 1fr 90px; /* Slightly tighter actions column */
     font-size: 0.9em;
   }
-  .stat-card .stat-value {
-    font-size: 2.2em;
-  }
-  .stat-card .stat-label {
-    font-size: 0.9em;
+  .actions select {
+    font-size: 0.8em;
+    padding: 0.4rem 0.6rem;
   }
 }
