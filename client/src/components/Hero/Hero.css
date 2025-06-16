@@ -1,226 +1,207 @@
-/* Import variables from home.css for consistency if possible, or redefine */
-:root {
-  --primary-color: #3498db; /* Blue */
-  --secondary-color: #2ecc71; /* Green */
-  --dark-background: #2c3e50; /* Dark Blue-Grey */
-  --text-dark: #333;
-  --border-color: #e0e0e0;
-  --error-color: #e74c3c;
-  --success-color: #27ae60;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  color: var(--text-dark);
-}
-
 .auth-page-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--dark-background), var(--primary-color));
-  padding: 1.5rem;
+  /* Use theme variables */
+  background: linear-gradient(135deg, var(--heading-color), var(--cta-primary-bg));
+  padding: 1rem;
   box-sizing: border-box;
 }
 
 .auth-card {
-  background-color: white;
+  background-color: var(--background-secondary); /* Use theme variable */
   border-radius: 12px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-  width: 100%;
-  max-width: 450px; /* Increased max-width for better spacing */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   padding: 2.5rem;
-  box-sizing: border-box;
-  position: relative;
-  overflow: hidden; /* For potential background shapes/gradients inside card */
-  border: 1px solid var(--border-color);
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+  border: 1px solid var(--border-color); /* Use theme variable */
+  transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transition */
 }
 
 .card-header {
-  text-align: center;
   margin-bottom: 2rem;
-  /* Added padding-top to ensure content inside card-header is pushed down */
-  /* This margin helps prevent overlap with the absolute positioned back-home-link */
-  margin-top: 1.5rem; /* Give space for the back link */
-}
-
-.card-header h2 {
-  font-size: 2.2em;
-  color: var(--dark-background);
-  margin-top: 0.5rem;
-  margin-bottom: 0.8rem;
-  font-weight: 700;
-}
-
-.card-subtitle {
-  font-size: 1em;
-  color: #777;
+  position: relative; /* For back-home-link positioning */
 }
 
 .back-home-link {
   position: absolute;
-  top: 1.5rem; /* Position closer to the edge of the padding */
-  left: 1.5rem;
+  top: 0;
+  left: 0;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  color: var(--text-secondary); /* Use theme variable */
   text-decoration: none;
-  color: var(--primary-color);
-  font-weight: 500;
-  font-size: 0.95em;
+  font-size: 0.9em;
   transition: color 0.2s ease;
-  /* Explicitly unset button-like properties */
-  background-color: transparent; /* Ensure no background */
-  border: none; /* Ensure no border */
-  padding: 0; /* Remove any padding from the link itself */
-  cursor: pointer; /* Ensure it feels clickable */
 }
+
 .back-home-link:hover {
-  color: #2980b9;
-  text-decoration: underline; /* Add underline on hover for link appearance */
+  color: var(--cta-primary-bg); /* Use theme variable */
 }
+
 .back-arrow-icon {
-  font-size: 1.1em;
+  font-size: 1em;
+}
+
+.card-header h2 {
+  font-size: 2.2em;
+  color: var(--heading-color); /* Use theme variable */
+  margin-bottom: 0.5rem;
+}
+
+.card-subtitle {
+  font-size: 1em;
+  color: var(--text-secondary); /* Use theme variable */
 }
 
 .mode-switch-tabs {
   display: flex;
-  border-bottom: 2px solid var(--border-color);
-  margin-bottom: 1.8rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-color); /* Use theme variable */
+  background-color: var(--background-primary); /* Use theme variable for tab container */
 }
 
 .tab-item {
   flex: 1;
-  text-align: center;
-  padding: 1rem 0;
+  padding: 0.8rem 0;
   text-decoration: none;
-  color: #888;
-  font-weight: 600;
-  font-size: 1.1em;
-  border-bottom: 3px solid transparent;
-  transition: all 0.3s ease;
+  color: var(--text-primary); /* Use theme variable */
+  font-weight: 500;
+  font-size: 1em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  border-right: 1px solid var(--border-color); /* Use theme variable */
+}
+
+.tab-item:last-child {
+  border-right: none;
 }
 
 .tab-item.active {
-  color: var(--primary-color);
-  border-bottom-color: var(--primary-color);
+  background-color: var(--cta-primary-bg); /* Use theme variable */
+  color: var(--text-light); /* Use theme variable */
 }
 
 .tab-item:hover:not(.active) {
-  color: var(--primary-color);
+  background-color: var(--table-row-hover-bg); /* Use theme variable */
 }
 
 .auth-form-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
+  text-align: left;
+}
+
+.form-error-message {
+  background-color: #f8d7da; /* Light red */
+  color: #721c24; /* Dark red */
+  border: 1px solid #f5c6cb;
+  padding: 0.8rem;
+  margin-bottom: 1.5rem;
+  border-radius: 6px;
+  font-size: 0.9em;
+  text-align: center;
 }
 
 .input-group {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.2rem;
   position: relative;
 }
 
 .input-group label {
   display: block;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
   font-weight: 600;
-  color: #555;
-  font-size: 0.9em;
+  color: var(--text-primary); /* Use theme variable */
+  font-size: 0.95em;
 }
 
 .input-field {
   width: 100%;
-  padding: 0.8rem 1rem;
-  border: 1px solid #ccc;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--input-border); /* Use theme variable */
   border-radius: 8px;
   font-size: 1em;
-  box-sizing: border-box; /* Ensures padding doesn't increase width */
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  color: var(--text-primary); /* Use theme variable */
+  background-color: var(--background-secondary); /* Use theme variable */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+  box-sizing: border-box; /* Include padding in width */
 }
 
 .input-field:focus {
   outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+  border-color: var(--input-focus-border); /* Use theme variable */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-.password-group .input-field {
-  padding-right: 3rem; /* Make space for the eye icon */
-}
-
-.show-pwd-btn {
+.password-group .show-pwd-btn {
   position: absolute;
-  top: calc(50% + 0.85rem);
+  right: 12px;
+  top: 60%; /* Adjust based on input height */
   transform: translateY(-50%);
-  right: 1rem;
   background: none;
   border: none;
+  color: var(--text-secondary); /* Use theme variable */
   cursor: pointer;
-  color: #888;
   font-size: 1.1em;
-  padding: 0.2rem;
   transition: color 0.2s ease;
 }
-.show-pwd-btn:hover {
-  color: var(--dark-background);
+
+.password-group .show-pwd-btn:hover {
+  color: var(--heading-color); /* Use theme variable */
 }
 
 .password-checklist {
   list-style: none;
   padding: 0;
-  margin: -0.5rem 0 1rem 0;
-  font-size: 0.9em;
-  color: #777;
+  margin-top: -0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.85em;
+  color: var(--text-secondary); /* Use theme variable */
 }
 
 .password-checklist li {
   display: flex;
   align-items: center;
   margin-bottom: 0.3rem;
-  gap: 0.5rem;
 }
 
-.password-checklist li .check-icon {
-  font-size: 1.1em;
+.password-checklist .check-icon {
+  margin-right: 0.5rem;
+  font-size: 1em;
 }
 
-.password-checklist li.valid {
-  color: var(--success-color);
-}
-
-.form-error-message {
-  background-color: #f8d7da; /* Light red */
-  color: var(--error-color);
-  padding: 0.8rem 1rem;
-  border: 1px solid var(--error-color);
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  font-size: 0.95em;
-  text-align: center;
+.password-checklist li.valid .check-icon {
+  color: var(--button-add); /* Use theme variable */
 }
 
 .submit-btn {
   width: 100%;
   padding: 1rem;
+  border: none;
+  border-radius: 8px;
   font-size: 1.1em;
-  margin-top: 1.5rem;
-  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  background-color: var(--cta-primary-bg); /* Use theme variable */
+  color: var(--text-light); /* Use theme variable */
 }
+
 .submit-btn:hover {
+  background-color: var(--cta-primary-hover-bg); /* Use theme variable */
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
 }
 
 /* Animations */
 @keyframes scaleIn {
   from {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.95);
   }
   to {
     opacity: 1;
@@ -229,32 +210,25 @@ body {
 }
 
 .animate-scale-in {
-  animation: scaleIn 0.5s ease-out forwards;
+  animation: scaleIn 0.4s ease-out forwards;
 }
 
-/* Responsive Design */
-@media (max-width: 500px) {
+/* Responsive */
+@media (max-width: 480px) {
   .auth-card {
     padding: 1.5rem;
-    max-width: 95%;
   }
   .card-header h2 {
     font-size: 1.8em;
   }
-  .tab-item {
-    font-size: 1em;
-    padding: 0.8rem 0;
+  .card-subtitle {
+    font-size: 0.9em;
   }
   .input-field {
-    padding: 0.7rem 0.9rem;
+    padding: 0.8rem 0.9rem;
   }
   .submit-btn {
     padding: 0.9rem;
     font-size: 1em;
-  }
-  .back-home-link {
-    top: 1rem; /* Adjusted for very small screens */
-    left: 1rem;
-    font-size: 0.85em;
   }
 }

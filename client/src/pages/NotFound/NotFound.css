@@ -1,4 +1,3 @@
-/* client/src/pages/NotFound/NotFound.css */
 .not-found-container {
   display: flex;
   flex-direction: column;
@@ -9,18 +8,21 @@
   background-color: var(--background-primary); /* Use theme variable */
   color: var(--text-primary); /* Use theme variable */
   padding: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .not-found-title {
   font-size: 6em;
   margin-bottom: 0.2em;
   color: var(--heading-color); /* Use theme variable */
+  transition: color 0.3s ease;
 }
 
 .not-found-message {
   font-size: 1.5em;
   margin-bottom: 1.5em;
   color: var(--text-secondary); /* Use theme variable */
+  transition: color 0.3s ease;
 }
 
 .not-found-link {
@@ -28,10 +30,10 @@
   margin: 0.5em;
   padding: 0.8em 1.5em;
   background-color: var(--cta-primary-bg); /* Use theme variable */
-  color: white;
+  color: var(--text-light); /* Use theme variable */
   text-decoration: none;
   border-radius: 8px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
   font-weight: 500;
 }
 

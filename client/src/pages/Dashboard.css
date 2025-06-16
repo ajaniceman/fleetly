@@ -4,11 +4,12 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  background-color: #f8f9fa; /* Light background for the dashboard area */
+  background-color: var(--background-primary); /* Use theme variable */
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0,0,0,0.05);
   min-height: 100vh; /* Ensure it takes full viewport height */
   box-sizing: border-box; /* Include padding in element's total width and height */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
 /* Header Section */
@@ -17,26 +18,32 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2.5rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color); /* Use theme variable */
   padding-bottom: 1.5rem;
 }
 
 .dashboard-greeting h1 {
   font-size: 2.5em;
-  color: #2c3e50; /* Dark blue-grey */
+  color: var(--heading-color); /* Use theme variable */
   margin: 0 0 0.5rem 0;
   font-weight: 700;
 }
 
 .dashboard-greeting .dashboard-subtitle {
   font-size: 1.1em;
-  color: #666;
+  color: var(--text-secondary); /* Use theme variable */
   margin: 0;
 }
 
+.header-buttons { /* New container for buttons */
+  display: flex;
+  gap: 1rem; /* Space between buttons */
+  align-items: center;
+}
+
 .logout-btn {
-  background-color: #e74c3c; /* Red color for logout */
-  color: white;
+  background-color: var(--button-delete); /* Use theme variable */
+  color: var(--text-light); /* Use theme variable */
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 6px;
@@ -48,7 +55,7 @@
 }
 
 .logout-btn:hover {
-  background-color: #c0392b;
+  background-color: var(--button-delete-hover); /* Use theme variable */
   transform: translateY(-1px);
 }
 
@@ -61,7 +68,7 @@
 }
 
 .stat-card {
-  background-color: white;
+  background-color: var(--background-secondary); /* Use theme variable */
   padding: 1.8rem;
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.08);
@@ -69,8 +76,8 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid #ddd;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease; /* Smooth transition */
+  border: 1px solid var(--border-color); /* Use theme variable */
 }
 
 .stat-card:hover {
@@ -86,25 +93,24 @@
 .stat-value {
   font-size: 2.5em;
   font-weight: 700;
-  color: #3498db; /* Primary blue for numbers */
 }
 
 .stat-label {
   font-size: 1em;
-  color: #555;
+  color: var(--text-secondary); /* Use theme variable */
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 /* Specific stat card colors */
 .stat-card.total-vehicles .stat-icon,
-.stat-card.total-vehicles .stat-value { color: #3498db; } /* Blue */
+.stat-card.total-vehicles .stat-value { color: var(--cta-primary-bg); } /* Use theme variable */
 
 .stat-card.expired-dates .stat-icon,
-.stat-card.expired-dates .stat-value { color: #e74c3c; } /* Red */
+.stat-card.expired-dates .stat-value { color: var(--button-delete); } /* Use theme variable */
 
 .stat-card.upcoming-dates .stat-icon,
-.stat-card.upcoming-dates .stat-value { color: #f39c12; } /* Orange */
+.stat-card.upcoming-dates .stat-value { color: var(--status-due-soon-text); } /* Use theme variable */
 
 
 /* Actions Row (Add Button & Search Bar) */
@@ -118,8 +124,8 @@
 }
 
 .add-btn {
-  background-color: #2ecc71; /* Green color for add button */
-  color: white;
+  background-color: var(--button-add); /* Use theme variable */
+  color: var(--text-light); /* Use theme variable */
   padding: 0.8rem 1.5rem;
   border: none;
   border-radius: 6px;
@@ -132,7 +138,7 @@
 }
 
 .add-btn:hover {
-  background-color: #27ae60;
+  background-color: var(--button-add-hover); /* Use theme variable */
   transform: translateY(-1px);
 }
 
@@ -146,40 +152,43 @@
 .search-input {
   flex-grow: 1;
   padding: 0.75rem 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--input-border); /* Use theme variable */
   border-radius: 6px;
   font-size: 1em;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
   box-sizing: border-box;
+  background-color: var(--background-secondary); /* Use theme variable */
+  color: var(--text-primary); /* Use theme variable */
 }
 
 .search-input:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: var(--input-focus-border); /* Use theme variable */
+  box-shadow: 0 0 0 0.2rem var(--input-focus-border); /* Use theme variable */
 }
 
 .clear-search-btn {
   background: none;
   border: none;
   font-size: 1.2em;
-  color: #999;
+  color: var(--text-secondary); /* Use theme variable */
   cursor: pointer;
   padding: 0 0.5rem;
   transition: color 0.2s ease;
 }
 .clear-search-btn:hover {
-  color: #666;
+  color: var(--heading-color); /* Use theme variable */
 }
 
 /* Vehicle Table */
 .vehicle-table-container {
-  background: #fff;
-  border: 1px solid #ddd;
+  background: var(--background-secondary); /* Use theme variable */
+  border: 1px solid var(--border-color); /* Use theme variable */
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   overflow-x: auto; /* Enable horizontal scrolling for the table if needed */
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transition */
 }
 
 .table-header, .table-row {
@@ -188,24 +197,27 @@
   grid-template-columns: 0.8fr 1fr 1fr 0.6fr 1fr 1.2fr 150px; /* Type, Make, Model, Year, License Plate, VIN, Actions */
   gap: 10px;
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color); /* Use theme variable */
   align-items: center;
 }
 
 .table-header {
-  background: #e9ecef;
+  background: var(--table-header-bg); /* Use theme variable */
   font-weight: 600;
-  color: #495057;
+  color: var(--table-header-text); /* Use theme variable */
   text-transform: uppercase;
   font-size: 0.85em;
   position: sticky; /* Make header sticky for scrolling */
   top: 0;
   z-index: 1; /* Ensure header is above rows */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
 .table-row {
-  background: white;
+  background: var(--background-secondary); /* Use theme variable */
   font-size: 0.95em;
+  color: var(--text-primary); /* Use theme variable */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
 .table-row:last-child {
@@ -213,33 +225,39 @@
 }
 
 .table-row:hover {
-  background: #f0f8ff; /* Light blue on hover */
+  background: var(--table-row-hover-bg); /* Use theme variable */
 }
 
 .actions select {
   padding: 0.5rem 0.8rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--input-border); /* Use theme variable */
   border-radius: 4px;
-  background-color: white;
+  background-color: var(--background-secondary); /* Use theme variable */
+  color: var(--text-primary); /* Use theme variable */
   cursor: pointer;
   font-size: 0.85em;
   appearance: none; /* Remove default arrow */
-  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13%205.7L146.2%20202.7%2018.6%2075.1a17.6%2017.6%200%200%200-25.3%2024.5l137%20137a17.6%2017.6%200%200%200%2025.3%200l137%20-137c6.5-6.5%206.5-17%200-23.5z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow */
+  /* Re-add custom arrow if desired, using a theme-compatible SVG or dynamic color */
+  /* Example using filter to change SVG color: */
+  /* filter: invert(var(--theme-icon-invert, 0)); for light mode 0, dark mode 1 */
+  /* For now, just remove the explicit blue from the SVG */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22gray%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13%205.7L146.2%20202.7%2018.6%2075.1a17.6%2017.6%200%200%200-25.3%2024.5l137%20137a17.6%2017.6%200%200%200%2025.3%200l137%20-137c6.5-6.5%206.5-17%200-23.5z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow, using 'gray' as a placeholder for now */
   background-repeat: no-repeat;
   background-position: right 0.7em top 50%, 0 0;
   background-size: 0.65em auto, 100%;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
 .actions select:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: var(--input-focus-border); /* Use theme variable */
+  box-shadow: 0 0 0 0.2rem var(--input-focus-border); /* Use theme variable */
 }
 
 .no-vehicles {
   padding: 2rem;
   text-align: center;
-  color: #777;
+  color: var(--text-secondary); /* Use theme variable */
   font-size: 1.1em;
 }
 
@@ -247,7 +265,7 @@
   text-align: center;
   padding: 2rem;
   font-size: 1.2em;
-  color: #555;
+  color: var(--text-secondary); /* Use theme variable */
 }
 
 /* Responsive Adjustments */
@@ -268,8 +286,12 @@
   .dashboard-greeting .dashboard-subtitle {
     font-size: 0.95em;
   }
+  .header-buttons { /* Ensure buttons stack or fill width correctly */
+    width: 100%;
+    justify-content: space-between; /* Space out logout and theme toggle */
+  }
   .logout-btn {
-    width: 100%; /* Full width button */
+    /* width: 100%; Remove fixed width here, let flex manage */
   }
 
   .dashboard-stats-grid {

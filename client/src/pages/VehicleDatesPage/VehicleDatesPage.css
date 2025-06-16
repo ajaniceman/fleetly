@@ -1,9 +1,11 @@
 .vehicle-dates-page {
   padding: 2rem;
-  max-width: 1000px; /* Slightly narrower than services for fewer columns */
+  max-width: 1000px;
   margin: auto;
   font-family: 'Inter', sans-serif;
-  color: #333;
+  color: var(--text-primary); /* Use theme variable */
+  background-color: var(--background-primary); /* Use theme variable */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .dates-header {
@@ -11,19 +13,21 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color); /* Use theme variable */
   padding-bottom: 1rem;
+  transition: border-color 0.3s ease;
 }
 
 .dates-header h1 {
   font-size: 2.2em;
-  color: #2c3e50;
+  color: var(--heading-color); /* Use theme variable */
   margin: 0;
+  transition: color 0.3s ease;
 }
 
 .back-to-dashboard-btn {
-  background-color: #6c757d; /* Grey color */
-  color: white;
+  background-color: var(--button-back); /* Use theme variable */
+  color: var(--text-light); /* Use theme variable */
   padding: 0.8rem 1.5rem;
   border: none;
   border-radius: 6px;
@@ -34,13 +38,13 @@
 }
 
 .back-to-dashboard-btn:hover {
-  background-color: #5a6268;
+  background-color: var(--button-back-hover); /* Use theme variable */
   transform: translateY(-1px);
 }
 
 .add-date-btn {
-  background-color: #007bff; /* Blue color */
-  color: white;
+  background-color: var(--cta-primary-bg); /* Use theme variable */
+  color: var(--text-light); /* Use theme variable */
   padding: 0.8rem 1.5rem;
   border: none;
   border-radius: 6px;
@@ -52,57 +56,60 @@
 }
 
 .add-date-btn:hover {
-  background-color: #0056b3;
+  background-color: var(--cta-primary-hover-bg); /* Use theme variable */
   transform: translateY(-1px);
 }
 
 .dates-table-container {
-  background: #fff;
-  border: 1px solid #ddd;
+  background: var(--background-secondary); /* Use theme variable */
+  border: 1px solid var(--border-color); /* Use theme variable */
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  /* CRITICAL: Ensure overflow-x is active on the container */
-  overflow-x: auto; /* Allows horizontal scrolling if table content is wider */
+  overflow-x: auto; /* Enable horizontal scrolling for the table if needed */
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   margin-top: 2rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .dates-table-container h2 {
   font-size: 1.8em;
-  color: #34495e;
+  color: var(--heading-color); /* Use theme variable */
   padding: 1.5rem;
   margin: 0;
-  border-bottom: 1px solid #eee;
-  background-color: #f8f9fa;
+  border-bottom: 1px solid var(--border-color); /* Use theme variable */
+  background-color: var(--background-primary); /* Use theme variable */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .dates-table {
-  width: 100%; /* Ensure table itself takes full width of its container */
+  width: 100%;
   min-width: 480px; /* Give it a minimum width to ensure columns are not too squeezed on very small screens */
 }
 
 .dates-table .table-header,
 .dates-table .table-row {
   display: grid;
-  /* Define columns for larger screens */
   grid-template-columns: 1.2fr 1fr 0.8fr 1.5fr 150px; /* Type, Date, Status, Notes, Actions */
   gap: 10px;
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color); /* Use theme variable */
   align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .dates-table .table-header {
-  background: #e9ecef;
+  background: var(--table-header-bg); /* Use theme variable */
   font-weight: 600;
-  color: #495057;
+  color: var(--table-header-text); /* Use theme variable */
   text-transform: uppercase;
   font-size: 0.85em;
 }
 
 .dates-table .table-row {
-  background: white;
+  background: var(--background-secondary); /* Use theme variable */
   font-size: 0.95em;
+  color: var(--text-primary); /* Use theme variable */
+  transition: background 0.2s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 .dates-table .table-row:last-child {
@@ -110,14 +117,16 @@
 }
 
 .dates-table .table-row:hover {
-  background: #f0f8ff;
+  background: var(--table-row-hover-bg); /* Use theme variable */
 }
 
 .no-dates-message, .loading, .error-message {
   padding: 2rem;
   text-align: center;
-  color: #777;
+  color: var(--text-secondary); /* Use theme variable */
   font-size: 1.1em;
+  background-color: var(--background-secondary); /* Use theme variable */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .actions .edit-date-btn, .actions .delete-date-btn {
@@ -127,23 +136,25 @@
   cursor: pointer;
   font-size: 0.85em;
   margin-right: 0.5rem;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .actions .edit-date-btn {
-  background-color: #28a745; /* Green */
-  color: white;
+  background-color: var(--button-edit); /* Use theme variable */
+  color: var(--text-light); /* Use theme variable */
 }
 .actions .edit-date-btn:hover {
-  background-color: #218838;
+  background-color: var(--button-edit-hover); /* Use theme variable */
+  transform: translateY(-1px);
 }
 
 .actions .delete-date-btn {
-  background-color: #dc3545; /* Red */
-  color: white;
+  background-color: var(--button-delete); /* Use theme variable */
+  color: var(--text-light); /* Use theme variable */
 }
 .actions .delete-date-btn:hover {
-  background-color: #c82333;
+  background-color: var(--button-delete-hover); /* Use theme variable */
+  transform: translateY(-1px);
 }
 
 /* Date Status Styling */
@@ -155,18 +166,18 @@
 }
 
 .date-status-expired {
-  background-color: #f8d7da; /* Light red */
-  color: #721c24; /* Dark red */
+  background-color: var(--status-expired-bg); /* Use theme variable */
+  color: var(--status-expired-text); /* Use theme variable */
 }
 
 .date-status-due-soon {
-  background-color: #fff3cd; /* Light yellow */
-  color: #856404; /* Dark yellow */
+  background-color: var(--status-due-soon-bg); /* Use theme variable */
+  color: var(--status-due-soon-text); /* Use theme variable */
 }
 
 .date-status-valid {
-  background-color: #d4edda; /* Light green */
-  color: #155724; /* Dark green */
+  background-color: var(--status-valid-bg); /* Use theme variable */
+  color: var(--status-valid-text); /* Use theme variable */
 }
 
 /* Responsive adjustments */
@@ -190,13 +201,13 @@
 
   .dates-table .table-header,
   .dates-table .table-row {
-    /* CRITICAL CHANGE: Proportional widths + fixed actions. Min-width on table itself will prevent too much squeeze. */
-    /* Type, Due Date, Status, Actions */
-    grid-template-columns: 1fr 1.2fr 0.8fr 100px;
+    /* Optimized widths for Type, Due Date, Status, and Actions */
+    /* Increased widths for Type and Due Date, slightly more for Status */
+    grid-template-columns: 1.1fr 1.5fr 0.7fr 90px; /* Type, Due Date, Status, Actions */
     gap: 5px; /* Even smaller gap to maximize content space */
     padding: 0.6rem 0.8rem; /* Further reduce padding */
     font-size: 0.85em; /* Reduce overall table font size */
-    overflow-x: hidden; /* Prevent horizontal scroll in row itself, rely on parent overflow-x: auto */
+    overflow-x: hidden; /* Prevent horizontal scroll in row itself */
   }
 
   /* Make sure content inside cells doesn't force new lines unless necessary */
@@ -220,8 +231,8 @@
     display: flex; /* Ensure actions container is flex for button alignment */
     justify-content: center; /* Center buttons within action column */
     align-items: center;
-    min-width: 90px; /* Ensure enough space for buttons to prevent squeezing */
-    flex-shrink: 0; /* Prevent the actions column from shrinking below its content size */
+    min-width: 90px; /* Ensure enough space for buttons */
+    /* Adjust width to be flexible but bounded if needed: flex-shrink: 0; */
   }
 
   .actions .edit-date-btn, .actions .delete-date-btn {
@@ -243,16 +254,16 @@
   .dates-table .table-header,
   .dates-table .table-row {
     /* Adjust actions width for tiny screens, more balanced proportions */
-    grid-template-columns: 1fr 1.3fr 0.6fr 80px; /* Type, Due Date, Status, Actions */
-    font-size: 0.7em; /* Even smaller font size */
+    grid-template-columns: 1fr 1.5fr 0.6fr 70px; /* Type, Due Date, Status, Actions */
+    font-size: 0.75em; /* Even smaller font size */
     padding: 0.4rem 0.5rem;
-    gap: 3px; /* Minimal gap for very small screens */
+    gap: 4px; /* Minimal gap for very small screens */
   }
   .actions {
-     min-width: 80px; /* Ensure enough space for buttons on very small screens */
+     min-width: 70px; /* Ensure enough space for buttons on very small screens */
   }
   .actions .edit-date-btn, .actions .delete-date-btn {
-    font-size: 0.55em; /* Even smaller button text */
-    padding: 0.1rem 0.2rem; /* Reduced padding */
+    font-size: 0.6em; /* Even smaller button text */
+    padding: 0.1rem 0.25rem; /* Reduced padding */
   }
 }

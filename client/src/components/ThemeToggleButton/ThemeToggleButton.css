@@ -21,7 +21,7 @@
 }
 
 .theme-toggle-btn:hover {
-  background-color: var(--table-row-hover-bg); /* Use a subtle hover effect */
+  background-color: var(--table-row-hover-bg); /* Use a subtle hover effect (from common variables) */
   transform: scale(1.05); /* Slightly enlarge on hover */
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }

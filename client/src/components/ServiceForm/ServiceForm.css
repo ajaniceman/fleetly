@@ -1,14 +1,15 @@
 .service-form {
-  background: #f9f9f9;
+  background: var(--background-secondary); /* Use theme variable */
   padding: 1.5rem;
   margin-bottom: 2rem;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--border-color); /* Use theme variable */
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .service-form h3 {
-  color: #34495e;
+  color: var(--heading-color); /* Use theme variable */
   margin-top: 0;
   margin-bottom: 1.5rem;
   font-size: 1.6em;
@@ -25,7 +26,7 @@
   display: block;
   margin-bottom: 0.4rem;
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary); /* Use theme variable */
   font-size: 0.95em;
 }
 
@@ -36,19 +37,21 @@
 .service-form textarea {
   width: 100%;
   padding: 0.8rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--input-border); /* Use theme variable */
   border-radius: 6px;
   font-size: 1em;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease;
   box-sizing: border-box; /* Ensures padding doesn't affect width */
+  background-color: var(--background-secondary); /* Use theme variable */
+  color: var(--text-primary); /* Use theme variable */
 }
 
 .service-form input:focus,
 .service-form select:focus,
 .service-form textarea:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: var(--input-focus-border); /* Use theme variable */
+  box-shadow: 0 0 0 0.2rem var(--input-focus-border); /* Use theme variable */
 }
 
 .service-form textarea {
@@ -66,12 +69,13 @@
   gap: 1rem;
   margin-top: 1.75rem;
   padding-top: 1rem;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--border-color); /* Use theme variable */
+  transition: border-top-color 0.3s ease;
 }
 
 .save-btn, .cancel-btn {
   border: none;
-  color: white;
+  color: var(--text-light); /* Use theme variable */
   padding: 0.75rem 1.5rem;
   border-radius: 6px;
   cursor: pointer;
@@ -81,17 +85,17 @@
 }
 
 .save-btn {
-  background: #28a745; /* Green */
+  background: var(--button-edit); /* Use theme variable */
 }
 .save-btn:hover {
-  background: #218838;
+  background: var(--button-edit-hover); /* Use theme variable */
   transform: translateY(-1px);
 }
 .cancel-btn {
-  background: #6c757d; /* Grey */
+  background: var(--button-back); /* Use theme variable */
 }
 .cancel-btn:hover {
-  background: #5a6268;
+  background: var(--button-back-hover); /* Use theme variable */
   transform: translateY(-1px);
 }
 
