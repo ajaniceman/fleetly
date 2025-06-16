@@ -296,14 +296,15 @@
   }
 
   .table-header, .table-row {
-    /* Critical Change: Redefine columns for mobile */
-    /* Ensure Type, Make, and Actions are visible. VIN and License Plate can be hidden/stacked. */
+    /* CRITICAL CHANGE: Only show Type, Make, and Actions */
     grid-template-columns: 1fr 1fr 100px; /* Type, Make, Actions */
     gap: 8px; /* Slightly smaller gap */
     padding: 0.8rem 1rem; /* Reduce padding */
   }
 
   /* Explicitly hide columns not needed on small screens for table-header */
+  /* This now includes the 'Model' column (3rd child) */
+  .table-header div:nth-child(3), /* Model */
   .table-header div:nth-child(4), /* Year */
   .table-header div:nth-child(5), /* License Plate */
   .table-header div:nth-child(6) {  /* VIN */
@@ -311,6 +312,8 @@
   }
 
   /* Explicitly hide columns not needed on small screens for table-row */
+  /* This now includes the 'Model' column (3rd child) */
+  .table-row div:nth-child(3), /* Model */
   .table-row div:nth-child(4), /* Year */
   .table-row div:nth-child(5), /* License Plate */
   .table-row div:nth-child(6) { /* VIN */
