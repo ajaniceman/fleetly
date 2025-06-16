@@ -1,13 +1,217 @@
+/* Base Font and Global Box Sizing */
 body {
+  font-family: 'Inter', sans-serif; /* Recommended font */
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* --- Theme Variables --- */
+/* Default (Light) Theme Colors */
+:root {
+  --background-primary: #f8f9fa; /* Light grey background for pages */
+  --background-secondary: #ffffff; /* White background for cards/containers */
+  --text-primary: #333333; /* Dark text */
+  --text-secondary: #555555; /* Medium grey text */
+  --text-light: #eeeeee; /* Light text (for dark backgrounds) */
+  --heading-color: #2c3e50; /* Dark blue-grey for headings */
+  --border-color: #e0e0e0; /* Light grey border */
+  --input-border: #cccccc; /* Input border color */
+  --input-focus-border: #007bff; /* Input focus border color */
+
+  /* Specific UI colors (matching existing components) */
+  --cta-primary-bg: #3498db; /* Blue for primary CTAs */
+  --cta-primary-hover-bg: #2980b9;
+  --cta-secondary-bg: transparent;
+  --cta-secondary-color: #3498db;
+  --cta-secondary-hover-bg: #3498db;
+  --cta-secondary-hover-color: white;
+
+  --button-add: #2ecc71; /* Green for Add buttons */
+  --button-add-hover: #27ae60;
+  --button-edit: #28a745; /* Green for Edit buttons */
+  --button-edit-hover: #218838;
+  --button-delete: #dc3545; /* Red for Delete buttons */
+  --button-delete-hover: #c82333;
+  --button-back: #6c757d; /* Grey for Back buttons */
+  --button-back-hover: #5a6268;
+
+  --status-expired-bg: #f8d7da; /* Light red */
+  --status-expired-text: #721c24; /* Dark red */
+  --status-due-soon-bg: #fff3cd; /* Light yellow */
+  --status-due-soon-text: #856404; /* Dark yellow */
+  --status-valid-bg: #d4edda; /* Light green */
+  --status-valid-text: #155724; /* Dark green */
+
+  --table-header-bg: #e9ecef; /* Light grey for table headers */
+  --table-header-text: #495057;
+  --table-row-hover-bg: #f0f8ff; /* Light blue on row hover */
+}
+
+/* Dark Theme Colors */
+html[data-theme='dark'] {
+  --background-primary: #1a1a2e; /* Darker background for pages */
+  --background-secondary: #2c3e50; /* Dark blue-grey for cards/containers */
+  --text-primary: #f0f0f0; /* Light text */
+  --text-secondary: #b0b0b0; /* Lighter grey text */
+  --text-light: #f0f0f0;
+  --heading-color: #e0e0e0; /* Lighter headings */
+  --border-color: #444444; /* Darker border */
+  --input-border: #555555;
+  --input-focus-border: #6495ed; /* Cornflower blue */
+
+  /* Adjust UI colors for dark mode */
+  --cta-primary-bg: #4a90e2; /* Brighter blue for primary CTAs */
+  --cta-primary-hover-bg: #387bd8;
+  --cta-secondary-color: #8ab4f8; /* Lighter blue */
+  --cta-secondary-hover-bg: #4a90e2;
+  --cta-secondary-hover-color: white;
+
+  --button-add: #20b2aa; /* Light Sea Green */
+  --button-add-hover: #1b918a;
+  --button-edit: #5cb85c; /* Slightly lighter green */
+  --button-edit-hover: #4cae4c;
+  --button-delete: #ff6347; /* Tomato Red */
+  --button-delete-hover: #e0543e;
+  --button-back: #95a5a6; /* Softer grey */
+  --button-back-hover: #7f8c8d;
+
+  --status-expired-bg: #4b0000; /* Darker red */
+  --status-expired-text: #ff8a80; /* Lighter red text */
+  --status-due-soon-bg: #6a5300; /* Darker yellow */
+  --status-due-soon-text: #ffd700; /* Lighter yellow text */
+  --status-valid-bg: #1f502d; /* Darker green */
+  --status-valid-text: #90ee90; /* Lighter green text */
+
+  --table-header-bg: #34495e; /* Darker table header */
+  --table-header-text: #f0f0f0;
+  --table-row-hover-bg: #3b5a77; /* Darker blue on row hover */
+}
+
+/* Apply theme variables to common elements */
+body {
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+}
+
+.auth-page-container {
+  background: linear-gradient(135deg, var(--heading-color), var(--cta-primary-bg));
+}
+
+.auth-card,
+.verify-email-card,
+.testimonial-card,
+.how-it-works-section .step-item,
+.service-form,
+.date-form,
+.dashboard .stat-card,
+.vehicle-table-container,
+.services-table-container,
+.dates-table-container {
+  background-color: var(--background-secondary);
+  border-color: var(--border-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading-color);
+}
+
+/* Specific text colors for lighter backgrounds */
+.hero-title,
+.hero-title .highlight {
+  color: var(--text-light); /* Ensure hero title is always visible */
+}
+
+/* Buttons and Links */
+.primary-cta {
+  background-color: var(--cta-primary-bg);
+  color: white; /* Always white text on primary CTA */
+}
+.primary-cta:hover {
+  background-color: var(--cta-primary-hover-bg);
+}
+
+.secondary-cta {
+  color: var(--cta-secondary-color);
+  border-color: var(--cta-secondary-color);
+}
+.secondary-cta:hover {
+  background-color: var(--cta-secondary-hover-bg);
+  color: var(--cta-secondary-hover-color);
+}
+
+/* Dashboard specific buttons */
+.add-btn {
+  background-color: var(--button-add);
+}
+.add-btn:hover {
+  background-color: var(--button-add-hover);
+}
+.logout-btn {
+  background-color: var(--button-delete); /* Using delete color for logout as a strong action */
+}
+.logout-btn:hover {
+  background-color: var(--button-delete-hover);
+}
+
+/* Vehicle Services / Dates buttons */
+.back-to-dashboard-btn {
+  background-color: var(--button-back);
+}
+.back-to-dashboard-btn:hover {
+  background-color: var(--button-back-hover);
+}
+
+.save-btn {
+  background: var(--button-edit);
+}
+.save-btn:hover {
+  background: var(--button-edit-hover);
+}
+.cancel-btn {
+  background: var(--button-back);
+}
+.cancel-btn:hover {
+  background: var(--button-back-hover);
+}
+
+/* Input fields */
+input, select, textarea {
+  border-color: var(--input-border);
+  color: var(--text-primary); /* Ensure input text color changes */
+  background-color: var(--background-secondary); /* Match card background */
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 0.2rem var(--input-focus-border); /* Use the focus border for shadow */
+}
+
+/* Table specific styling */
+.table-header,
+.services-table .table-header,
+.dates-table .table-header {
+  background: var(--table-header-bg);
+  color: var(--table-header-text);
+}
+
+.table-row:hover,
+.services-table .table-row:hover,
+.dates-table .table-row:hover {
+  background: var(--table-row-hover-bg);
+}
+
+/* Date Status Styling (already using vars from earlier, just confirm consistency) */
+.date-status-expired {
+  background-color: var(--status-expired-bg);
+  color: var(--status-expired-text);
+}
+.date-status-due-soon {
+  background-color: var(--status-due-soon-bg);
+  color: var(--status-due-soon-text);
+}
+.date-status-valid {
+  background-color: var(--status-valid-bg);
+  color: var(--status-valid-text);
 }
