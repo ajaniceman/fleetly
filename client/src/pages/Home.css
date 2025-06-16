@@ -27,14 +27,13 @@ body {
 }
 
 .bg-dark {
-  /* This needs to be explicitly handled by global variables */
-  background-color: var(--background-primary); /* Default to primary background if no specific dark-background var */
+  background-color: var(--background-primary); /* Default to primary background, if no specific dark-background var for sections */
   color: var(--text-light); /* Use theme variable */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-/* If you want a specific "dark" background for sections, add this to index.css and use here */
+/* If you want a specific "dark" background for sections, ensure it's defined and used */
 html[data-theme='dark'] .bg-dark {
-  background-color: var(--background-primary); /* This should also come from a specific variable if different */
+  background-color: var(--background-secondary); /* Using secondary background for contrast in dark mode */
 }
 
 
@@ -86,12 +85,14 @@ html[data-theme='dark'] .bg-dark {
 .primary-cta {
   background-color: var(--cta-primary-bg); /* Use theme variable */
   color: white;
-  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); /* Adjust rgba for shadow if needed for dark mode */
+  /* Adjust box-shadow RGBA for better visibility on dark backgrounds */
+  box-shadow: 0 4px 15px rgba(var(--cta-primary-rgb-shadow, 52, 152, 219), 0.3);
 }
 .primary-cta:hover {
   background-color: var(--cta-primary-hover-bg); /* Use theme variable */
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4); /* Adjust rgba for shadow if needed for dark mode */
+  /* Adjust box-shadow RGBA for better visibility on dark backgrounds */
+  box-shadow: 0 6px 20px rgba(var(--cta-primary-rgb-shadow, 52, 152, 219), 0.4);
 }
 
 .secondary-cta {
@@ -123,7 +124,7 @@ html[data-theme='dark'] .bg-dark {
   text-align: center;
   overflow: hidden;
   padding: 4rem 0; /* Add padding for smaller screens */
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease; /* Transition background for gradient */
 }
 /* Apply dark gradient specifically for dark theme */
 html[data-theme='dark'] .hero-section {
@@ -132,7 +133,6 @@ html[data-theme='dark'] .hero-section {
 
 .hero-background-gradient {
   /* This element is now redundant if hero-section background is directly themed */
-  /* If you want an *additional* gradient overlay, keep it and adjust its colors */
   display: none; /* Hide if hero-section takes over the main gradient */
 }
 
@@ -188,16 +188,15 @@ html[data-theme='dark'] .hero-section {
   margin-top: 3rem;
   padding: 1.5rem;
   background-color: var(--background-secondary); /* Use theme variable for stats background */
-  opacity: 0.1; /* Keep opacity for a subtle background effect */
+  /* REMOVED OPACITY for clear background */
   border-radius: 12px;
-  /* backdrop-filter: blur(5px); -- may not be needed if background is solid color */
   border: 1px solid var(--border-color); /* Use theme variable */
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .stat-item {
   background-color: var(--background-secondary); /* Use theme variable */
-  opacity: 0.15; /* Keep opacity for subtle background */
+  /* REMOVED OPACITY for clear background */
   padding: 1.2rem;
   border-radius: 10px;
   display: flex;
@@ -230,6 +229,14 @@ html[data-theme='dark'] .hero-section {
 }
 
 /* --- How It Works Section --- */
+.how-it-works-section { /* Added this class for specific background */
+  background-color: var(--background-primary); /* Default primary background for the section */
+  transition: background-color 0.3s ease;
+}
+html[data-theme='dark'] .how-it-works-section {
+  background-color: var(--background-secondary); /* Make this section background different in dark mode */
+}
+
 .how-it-works-section .steps-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

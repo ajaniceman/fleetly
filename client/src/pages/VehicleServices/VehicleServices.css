@@ -1,8 +1,3 @@
-/*
-  CRITICAL FIX: Removed local :root variables. All color-related variables should now
-  be defined globally in client/src/index.css and accessed here.
-*/
-
 .vehicle-services-page {
   padding: 2.5rem; /* Increased padding */
   max-width: 1200px;
@@ -23,7 +18,6 @@
   padding-bottom: 1.5rem; /* More padding */
   flex-wrap: wrap; /* Allow wrapping */
   gap: 1rem;
-  transition: border-color 0.3s ease;
 }
 
 .services-header h1 {
@@ -31,7 +25,6 @@
   color: var(--heading-color); /* Use theme variable */
   margin: 0;
   font-weight: 700;
-  transition: color 0.3s ease;
 }
 
 .back-to-dashboard-btn {
@@ -44,13 +37,13 @@
   font-size: 1em;
   font-weight: 500;
   transition: background-color 0.2s ease, transform 0.1s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2); /* Adjust shadow if needed for dark mode */
+  box-shadow: 0 2px 8px rgba(108, 117, 125, 0.2); /* Adjust shadow if needed for dark mode */
 }
 
 .back-to-dashboard-btn:hover {
   background-color: var(--button-back-hover); /* Use theme variable */
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* Adjust shadow if needed for dark mode */
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3); /* Adjust shadow if needed for dark mode */
 }
 
 .add-service-btn {
@@ -64,13 +57,13 @@
   font-weight: 600;
   margin-bottom: 2rem; /* More margin */
   transition: background-color 0.2s ease, transform 0.1s ease;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Adjust shadow if needed for dark mode */
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); /* Adjust shadow if needed for dark mode */
 }
 
 .add-service-btn:hover {
   background-color: var(--cta-primary-hover-bg); /* Use theme variable */
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4); /* Adjust shadow if needed for dark mode */
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4); /* Adjust shadow if needed for dark mode */
 }
 
 .services-table-container {
@@ -107,7 +100,7 @@
   padding: 1rem 1.5rem; /* Increased padding */
   border-bottom: 1px solid var(--border-color); /* Use theme variable */
   align-items: center;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .services-table .table-header {
@@ -218,24 +211,23 @@
   .services-table .table-header,
   .services-table .table-row {
     /* CRITICAL CHANGE: Only show Date, Type, Actions on small screens */
-    grid-template-columns: 1fr 1fr 100px; /* Date, Type, Actions */
+    grid-template-columns: 1fr 1.2fr 90px; /* Date, Type, Actions */
     gap: 8px;
     padding: 0.8rem 1rem;
     font-size: 0.8em;
   }
   /* Hide Cost and Description, and Odometer/Engine Hours */
   /* This needs to target columns by their original order, or use nth-child combined with specific classes */
+  .services-table .table-header div:nth-child(3), /* Description */
+  .services-table .table-row div:nth-child(3),
   .services-table .table-header div:nth-child(4), /* Cost */
   .services-table .table-row div:nth-child(4),
   .services-table .table-header div:nth-child(5), /* Odometer */
   .services-table .table-row div:nth-child(5),
   .services-table .table-header div:nth-child(6), /* Engine Hours */
-  .services-table .table-row div:nth-child(6),
-  .services-table .table-header div:nth-child(3), /* Description (added this to hidden) */
-  .services-table .table-row div:nth-child(3) {
+  .services-table .table-row div:nth-child(6) {
     display: none;
   }
-
   /* Explicitly ensure actions column is visible and positioned correctly */
   .services-table .table-header div:nth-child(7), /* Actions column is 7th child */
   .services-table .table-row div:nth-child(7) {
