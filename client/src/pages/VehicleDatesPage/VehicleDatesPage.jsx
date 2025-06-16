@@ -1,41 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import DateForm from '../components/DateForm/DateForm'; // We'll create this next
-import './VehicleDatesPage.css'; // We'll create this CSS file next
+import DateForm from '../../components/DateForm/DateForm';
+import { useAuth } from '../../hooks/useAuth'; // Import useAuth
+import './VehicleDatesPage.css';
 
 export default function VehicleDatesPage() {
-  const { id } = useParams(); // Get the vehicle ID from the URL
+  const { id } = useParams();
   const navigate = useNavigate();
-  const [vehicle, setVehicle] = useState(null); // To store the specific vehicle's details
-  const [dates, setDates] = useState([]); // To store dates for this vehicle
+  const { fetchWithAuth } = useAuth(); // Destructure fetchWithAuth
+  const [vehicle, setVehicle] = useState(null);
+  const [dates, setDates] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showDateForm, setShowDateForm] = useState(false);
-  const [editingDate, setEditingDate] = useState(null); // To handle editing a date
+  const [editingDate, setEditingDate] = useState(null);
 
   useEffect(() => {
-    // Fetch vehicle details and its dates when the component mounts or ID changes
     const fetchVehicleAndDates = async () => {
       try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          navigate('/login'); // Redirect to login if no token
-          return;
-        }
-
-        // Fetch vehicle details
-        const vehicleRes = await fetch(`/api/vehicles/${id}`, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
+        // Fetch vehicle details using fetchWithAuth
+        const vehicleRes = await fetchWithAuth(`/api/vehicles/${id}`);
         if (!vehicleRes.ok) {
           throw new Error('Failed to fetch vehicle details');
         }
         const vehicleData = await vehicleRes.json();
         setVehicle(vehicleData);
 
-        // Fetch dates for this vehicle
-        const datesRes = await fetch(`/api/dates/vehicle/${id}`, { // New backend endpoint
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
+        // Fetch dates for this vehicle using fetchWithAuth
+        const datesRes = await fetchWithAuth(`/api/dates/vehicle/${id}`);
         if (!datesRes.ok) {
           throw new Error('Failed to fetch dates');
         }
@@ -44,8 +35,10 @@ export default function VehicleDatesPage() {
 
       } catch (error) {
         console.error("Error loading vehicle dates:", error);
-        alert(`Error loading dates: ${error.message}`);
-        navigate('/dashboard'); // Go back to dashboard on error
+        if (!error.message.includes("Session expired")) {
+          alert(`Error loading dates: ${error.message}`);
+          navigate('/dashboard'); // Go back to dashboard on other errors
+        }
       } finally {
         setLoading(false);
       }
@@ -54,14 +47,13 @@ export default function VehicleDatesPage() {
     if (id) {
       fetchVehicleAndDates();
     }
-  }, [id, navigate]); // Re-run if vehicle ID changes
+  }, [id, navigate, fetchWithAuth]); // Add fetchWithAuth to dependency array
 
   const handleSaveDate = async (formData) => {
     let res;
     let url;
     let method;
 
-    // Add vehicle_id to formData before sending
     formData.vehicle_id = id;
 
     if (editingDate) {
@@ -73,11 +65,10 @@ export default function VehicleDatesPage() {
     }
 
     try {
-      res = await fetch(url, {
+      res = await fetchWithAuth(url, { // Use fetchWithAuth
         method: method,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify(formData)
       });
@@ -100,16 +91,17 @@ export default function VehicleDatesPage() {
       }
     } catch (error) {
       console.error(`Error ${editingDate ? 'updating' : 'adding'} date:`, error);
-      alert(`An unexpected error occurred while ${editingDate ? 'updating' : 'adding'} the date.`);
+      if (!error.message.includes("Session expired")) {
+        alert(`An unexpected error occurred while ${editingDate ? 'updating' : 'adding'} the date.`);
+      }
     }
   };
 
   const handleDeleteDate = async (dateId) => {
     if (window.confirm("Are you sure you want to delete this date record?")) {
       try {
-        const res = await fetch(`/api/dates/${dateId}`, {
+        const res = await fetchWithAuth(`/api/dates/${dateId}`, { // Use fetchWithAuth
           method: 'DELETE',
-          headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
         if (res.ok) {
           setDates(prevDates => prevDates.filter(d => d.id !== dateId));
@@ -120,7 +112,9 @@ export default function VehicleDatesPage() {
         }
       } catch (error) {
         console.error("Error deleting date record:", error);
-        alert("An unexpected error occurred while deleting the date record.");
+        if (!error.message.includes("Session expired")) {
+          alert("An unexpected error occurred while deleting the date record.");
+        }
       }
     }
   };
@@ -156,7 +150,6 @@ export default function VehicleDatesPage() {
         </button>
       </div>
 
-      {/* Date Form Section */}
       {showDateForm ? (
         <DateForm
           onSubmit={handleSaveDate}
@@ -168,12 +161,11 @@ export default function VehicleDatesPage() {
         />
       ) : (
         <button onClick={() => {
-          setEditingDate(null); // Ensure not editing when adding
+          setEditingDate(null);
           setShowDateForm(true);
         }} className="add-date-btn">+ Add New Date</button>
       )}
 
-      {/* Dates Table */}
       <div className="dates-table-container">
         <h2>Date Records</h2>
         {dates.length === 0 ? (
@@ -189,7 +181,7 @@ export default function VehicleDatesPage() {
             </div>
             {dates.map(d => (
               <div key={d.id} className="table-row">
-                <div>{d.dateType || 'N/A'}</div> {/* Use d.dateType for camelCase */}
+                <div>{d.dateType || 'N/A'}</div>
                 <div>
                   {d.dueDate && !isNaN(new Date(d.dueDate))
                     ? new Date(d.dueDate).toLocaleDateString()
