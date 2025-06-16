@@ -183,7 +183,8 @@
   .dates-table .table-header,
   .dates-table .table-row {
     /* Optimized widths for Type, Due Date, Status, and Actions */
-    grid-template-columns: 1fr 1.4fr 0.6fr 90px; /* Type, Due Date, Status, Actions */
+    /* Increased widths for Type and Due Date, slightly more for Status */
+    grid-template-columns: 1.1fr 1.5fr 0.7fr 90px; /* Type, Due Date, Status, Actions */
     gap: 5px; /* Even smaller gap to maximize content space */
     padding: 0.6rem 0.8rem; /* Further reduce padding */
     font-size: 0.85em; /* Reduce overall table font size */
@@ -230,15 +231,17 @@
 @media (max-width: 480px) {
   .dates-table .table-header,
   .dates-table .table-row {
-    grid-template-columns: 0.8fr 1.3fr 0.6fr 75px; /* Adjust actions width for tiny screens */
+    /* Adjust actions width for tiny screens, more balanced proportions */
+    grid-template-columns: 1fr 1.5fr 0.6fr 70px; /* Type, Due Date, Status, Actions */
     font-size: 0.75em; /* Even smaller font size */
     padding: 0.4rem 0.5rem;
+    gap: 4px; /* Minimal gap for very small screens */
   }
   .actions {
-     min-width: 75px; /* Ensure enough space for buttons on very small screens */
+     min-width: 70px; /* Ensure enough space for buttons on very small screens */
   }
   .actions .edit-date-btn, .actions .delete-date-btn {
-    font-size: 0.65em; /* Even smaller button text */
-    padding: 0.15rem 0.3rem;
+    font-size: 0.6em; /* Even smaller button text */
+    padding: 0.1rem 0.25rem; /* Reduced padding */
   }
 }
