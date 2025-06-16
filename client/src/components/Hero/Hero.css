@@ -25,18 +25,19 @@ html[data-theme='dark'] .auth-page-container {
   text-align: center;
   border: 1px solid var(--border-color); /* Use theme variable */
   transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+  position: relative; /* Add position relative to auth-card for back-home-link positioning */
 }
 
 .card-header {
   margin-bottom: 2rem;
-  position: relative; /* For back-home-link positioning */
-  padding-top: 0; /* Removed padding-top here as it was pushing content down */
+  /* Removed position: relative from here as back-home-link is no longer its child */
+  padding-top: 0; /* No padding-top here; space will be managed by h2 margin */
 }
 
 .back-home-link {
-  position: absolute;
-  top: 0.5rem;      /* Adjusted: Position it closer to the top of the .card-header content area */
-  left: 0;          /* Align with the left edge of the .card-header */
+  position: absolute; /* Position relative to .auth-card */
+  top: 1.5rem;      /* Position within the 2.5rem top padding of auth-card */
+  left: 2.5rem;     /* Position within the 2.5rem left padding of auth-card */
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -44,6 +45,7 @@ html[data-theme='dark'] .auth-page-container {
   text-decoration: none;
   font-size: 0.9em;
   transition: color 0.2s ease;
+  z-index: 10; /* Ensure it's above other elements if necessary */
 }
 
 .back-home-link:hover {
@@ -57,7 +59,7 @@ html[data-theme='dark'] .auth-page-container {
 .card-header h2 {
   font-size: 2.2em;
   color: var(--heading-color); /* Use theme variable */
-  margin-top: 2rem; /* Added margin-top to push h2 down, creating space below the absolute link */
+  margin-top: 0.5rem; /* Adjusted margin-top to ensure space *below* the absolute link */
   margin-bottom: 0.5rem;
 }
 
@@ -241,7 +243,7 @@ html[data-theme='dark'] .auth-page-container {
     font-size: 1em;
   }
   .back-home-link { /* Adjust for very small screens */
-    top: 0.5rem; /* Keep similar top positioning */
-    left: 0.5rem; /* Adjust left for smaller padding */
+    top: 1rem; /* Adjust slightly for smaller padding on mobile */
+    left: 1rem; /* Adjust slightly for smaller padding on mobile */
   }
 }

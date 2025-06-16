@@ -57,10 +57,12 @@ export default function Hero() {
   return (
     <div className="auth-page-container">
       <div className="auth-card animate-scale-in">
+        {/* MOVED: Back to Home link is now a direct child of auth-card */}
+        <Link to="/" className="back-home-link">
+          <FaArrowLeft className="back-arrow-icon" /> Back to Home
+        </Link>
+
         <div className="card-header">
-          <Link to="/" className="back-home-link">
-            <FaArrowLeft className="back-arrow-icon" /> Back to Home
-          </Link>
           <h2>{mode === 'login' ? 'Welcome Back!' : 'Join Fleetly Today'}</h2>
           <p className="card-subtitle">
             {mode === 'login' ? 'Sign in to access your dashboard.' : 'Manage your fleet smarter, not harder.'}
