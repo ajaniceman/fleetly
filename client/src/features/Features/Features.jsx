@@ -1,55 +1,57 @@
 import React from 'react';
 import './Features.css'; // Make sure this CSS file exists and is linked
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
-// Example Feature Data (Replace with your actual features if you have them)
+// Example Feature Data (Using translation keys now)
 const featureData = [
   {
     id: 1,
-    icon: '📊', // Emoji for icon
-    title: 'Intuitive Dashboard',
-    description: 'Get a real-time overview of your entire fleet at a glance, with key metrics and insights.',
+    icon: '📊',
+    titleKey: 'feature_dashboard_title',
+    descriptionKey: 'feature_dashboard_description',
   },
   {
     id: 2,
-    icon: '🗺️', // Emoji for icon
-    title: 'Advanced Tracking',
-    description: 'Monitor vehicle locations and routes to optimize dispatch and enhance efficiency.',
+    icon: '🗺️',
+    titleKey: 'feature_tracking_title',
+    descriptionKey: 'feature_tracking_description',
   },
   {
     id: 3,
-    icon: '🛠️', // Emoji for icon
-    title: 'Proactive Maintenance',
-    description: 'Never miss a service with automated reminders and detailed service history logs.',
+    icon: '🛠️',
+    titleKey: 'feature_maintenance_title',
+    descriptionKey: 'feature_maintenance_description',
   },
   {
     id: 4,
-    icon: '🗓️', // Emoji for icon
-    title: 'Critical Date Reminders',
-    description: 'Stay compliant with timely alerts for registrations, inspections, and license renewals.',
+    icon: '🗓️',
+    titleKey: 'feature_date_reminders_title',
+    descriptionKey: 'feature_date_reminders_description',
   },
   {
     id: 5,
-    icon: '📉', // Emoji for icon
-    title: 'Cost Optimization',
-    description: 'Track expenses and identify areas for savings to improve your fleet’s profitability.',
+    icon: '📉',
+    titleKey: 'feature_cost_optimization_title',
+    descriptionKey: 'feature_cost_optimization_description',
   },
   {
     id: 6,
-    icon: '📱', // Emoji for icon
-    title: 'Mobile Accessibility',
-    description: 'Manage your fleet on the go with a fully responsive and optimized mobile experience.',
+    icon: '📱',
+    titleKey: 'feature_mobile_accessibility_title',
+    descriptionKey: 'feature_mobile_accessibility_description',
   },
 ];
 
 export default function Features() {
+  const { t } = useTranslation(); // Initialize the translation hook
+
   return (
-    // This div applies the grid layout defined in Features.css
     <div className="features-grid">
       {featureData.map(feature => (
         <div key={feature.id} className="feature-card">
           <div className="feature-icon">{feature.icon}</div>
-          <h3>{feature.title}</h3>
-          <p>{feature.description}</p>
+          <h3>{t(feature.titleKey)}</h3> {/* Use translation for title */}
+          <p>{t(feature.descriptionKey)}</p> {/* Use translation for description */}
         </div>
       ))}
     </div>
