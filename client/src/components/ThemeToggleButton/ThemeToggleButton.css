@@ -1,13 +1,7 @@
 .theme-toggle-btn {
-  /* Position it absolutely relative to the body/html */
-  position: fixed; /* Stays in place when scrolling */
-  top: 1.5rem;      /* Adjust distance from top */
-  right: 1.5rem;    /* Adjust distance from right */
-  z-index: 1000;    /* Ensure it's above other content */
-
   background-color: var(--background-secondary); /* Use theme color */
   color: var(--text-primary); /* Use theme color */
-  border: 1px solid var(--border-color); /* Use theme color */
+  border: 1px solid var(--input-border); /* Use theme color (changed from --border-color for better consistency) */
   border-radius: 50%; /* Make it round */
   width: 45px;      /* Fixed width */
   height: 45px;     /* Fixed height */
@@ -16,23 +10,14 @@
   align-items: center;
   font-size: 1.5em; /* Size of the emoji/icon */
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slightly smaller shadow */
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .theme-toggle-btn:hover {
   background-color: var(--table-row-hover-bg); /* Use a subtle hover effect (from common variables) */
   transform: scale(1.05); /* Slightly enlarge on hover */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Slightly larger shadow on hover */
 }
 
-/* Optional: Adjust position for smaller screens if it conflicts with other elements */
-@media (max-width: 768px) {
-  .theme-toggle-btn {
-    top: 1rem;
-    right: 1rem;
-    width: 40px;
-    height: 40px;
-    font-size: 1.3em;
-  }
-}
+/* No specific positioning media queries here, as it's now handled by NavBar.css */
