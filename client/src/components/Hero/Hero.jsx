@@ -3,11 +3,13 @@ import { useAuth } from '../../hooks/useAuth';
 import { FaEye, FaEyeSlash, FaArrowLeft } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 import './Hero.css';
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 export default function Hero() {
   const { login, register } = useAuth();
   const location = useLocation();
   const mode = location.pathname === '/register' ? 'register' : 'login';
+  const { t } = useTranslation(); // Initialize the translation hook
 
   const [form, setForm] = useState({ email: '', password: '', name: '' });
   const [pwdChecks, setPwdChecks] = useState({ minLength: false, hasNumber: false });
@@ -42,7 +44,7 @@ export default function Hero() {
     } else {
       // Basic frontend validation for register mode
       if (!pwdChecks.minLength || !pwdChecks.hasNumber) {
-        setError('Password must be at least 8 characters and contain a number.');
+        setError(t('password_validation_error')); // Translate validation error
         return;
       }
       result = await register(form);
@@ -57,24 +59,23 @@ export default function Hero() {
   return (
     <div className="auth-page-container">
       <div className="auth-card animate-scale-in">
-        {/* MOVED: Back to Home link is now a direct child of auth-card */}
         <Link to="/" className="back-home-link">
-          <FaArrowLeft className="back-arrow-icon" /> Back to Home
+          <FaArrowLeft className="back-arrow-icon" /> {t('back_to_home')} {/* Translated */}
         </Link>
 
         <div className="card-header">
-          <h2>{mode === 'login' ? 'Welcome Back!' : 'Join Fleetly Today'}</h2>
+          <h2>{mode === 'login' ? t('welcome_back_title') : t('join_fleetly_title')}</h2> {/* Translated */}
           <p className="card-subtitle">
-            {mode === 'login' ? 'Sign in to access your dashboard.' : 'Manage your fleet smarter, not harder.'}
+            {mode === 'login' ? t('sign_in_subtitle') : t('manage_fleet_subtitle')} {/* Translated */}
           </p>
         </div>
 
         <div className="mode-switch-tabs">
           <Link to="/login" className={`tab-item ${mode === 'login' ? 'active' : ''}`}>
-            Login
+            {t('login_tab')} {/* Translated */}
           </Link>
           <Link to="/register" className={`tab-item ${mode === 'register' ? 'active' : ''}`}>
-            Register
+            {t('register_tab')} {/* Translated */}
           </Link>
         </div>
 
@@ -82,7 +83,7 @@ export default function Hero() {
           {error && <div className="form-error-message">{error}</div>}
 
           <div className="input-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">{t('email_label')}</label> {/* Translated */}
             <input
               id="email"
               name="email"
@@ -96,7 +97,7 @@ export default function Hero() {
           </div>
 
           <div className="input-group password-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{t('password_label')}</label> {/* Translated */}
             <input
               id="password"
               name="password"
@@ -120,17 +121,17 @@ export default function Hero() {
           {mode === 'register' && (
             <ul className="password-checklist">
               <li className={pwdChecks.minLength ? 'valid' : ''}>
-                <span className="check-icon">{pwdChecks.minLength ? '✅' : '❌'}</span> At least 8 characters
+                <span className="check-icon">{pwdChecks.minLength ? '✅' : '❌'}</span> {t('password_min_length')} {/* Translated */}
               </li>
               <li className={pwdChecks.hasNumber ? 'valid' : ''}>
-                <span className="check-icon">{pwdChecks.hasNumber ? '✅' : '❌'}</span> Contains a number
+                <span className="check-icon">{pwdChecks.hasNumber ? '✅' : '❌'}</span> {t('password_has_number')} {/* Translated */}
               </li>
             </ul>
           )}
 
           {mode === 'register' && (
             <div className="input-group">
-              <label htmlFor="name">Name</label>
+              <label htmlFor="name">{t('name_label')}</label> {/* Translated */}
               <input
                 id="name"
                 name="name"
@@ -145,7 +146,7 @@ export default function Hero() {
           )}
 
           <button type="submit" className="submit-btn primary-cta">
-            {mode === 'login' ? 'Log In' : 'Register Account'}
+            {mode === 'login' ? t('login_button_text') : t('register_button_text')} {/* Translated */}
           </button>
         </form>
       </div>
