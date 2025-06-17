@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
-import { useTheme } from '../../context/ThemeContext';
+import { useTheme } from '../../contexts/ThemeContext';
 import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
 import { FaBars, FaTimes, FaCaretDown, FaCaretUp } from 'react-icons/fa'; // Import FaCaretDown/Up for dropdown
 import './NavBar.css';
