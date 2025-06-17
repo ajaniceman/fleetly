@@ -9,6 +9,7 @@ import bsTranslation from './locales/bs/translation.json'; // New
 import frTranslation from './locales/fr/translation.json'; // New
 import deTranslation from './locales/de/translation.json'; // New
 import itTranslation from './locales/it/translation.json'; // New
+import plTranslation from './locales/pl/translation.json';
 
 i18n
   .use(LanguageDetector)
@@ -32,6 +33,9 @@ i18n
       },
       it: { // New language entry
         translation: itTranslation,
+      },
+      pl: {
+        translation: plTranslation,        
       },
     },
     fallbackLng: 'en', // Fallback to English if translation is missing

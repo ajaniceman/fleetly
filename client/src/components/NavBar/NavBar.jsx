@@ -85,6 +85,7 @@ export default function NavBar({ currentLanguage, onLanguageChange }) {
             <option value="fr">{t('language_french')}</option>
             <option value="de">{t('language_german')}</option>
             <option value="it">{t('language_italian')}</option>
+            <option value="pl">{t('language_polish')}</option>
           </select>
 
           {/* Theme Toggle Button (visible on both mobile and desktop, styled via CSS) */}
