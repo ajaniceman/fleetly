@@ -1,21 +1,24 @@
+// client/src/pages/Dashboard/Dashboard.jsx
 import React, { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-// REMOVED: import { useTheme } from '../contexts/ThemeContext'; // No longer needed directly in Dashboard for toggle button
 import VehicleForm from '../components/VehicleForm/VehicleForm';
-import { useNavigate } from 'react-router-dom';
-import './Dashboard.css'; // Keep existing CSS
+import './Dashboard.css'; // Assuming you have Dashboard.css
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 export default function Dashboard() {
   const { user, logout, fetchWithAuth } = useAuth();
-  // REMOVED: const { theme, toggleTheme } = useTheme(); // No longer needed here
+  const navigate = useNavigate();
+  const { t } = useTranslation(); // Initialize translation hook
+
   const [vehicles, setVehicles] = useState([]);
   const [allDates, setAllDates] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [editingVehicle, setEditingVehicle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const navigate = useNavigate();
 
+  // Fetch vehicles and dates on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -32,15 +35,21 @@ export default function Dashboard() {
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
         if (!error.message.includes("Session expired")) {
-            alert(`Error loading dashboard data: ${error.message}`);
+            // Using translated alert message
+            alert(t('error_loading_dashboard_data', { message: error.message }));
         }
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
-  }, [fetchWithAuth]);
+    if (user) { // Only fetch if user is authenticated
+      fetchData();
+    } else {
+      setLoading(false);
+      navigate('/login'); // Redirect to login if no user
+    }
+  }, [user, navigate, fetchWithAuth, t]); // Added t to dependency array
 
   const totalVehiclesCount = vehicles.length;
   const today = new Date();
@@ -105,7 +114,7 @@ export default function Dashboard() {
         });
         setShowForm(false);
         setEditingVehicle(null);
-        alert(`Vehicle ${editingVehicle ? 'updated' : 'added'} successfully!`);
+        alert(t(`vehicle_${editingVehicle ? 'updated' : 'added'}_success`)); // Translated alert
         const datesRes = await fetchWithAuth('/api/dates/user');
         if (datesRes.ok) {
           const datesData = await datesRes.json();
@@ -113,18 +122,18 @@ export default function Dashboard() {
         }
       } else {
         const errorData = await res.json();
-        alert(`Failed to ${editingVehicle ? 'update' : 'add'} vehicle: ${errorData.message || res.statusText}`);
+        alert(t(`failed_to_${editingVehicle ? 'update' : 'add'}_vehicle`, { message: errorData.message || res.statusText })); // Translated alert
       }
     } catch (error) {
       console.error(`Error ${editingVehicle ? 'updating' : 'adding'} vehicle:`, error);
       if (!error.message.includes("Session expired")) {
-        alert(`An unexpected error occurred while ${editingVehicle ? 'updating' : 'adding'} the vehicle.`);
+        alert(t(`unexpected_${editingVehicle ? 'update' : 'add'}_error_vehicle`)); // Translated alert
       }
     }
   };
 
   const handleDelete = async (vehicleId) => {
-    if (window.confirm("Are you sure you want to delete this vehicle?")) {
+    if (window.confirm(t('confirm_delete_vehicle'))) { // Translated confirmation
       try {
         const res = await fetchWithAuth(`/api/vehicles/${vehicleId}`, {
           method: 'DELETE',
@@ -132,15 +141,15 @@ export default function Dashboard() {
         if (res.ok) {
           setVehicles(vehicles.filter(v => v.id !== vehicleId));
           setAllDates(prevDates => prevDates.filter(d => d.vehicleId !== vehicleId));
-          alert("Vehicle deleted successfully!");
+          alert(t('vehicle_deleted_success')); // Translated alert
         } else {
           const errorData = await res.json();
-          alert(`Failed to delete vehicle: ${errorData.message || res.statusText}`);
+          alert(t('failed_to_delete_vehicle', { message: errorData.message || res.statusText })); // Translated alert
         }
       } catch (error) {
         console.error("Error deleting vehicle:", error);
         if (!error.message.includes("Session expired")) {
-            alert("An unexpected error occurred while deleting the vehicle.");
+            alert(t('unexpected_delete_error_vehicle')); // Translated alert
         }
       }
     }
@@ -166,17 +175,17 @@ export default function Dashboard() {
     }
   };
 
-  if (loading) return <div className="loading">Loading dashboard...</div>;
+  if (loading) return <div className="loading">{t('loading_dashboard')}</div>;
 
   return (
-    <div className="dashboard">
+    <div className="dashboard-page">
       <div className="dashboard-header-main">
         <div className="dashboard-greeting">
-          <h1>Welcome, {user.name}!</h1>
-          <p className="dashboard-subtitle">Here's an overview of your fleet.</p>
+          <h1>{t('dashboard_welcome_title', { name: user?.name || t('user_placeholder') })}</h1> {/* Translated greeting */}
+          <p className="dashboard-subtitle">{t('dashboard_subtitle')}</p> {/* Translated subtitle */}
         </div>
-        <div className="header-buttons"> {/* Container for logout button */}
-          {/* REMOVED: Theme toggle button is now global and outside this component */}
+        <div className="header-buttons">
+          {/* Logout button removed as it's in NavBar now */}
         </div>
       </div>
 
@@ -184,17 +193,17 @@ export default function Dashboard() {
         <div className="stat-card total-vehicles">
           <div className="stat-icon">🚗</div>
           <div className="stat-value">{totalVehiclesCount}</div>
-          <div className="stat-label">Total Vehicles</div>
+          <div className="stat-label">{t('dashboard_total_vehicles_stat')}</div> {/* Translated */}
         </div>
         <div className="stat-card expired-dates">
           <div className="stat-icon">⚠️</div>
           <div className="stat-value">{expiredDatesCount}</div>
-          <div className="stat-label">Expired Dates</div>
+          <div className="stat-label">{t('dashboard_expired_dates_stat')}</div> {/* Translated */}
         </div>
         <div className="stat-card upcoming-dates">
           <div className="stat-icon">🔔</div>
           <div className="stat-value">{upcomingDatesCount}</div>
-          <div className="stat-label">Upcoming Dates (30 Days)</div>
+          <div className="stat-label">{t('dashboard_upcoming_dates_stat')}</div> {/* Translated */}
         </div>
       </div>
 
@@ -209,16 +218,21 @@ export default function Dashboard() {
             initial={editingVehicle}
           />
         ) : (
-          <button onClick={() => {
-            setEditingVehicle(null);
-            setShowForm(true);
-          }} className="add-btn">+ Add New Vehicle</button>
+          <button
+            onClick={() => {
+              setEditingVehicle(null);
+              setShowForm(true);
+            }}
+            className="add-btn"
+          >
+            {t('add_new_vehicle_btn')} {/* Translated */}
+          </button>
         )}
 
         <div className="search-bar">
           <input
             type="text"
-            placeholder="Search vehicles..."
+            placeholder={t('search_vehicles_placeholder')} /* Translated placeholder */
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
@@ -230,19 +244,20 @@ export default function Dashboard() {
       </div>
 
       <div className="vehicle-table-container">
+        <h2>{t('your_fleet_title')}</h2> {/* Translated title */}
         <div className="table-header">
-          <div>Type</div>
-          <div>Make</div>
-          <div>Model</div>
-          <div>Year</div>
-          <div>License Plate</div>
-          <div>VIN</div>
-          <div>Actions</div>
+          <div>{t('vehicle_table_type')}</div> {/* Translated */}
+          <div>{t('vehicle_table_make')}</div> {/* Translated */}
+          <div>{t('vehicle_table_model')}</div> {/* Translated */}
+          <div>{t('vehicle_table_year')}</div> {/* Translated */}
+          <div>{t('vehicle_table_license_plate')}</div> {/* Translated */}
+          <div>{t('vehicle_table_vin')}</div> {/* Translated */}
+          <div>{t('vehicle_table_actions')}</div> {/* Translated */}
         </div>
 
         {filteredVehicles.length === 0 ? (
           <div className="no-vehicles">
-            {searchTerm ? `No vehicles found for "${searchTerm}"` : `No vehicles added yet! Click "Add New Vehicle" to get started!`}
+            {searchTerm ? t('no_vehicles_found', { searchTerm: searchTerm }) : t('no_vehicles_yet')} {/* Translated messages */}
           </div>
         ) : filteredVehicles.map((v) => (
           <div key={v.id} className={`table-row animated-row`}>
@@ -250,15 +265,15 @@ export default function Dashboard() {
             <div>{v.make}</div>
             <div>{v.model}</div>
             <div>{v.year}</div>
-            <div>{v.licensePlate || 'N/A'}</div>
-            <div>{v.vin || 'N/A'}</div>
+            <div>{v.licensePlate || t('n_a_placeholder')}</div> {/* Translated N/A */}
+            <div>{v.vin || t('n_a_placeholder')}</div> {/* Translated N/A */}
             <div className="actions">
               <select onChange={e => handleAction(e.target.value, v)} defaultValue="">
-                <option value="" disabled>Select Action</option>
-                <option value="services">Services</option>
-                <option value="dates">Dates</option>
-                <option value="edit">Edit</option>
-                <option value="delete">Delete</option>
+                <option value="" disabled>{t('select_action_option')}</option> {/* Translated */}
+                <option value="services">{t('services_action')}</option> {/* Translated */}
+                <option value="dates">{t('dates_action')}</option> {/* Translated */}
+                <option value="edit">{t('edit_action')}</option> {/* Translated */}
+                <option value="delete">{t('delete_action')}</option> {/* Translated */}
               </select>
             </div>
           </div>
