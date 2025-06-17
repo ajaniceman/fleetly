@@ -165,5 +165,6 @@
   "date_deleted_success": "Record di data eliminato con successo!",
   "failed_to_delete_date": "Impossibile eliminare il record di data: {{message}}",
   "unexpected_delete_error_date": "Si è verificato un errore imprevisto durante l'eliminazione del record di data.",
-  "error_loading_dates": "Errore durante il caricamento delle date: {{message}}"
+  "error_loading_dates": "Errore durante il caricamento delle date: {{message}}",
+  "account_menu": "Account"
 }

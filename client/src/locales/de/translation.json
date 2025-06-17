@@ -165,5 +165,6 @@
   "date_deleted_success": "Termindatensatz erfolgreich gelöscht!",
   "failed_to_delete_date": "Fehler beim Löschen des Termindatensatzes: {{message}}",
   "unexpected_delete_error_date": "Beim Löschen des Termindatensatzes ist ein unerwarteter Fehler aufgetreten.",
-  "error_loading_dates": "Fehler beim Laden der Termine: {{message}}"
+  "error_loading_dates": "Fehler beim Laden der Termine: {{message}}",
+  "account_menu": "Konto"
 }

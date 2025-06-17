@@ -165,5 +165,6 @@
   "date_deleted_success": "Zapis o datumu uspješno izbrisan!",
   "failed_to_delete_date": "Brisanje zapisa o datumu nije uspjelo: {{message}}",
   "unexpected_delete_error_date": "Došlo je do neočekivane greške prilikom brisanja zapisa o datumu.",
-  "error_loading_dates": "Greška pri učitavanju datuma: {{message}}"
+  "error_loading_dates": "Greška pri učitavanju datuma: {{message}}",
+  "account_menu": "Račun"
 }

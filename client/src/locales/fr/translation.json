@@ -165,5 +165,6 @@
   "date_deleted_success": "Enregistrement de date supprimé avec succès !",
   "failed_to_delete_date": "Échec de la suppression de l'enregistrement de date : {{message}}",
   "unexpected_delete_error_date": "Une erreur inattendue est survenue lors de la suppression de l'enregistrement de date.",
-  "error_loading_dates": "Erreur lors du chargement des dates : {{message}}"
+  "error_loading_dates": "Erreur lors du chargement des dates : {{message}}",
+  "account_menu": "Compte"
 }

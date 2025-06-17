@@ -165,5 +165,6 @@
   "date_deleted_success": "Date record deleted successfully!",
   "failed_to_delete_date": "Failed to delete date record: {{message}}",
   "unexpected_delete_error_date": "An unexpected error occurred while deleting the date record.",
-  "error_loading_dates": "Error loading dates: {{message}}"
+  "error_loading_dates": "Error loading dates: {{message}}",
+  "account_menu": "Account"
 }

@@ -165,5 +165,6 @@
   "date_deleted_success": "¡Registro de fecha eliminado correctamente!",
   "failed_to_delete_date": "Error al eliminar el registro de fecha: {{message}}",
   "unexpected_delete_error_date": "Ocurrió un error inesperado al eliminar el registro de fecha.",
-  "error_loading_dates": "Error al cargar las fechas: {{message}}"
+  "error_loading_dates": "Error al cargar las fechas: {{message}}",
+  "account_menu": "Cuenta"
 }
