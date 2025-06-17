@@ -34,8 +34,9 @@
   color: var(--cta-primary-hover-bg); /* Use theme variable */
 }
 
-.navbar-links {
-  display: flex;
+/* Desktop Navigation Links */
+.navbar-links-desktop {
+  display: flex; /* Always flex for desktop */
   align-items: center;
   gap: 1.5rem; /* Space between nav items */
 }
@@ -91,7 +92,6 @@
 @media (max-width: 768px) {
   .navbar {
     padding: 0.8rem 1rem;
-    /* Apply fixed top position for mobile and transition */
     transform: translateY(0); /* Default visible state */
   }
 
@@ -99,32 +99,94 @@
     transform: translateY(-100%); /* Slide up to hide */
   }
 
-  .navbar-links {
-    /* Hide all nav links and buttons on mobile by default, will be controlled by a mobile menu icon if implemented */
-    /* For now, just hide them to manage space, user would log out from dashboard */
-    display: none; /* Hide for smaller screens unless explicitly shown by a hamburger menu */
+  /* Hide desktop links on mobile */
+  .navbar-links-desktop {
+    display: none;
   }
 
-  /* Only show brand and language selector/theme toggle for now */
-  .navbar-container {
-    justify-content: space-between; /* Keep space-between */
+  /* Show mobile controls and hamburger icon */
+  .navbar-controls-mobile {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Space between controls */
   }
 
-  /* Make brand more prominent on mobile */
-  .navbar-brand {
-    font-size: 1.6em;
+  .hamburger-menu-icon {
+    display: block; /* Show hamburger icon */
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.2s ease;
   }
 
-  /* Re-enable language selector and theme toggle for direct visibility on mobile */
-  .navbar-links .language-selector,
-  .navbar-links .theme-toggle-btn {
-    display: block; /* Override display: none from .navbar-links if needed */
+  .hamburger-menu-icon:hover {
+    color: var(--cta-primary-bg);
+  }
+
+  /* Mobile Navigation Menu */
+  .mobile-nav-menu {
+    position: fixed;
+    top: 60px; /* Adjust based on navbar height */
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 60px); /* Fill remaining viewport height */
+    background-color: var(--background-secondary); /* Use theme variable */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    transform: translateX(100%); /* Start off-screen to the right */
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    z-index: 999; /* Below navbar, above content */
+  }
+
+  .mobile-nav-menu.menu-open {
+    transform: translateX(0); /* Slide in from the right */
+  }
+
+  .mobile-navbar-item,
+  .mobile-navbar-button {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.2em;
+    padding: 1rem 2rem;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color); /* Separator */
+    transition: background-color 0.2s ease, color 0.2s ease;
+    box-sizing: border-box; /* Include padding in width */
+  }
+
+  .mobile-navbar-item:last-of-type,
+  .mobile-navbar-button:last-of-type {
+    border-bottom: none;
+  }
+
+  .mobile-navbar-item:hover,
+  .mobile-navbar-button:hover {
+    background-color: var(--table-row-hover-bg); /* Use a subtle hover effect */
+  }
+
+  .mobile-navbar-button {
+    background-color: var(--button-delete); /* Style logout button specifically */
+    color: var(--text-light);
+    border: none;
+    margin-top: 1rem; /* Space from links above */
+    border-radius: 0; /* No rounded corners for full width */
+  }
+  .mobile-navbar-button:hover {
+    background-color: var(--button-delete-hover);
   }
 
   /* Adjust theme toggle button position to be relative to the navbar and visible */
   .theme-toggle-btn {
-    position: static; /* Remove fixed positioning */
-    margin-left: 1rem; /* Space from language selector */
+    position: static; /* Remove fixed positioning if it's placed here */
+    margin-left: 0.5rem; /* Space from language selector */
     box-shadow: none; /* Remove shadow to blend with navbar */
   }
 }
@@ -141,5 +203,9 @@
     width: 35px;
     height: 35px;
     font-size: 1.2em;
+  }
+  .mobile-nav-menu {
+    top: 50px; /* Further adjust for smaller screens if needed */
+    height: calc(100vh - 50px);
   }
 }
