@@ -34,43 +34,14 @@
   color: var(--cta-primary-hover-bg); /* Use theme variable */
 }
 
-/* Desktop Navigation Links */
-.navbar-links-desktop {
-  display: flex; /* Always flex for desktop */
+/* New container for all right-side elements */
+.main-nav-right-side {
+  display: flex;
   align-items: center;
-  gap: 1.5rem; /* Space between nav items */
+  gap: 1.5rem; /* Default spacing for desktop elements */
 }
 
-.navbar-item {
-  color: var(--text-primary); /* Use theme variable */
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1em;
-  padding: 0.5rem 0; /* Vertical padding for click area */
-  transition: color 0.2s ease;
-}
-
-.navbar-item:hover {
-  color: var(--cta-primary-bg); /* Use theme variable */
-}
-
-.navbar-button {
-  background-color: var(--button-delete); /* Use theme variable for logout */
-  color: var(--text-light); /* Use theme variable */
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.95em;
-  font-weight: 500;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-}
-
-.navbar-button:hover {
-  background-color: var(--button-delete-hover); /* Use theme variable */
-  transform: translateY(-1px);
-}
-
+/* Common styles for language selector and theme toggle */
 .language-selector {
   padding: 0.4rem 0.7rem;
   border: 1px solid var(--input-border); /* Use theme variable */
@@ -80,6 +51,11 @@
   font-size: 0.9em;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  appearance: none; /* Remove default arrow */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22gray%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13%205.7L146.2%20202.7%2018.6%2075.1a17.6%2017.6%200%200%200-25.3%2024.5l137%20137a17.6%2017.6%200%200%200%2025.3%200l137%20-137c6.5-6.5%206.5-17%200-23.5z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 0.7em top 50%, 0 0;
+  background-size: 0.65em auto, 100%;
 }
 
 .language-selector:focus {
@@ -87,6 +63,106 @@
   border-color: var(--input-focus-border); /* Use theme variable */
   box-shadow: 0 0 0 0.2rem var(--input-focus-border); /* Use theme variable */
 }
+
+/* Desktop Dropdown Container and Toggle */
+.desktop-dropdown-container {
+  position: relative;
+  display: flex; /* Default to flex for desktop */
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.desktop-dropdown-toggle {
+  background-color: var(--background-primary); /* Match general background or subtle button */
+  color: var(--text-primary);
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--input-border);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95em;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.desktop-dropdown-toggle:hover {
+  background-color: var(--table-row-hover-bg);
+  border-color: var(--cta-primary-bg);
+}
+
+.dropdown-caret {
+  font-size: 0.8em; /* Smaller caret icon */
+}
+
+.desktop-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px); /* Position below the toggle button */
+  right: 0;
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  z-index: 1001; /* Ensure it's above other elements */
+  padding: 0.5rem 0;
+}
+
+.desktop-dropdown-item,
+.desktop-dropdown-button {
+  display: block;
+  padding: 0.75rem 1.25rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  font-size: 0.95em;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  width: 100%; /* Ensure full width clickable area */
+  box-sizing: border-box;
+}
+
+.desktop-dropdown-item:hover,
+.desktop-dropdown-button:hover {
+  background-color: var(--table-row-hover-bg);
+  color: var(--cta-primary-bg);
+}
+
+.desktop-dropdown-button {
+  background-color: var(--button-delete);
+  color: var(--text-light);
+  font-weight: 600;
+  margin-top: 0.5rem; /* Space from links above */
+  border-radius: 0 0 8px 8px; /* Rounded bottom if it's the last item */
+}
+
+.desktop-dropdown-button:hover {
+  background-color: var(--button-delete-hover);
+}
+
+
+/* Hamburger Menu (Hidden on Desktop) */
+.hamburger-menu-icon {
+  display: none; /* Hidden by default on desktop */
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+/* Mobile Navigation Menu (Hidden on Desktop) */
+.mobile-nav-menu {
+  display: none; /* Hidden by default on desktop */
+}
+
 
 /* Mobile-specific adjustments */
 @media (max-width: 768px) {
@@ -99,31 +175,18 @@
     transform: translateY(-100%); /* Slide up to hide */
   }
 
-  /* Hide desktop links on mobile */
-  .navbar-links-desktop {
+  /* Hide desktop dropdown on mobile */
+  .desktop-dropdown-container {
     display: none;
   }
 
   /* Show mobile controls and hamburger icon */
-  .navbar-controls-mobile {
-    display: flex;
-    align-items: center;
-    gap: 1rem; /* Space between controls */
+  .main-nav-right-side {
+    gap: 1rem; /* Adjust spacing for mobile controls */
   }
 
   .hamburger-menu-icon {
-    display: block; /* Show hamburger icon */
-    background: none;
-    border: none;
-    color: var(--text-primary);
-    font-size: 1.5em;
-    cursor: pointer;
-    padding: 0.5rem;
-    transition: color 0.2s ease;
-  }
-
-  .hamburger-menu-icon:hover {
-    color: var(--cta-primary-bg);
+    display: block; /* Show hamburger icon on mobile */
   }
 
   /* Mobile Navigation Menu */
@@ -184,8 +247,9 @@
   }
 
   /* Adjust theme toggle button position to be relative to the navbar and visible */
+  /* This rule is now inside the media query for mobile only */
   .theme-toggle-btn {
-    position: static; /* Remove fixed positioning if it's placed here */
+    position: static; /* Override fixed positioning from its own CSS */
     margin-left: 0.5rem; /* Space from language selector */
     box-shadow: none; /* Remove shadow to blend with navbar */
   }
