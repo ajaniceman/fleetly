@@ -1,6 +1,7 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules'; // Import Swiper modules
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 // Import Swiper styles
 import 'swiper/css';
@@ -9,40 +10,43 @@ import 'swiper/css/pagination'; // Styles for pagination dots
 
 import './Testimonials.css';
 
+// Using translation keys now
 const reviews = [
   {
-    quote: "Fleetly reminded me to renew my registration—saved me a $200 late fee! It's an indispensable tool for staying compliant.",
-    name: "Sarah K.",
-    role: "Small Business Owner",
+    quoteKey: "testimonial_sarah_quote",
+    nameKey: "testimonial_sarah_name",
+    roleKey: "testimonial_sarah_role",
     avatar: "https://placehold.co/150x150/dbeafe/1e40af?text=SK", // Placeholder with initials
   },
   {
-    quote: "I used to forget oil changes and other essential maintenance. Now my truck runs smoother than ever, and I've seen a noticeable reduction in unexpected breakdowns. Fleetly is a game-changer.",
-    name: "Mike T.",
-    role: "Independent Driver",
+    quoteKey: "testimonial_mike_quote",
+    nameKey: "testimonial_mike_name",
+    roleKey: "testimonial_mike_role",
     avatar: "https://placehold.co/150x150/dcfce7/14532d?text=MT", // Placeholder with initials
   },
   {
-    quote: "Tracking my fleet's maintenance has never been easier. From services to registration dates, Fleetly keeps everything organized. It truly pays for itself in avoided repair costs and peace of mind.",
-    name: "David R.",
-    role: "Fleet Manager",
+    quoteKey: "testimonial_david_quote",
+    nameKey: "testimonial_david_name",
+    roleKey: "testimonial_david_role",
     avatar: "https://placehold.co/150x150/ffe4e6/881337?text=DR", // Placeholder with initials
   },
   {
-    quote: "The registration reminders alone are worth it. No more last-minute DMV runs or scrambling for documents. This app keeps me perfectly on schedule.",
-    name: "Lisa M.",
-    role: "Rideshare Driver",
+    quoteKey: "testimonial_lisa_quote",
+    nameKey: "testimonial_lisa_name",
+    roleKey: "testimonial_lisa_role",
     avatar: "https://placehold.co/150x150/fef2f2/7f1d1d?text=LM", // Placeholder with initials
   },
   {
-    quote: "Implementing Fleetly streamlined our operations significantly. The ability to track specific engine hours for our heavy machinery has been invaluable for preventive maintenance.",
-    name: "Chris P.",
-    role: "Construction Lead",
+    quoteKey: "testimonial_chris_quote",
+    nameKey: "testimonial_chris_name",
+    roleKey: "testimonial_chris_role",
     avatar: "https://placehold.co/150x150/e0f2fe/075985?text=CP", // Placeholder with initials
   }
 ];
 
 export default function Testimonials() {
+  const { t } = useTranslation(); // Initialize translation hook
+
   return (
     <div className="testimonials-section-content"> {/* Use a div for section content */}
       <div className="testimonials-wrapper">
@@ -72,12 +76,12 @@ export default function Testimonials() {
             <SwiperSlide key={index}>
               <div className="testimonial-card">
                 <div className="quote-icon">❝</div> {/* Decorative quote icon */}
-                <blockquote className="quote">"{review.quote}"</blockquote>
+                <blockquote className="quote">"{t(review.quoteKey)}"</blockquote> {/* Use translation for quote */}
                 <div className="author-details">
                   <div className="avatar-container">
                     <img
                       src={review.avatar}
-                      alt={`Avatar of ${review.name}`}
+                      alt={`Avatar of ${t(review.nameKey)}`} // Translate alt text
                       className="avatar"
                       onError={(e) => {
                         e.target.onerror = null; // Prevent infinite loop
@@ -86,8 +90,8 @@ export default function Testimonials() {
                     />
                   </div>
                   <div className="author-info">
-                    <p className="name">{review.name}</p>
-                    <p className="role">{review.role}</p>
+                    <p className="name">{t(review.nameKey)}</p> {/* Use translation for name */}
+                    <p className="role">{t(review.roleKey)}</p> {/* Use translation for role */}
                   </div>
                 </div>
               </div>
