@@ -80,6 +80,7 @@
   "language_french": "Französisch",
   "language_german": "Deutsch",
   "language_italian": "Italienisch",
+  "language_polish": "Polnisch",
   "dashboard_welcome_title": "Willkommen, {{name}}!",
   "dashboard_subtitle": "Hier ist eine Übersicht Ihrer Flotte.",
   "dashboard_total_vehicles_stat": "Gesamtzahl Fahrzeuge",
