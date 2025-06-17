@@ -80,7 +80,7 @@
   "language_french": "Francese",
   "language_german": "Tedesco",
   "language_italian": "Italiano",
-  "dashboard_welcome_title": "Benvenuto, {{name}}!",
+  "dashboard_welcome_title": "Benvenuto!",
   "dashboard_subtitle": "Ecco una panoramica della tua flotta.",
   "dashboard_total_vehicles_stat": "Veicoli totali",
   "dashboard_expired_dates_stat": "Date scadute",
