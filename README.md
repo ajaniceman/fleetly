@@ -277,4 +277,4 @@ Contributions are welcome\! If you find a bug or have an idea for a new feature,
 
 For any questions or support, please contact:  
 Eman  
-Email: support@fleetly.com (example)
+Email: ajaniceman@gmail.com (example)
