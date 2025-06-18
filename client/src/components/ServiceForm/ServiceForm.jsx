@@ -100,7 +100,8 @@ export default function ServiceForm({ onSubmit, onCancel, vehicleType, initial =
           >
             <option value="">{t('service_form_option_select_type')}</option>
             {commonServiceTypes.map(type => (
-              <option key={type} value={type}>{t(`service_type_${type.toLowerCase().replace(/[^a-z0-9]/g, '_')}`)}</option>
+              // Generate cleaner keys: replace non-alphanumeric with single underscore, remove leading/trailing
+              <option key={type} value={type}>{t(`service_type_${type.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '')}`)}</option>
             ))}
           </select>
         </div>
