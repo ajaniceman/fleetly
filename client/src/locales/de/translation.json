@@ -167,5 +167,19 @@
   "failed_to_delete_date": "Fehler beim Löschen des Termindatensatzes: {{message}}",
   "unexpected_delete_error_date": "Beim Löschen des Termindatensatzes ist ein unerwarteter Fehler aufgetreten.",
   "error_loading_dates": "Fehler beim Laden der Termine: {{message}}",
-  "account_menu": "Konto"
+  "account_menu": "Konto",
+  "vehicle_form_title_add": "Neues Fahrzeug hinzufügen",
+  "vehicle_form_title_edit": "Fahrzeug bearbeiten",
+  "vehicle_form_label_type": "Typ",
+  "vehicle_form_option_select_type": "Typ auswählen",
+  "vehicle_form_label_make": "Marke",
+  "vehicle_form_label_model": "Modell",
+  "vehicle_form_label_year": "Jahr",
+  "vehicle_form_label_license_plate": "Kennzeichen (Optional)",
+  "vehicle_form_label_vin": "FIN (Optional)",
+  "vehicle_form_label_engine": "Motor (Optional)",
+  "vehicle_form_label_registration_date": "Datum der Zulassung",
+  "vehicle_form_save_btn": "Fahrzeug speichern",
+  "vehicle_form_update_btn": "Fahrzeug aktualisieren",
+  "vehicle_form_cancel_btn": "Abbrechen"
 }

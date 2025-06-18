@@ -167,5 +167,19 @@
   "failed_to_delete_date": "Échec de la suppression de l'enregistrement de date : {{message}}",
   "unexpected_delete_error_date": "Une erreur inattendue est survenue lors de la suppression de l'enregistrement de date.",
   "error_loading_dates": "Erreur lors du chargement des dates : {{message}}",
-  "account_menu": "Compte"
+  "account_menu": "Compte",
+  "vehicle_form_title_add": "Ajouter un nouveau véhicule",
+  "vehicle_form_title_edit": "Modifier le véhicule",
+  "vehicle_form_label_type": "Type",
+  "vehicle_form_option_select_type": "Sélectionner le type",
+  "vehicle_form_label_make": "Marque",
+  "vehicle_form_label_model": "Modèle",
+  "vehicle_form_label_year": "Année",
+  "vehicle_form_label_license_plate": "Plaque d'immatriculation (Facultatif)",
+  "vehicle_form_label_vin": "VIN (Facultatif)",
+  "vehicle_form_label_engine": "Moteur (Facultatif)",
+  "vehicle_form_label_registration_date": "Date d'immatriculation",
+  "vehicle_form_save_btn": "Enregistrer le véhicule",
+  "vehicle_form_update_btn": "Mettre à jour le véhicule",
+  "vehicle_form_cancel_btn": "Annuler"
 }

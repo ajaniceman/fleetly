@@ -167,5 +167,19 @@
   "failed_to_delete_date": "Impossibile eliminare il record di data: {{message}}",
   "unexpected_delete_error_date": "Si è verificato un errore imprevisto durante l'eliminazione del record di data.",
   "error_loading_dates": "Errore durante il caricamento delle date: {{message}}",
-  "account_menu": "Account"
+  "account_menu": "Account",
+  "vehicle_form_title_add": "Aggiungi nuovo veicolo",
+  "vehicle_form_title_edit": "Modifica veicolo",
+  "vehicle_form_label_type": "Tipo",
+  "vehicle_form_option_select_type": "Seleziona tipo",
+  "vehicle_form_label_make": "Marca",
+  "vehicle_form_label_model": "Modello",
+  "vehicle_form_label_year": "Anno",
+  "vehicle_form_label_license_plate": "Targa (Opzionale)",
+  "vehicle_form_label_vin": "VIN (Opzionale)",
+  "vehicle_form_label_engine": "Motore (Opzionale)",
+  "vehicle_form_label_registration_date": "Data di immatricolazione",
+  "vehicle_form_save_btn": "Salva veicolo",
+  "vehicle_form_update_btn": "Aggiorna veicolo",
+  "vehicle_form_cancel_btn": "Annulla"
 }

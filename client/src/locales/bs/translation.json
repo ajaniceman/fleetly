@@ -167,5 +167,19 @@
   "failed_to_delete_date": "Brisanje zapisa o datumu nije uspjelo: {{message}}",
   "unexpected_delete_error_date": "Došlo je do neočekivane greške prilikom brisanja zapisa o datumu.",
   "error_loading_dates": "Greška pri učitavanju datuma: {{message}}",
-  "account_menu": "Račun"
+  "account_menu": "Račun",
+  "vehicle_form_title_add": "Dodaj novo vozilo",
+  "vehicle_form_title_edit": "Uredi vozilo",
+  "vehicle_form_label_type": "Tip",
+  "vehicle_form_option_select_type": "Odaberite tip",
+  "vehicle_form_label_make": "Proizvođač",
+  "vehicle_form_label_model": "Model",
+  "vehicle_form_label_year": "Godina",
+  "vehicle_form_label_license_plate": "Registarska tablica (opcionalno)",
+  "vehicle_form_label_vin": "VIN (opcionalno)",
+  "vehicle_form_label_engine": "Motor (opcionalno)",
+  "vehicle_form_label_registration_date": "Datum registracije",
+  "vehicle_form_save_btn": "Sačuvaj vozilo",
+  "vehicle_form_update_btn": "Ažuriraj vozilo",
+  "vehicle_form_cancel_btn": "Otkaži"
 }

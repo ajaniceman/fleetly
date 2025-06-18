@@ -167,5 +167,19 @@
   "failed_to_delete_date": "Error al eliminar el registro de fecha: {{message}}",
   "unexpected_delete_error_date": "Ocurrió un error inesperado al eliminar el registro de fecha.",
   "error_loading_dates": "Error al cargar las fechas: {{message}}",
-  "account_menu": "Cuenta"
+  "account_menu": "Cuenta",
+  "vehicle_form_title_add": "Agregar nuevo vehículo",
+  "vehicle_form_title_edit": "Editar vehículo",
+  "vehicle_form_label_type": "Tipo",
+  "vehicle_form_option_select_type": "Seleccionar tipo",
+  "vehicle_form_label_make": "Marca",
+  "vehicle_form_label_model": "Modelo",
+  "vehicle_form_label_year": "Año",
+  "vehicle_form_label_license_plate": "Matrícula (Opcional)",
+  "vehicle_form_label_vin": "VIN (Opcional)",
+  "vehicle_form_label_engine": "Motor (Opcional)",
+  "vehicle_form_label_registration_date": "Fecha de registro",
+  "vehicle_form_save_btn": "Guardar vehículo",
+  "vehicle_form_update_btn": "Actualizar vehículo",
+  "vehicle_form_cancel_btn": "Cancelar"
 }

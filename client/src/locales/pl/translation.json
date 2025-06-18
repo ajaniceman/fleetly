@@ -81,5 +81,19 @@
   "language_german": "Alemán",
   "language_italian": "Italiano",
   "language_polish": "Polaco",
-  "account_menu": "Cuenta"
+  "account_menu": "Cuenta",
+  "vehicle_form_title_add": "Dodaj nowy pojazd",
+  "vehicle_form_title_edit": "Edytuj pojazd",
+  "vehicle_form_label_type": "Typ",
+  "vehicle_form_option_select_type": "Wybierz typ",
+  "vehicle_form_label_make": "Marka",
+  "vehicle_form_label_model": "Model",
+  "vehicle_form_label_year": "Rok",
+  "vehicle_form_label_license_plate": "Tablica rejestracyjna (Opcjonalnie)",
+  "vehicle_form_label_vin": "VIN (Opcjonalnie)",
+  "vehicle_form_label_engine": "Silnik (Opcjonalnie)",
+  "vehicle_form_label_registration_date": "Data rejestracji",
+  "vehicle_form_save_btn": "Zapisz pojazd",
+  "vehicle_form_update_btn": "Zaktualizuj pojazd",
+  "vehicle_form_cancel_btn": "Anuluj"
 }
