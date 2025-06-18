@@ -181,5 +181,11 @@
   "vehicle_form_label_registration_date": "Fecha de registro",
   "vehicle_form_save_btn": "Guardar vehículo",
   "vehicle_form_update_btn": "Actualizar vehículo",
-  "vehicle_form_cancel_btn": "Cancelar"
+  "vehicle_form_cancel_btn": "Cancelar",
+  "vehicle_type_car": "Coche",
+  "vehicle_type_truck": "Camión",
+  "vehicle_type_excavator": "Excavadora",
+  "vehicle_type_roller": "Rodillo",
+  "vehicle_type_van": "Furgoneta",
+  "vehicle_type_bus": "Autobús"
 }

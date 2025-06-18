@@ -181,5 +181,11 @@
   "vehicle_form_label_registration_date": "Data di immatricolazione",
   "vehicle_form_save_btn": "Salva veicolo",
   "vehicle_form_update_btn": "Aggiorna veicolo",
-  "vehicle_form_cancel_btn": "Annulla"
+  "vehicle_form_cancel_btn": "Annulla",
+  "vehicle_type_car": "Auto",
+  "vehicle_type_truck": "Camion",
+  "vehicle_type_excavator": "Escavatore",
+  "vehicle_type_roller": "Rullo compressore",
+  "vehicle_type_van": "Furgone",
+  "vehicle_type_bus": "Autobus"
 }

@@ -69,7 +69,9 @@ export default function VehicleForm({ onSubmit, onCancel, initial = {}, formTitl
           <label htmlFor="type">{t('vehicle_form_label_type')}</label>
           <select id="type" name="type" required value={form.type} onChange={handleChange}>
             <option value="">{t('vehicle_form_option_select_type')}</option>
-            {types.map(t_val => <option key={t_val} value={t_val}>{t_val}</option>)}
+            {types.map(type => (
+              <option key={type} value={type}>{t(`vehicle_type_${type.toLowerCase()}`)}</option>
+            ))}
           </select>
         </div>
         <div>

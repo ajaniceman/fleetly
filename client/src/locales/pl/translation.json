@@ -95,5 +95,11 @@
   "vehicle_form_label_registration_date": "Data rejestracji",
   "vehicle_form_save_btn": "Zapisz pojazd",
   "vehicle_form_update_btn": "Zaktualizuj pojazd",
-  "vehicle_form_cancel_btn": "Anuluj"
+  "vehicle_form_cancel_btn": "Anuluj",
+  "vehicle_type_car": "Samochód",
+  "vehicle_type_truck": "Ciężarówka",
+  "vehicle_type_excavator": "Koparka",
+  "vehicle_type_roller": "Walec",
+  "vehicle_type_van": "Van",
+  "vehicle_type_bus": "Autobus"
 }

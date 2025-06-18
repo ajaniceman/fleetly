@@ -181,5 +181,11 @@
   "vehicle_form_label_registration_date": "Datum registracije",
   "vehicle_form_save_btn": "Sačuvaj vozilo",
   "vehicle_form_update_btn": "Ažuriraj vozilo",
-  "vehicle_form_cancel_btn": "Otkaži"
+  "vehicle_form_cancel_btn": "Otkaži",
+  "vehicle_type_car": "Automobil",
+  "vehicle_type_truck": "Kamion",
+  "vehicle_type_excavator": "Bager",
+  "vehicle_type_roller": "Valjak",
+  "vehicle_type_van": "Kombi",
+  "vehicle_type_bus": "Autobus"
 }

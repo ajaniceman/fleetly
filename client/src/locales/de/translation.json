@@ -181,5 +181,11 @@
   "vehicle_form_label_registration_date": "Datum der Zulassung",
   "vehicle_form_save_btn": "Fahrzeug speichern",
   "vehicle_form_update_btn": "Fahrzeug aktualisieren",
-  "vehicle_form_cancel_btn": "Abbrechen"
+  "vehicle_form_cancel_btn": "Abbrechen",
+  "vehicle_type_car": "Auto",
+  "vehicle_type_truck": "Lastwagen",
+  "vehicle_type_excavator": "Bagger",
+  "vehicle_type_roller": "Walze",
+  "vehicle_type_van": "Lieferwagen",
+  "vehicle_type_bus": "Bus"
 }
