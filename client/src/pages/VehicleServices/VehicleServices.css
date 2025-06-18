@@ -1,3 +1,8 @@
+/*
+  CRITICAL FIX: Removed local :root variables. All color-related variables should now
+  be defined globally in client/src/index.css and accessed here.
+*/
+
 .vehicle-services-page {
   padding: 2.5rem; /* Increased padding */
   max-width: 1200px;
@@ -7,6 +12,7 @@
   background-color: var(--background-primary); /* Use theme variable */
   min-height: 100vh;
   transition: background-color 0.3s ease, color 0.3s ease;
+  padding-top: 5rem; /* Added padding-top to account for fixed navbar */
 }
 
 .services-header {
@@ -18,6 +24,7 @@
   padding-bottom: 1.5rem; /* More padding */
   flex-wrap: wrap; /* Allow wrapping */
   gap: 1rem;
+  transition: border-color 0.3s ease;
 }
 
 .services-header h1 {
@@ -25,6 +32,7 @@
   color: var(--heading-color); /* Use theme variable */
   margin: 0;
   font-weight: 700;
+  transition: color 0.3s ease;
 }
 
 .back-to-dashboard-btn {
@@ -37,13 +45,13 @@
   font-size: 1em;
   font-weight: 500;
   transition: background-color 0.2s ease, transform 0.1s ease;
-  box-shadow: 0 2px 8px rgba(108, 117, 125, 0.2); /* Adjust shadow if needed for dark mode */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2); /* Adjust shadow if needed for dark mode */
 }
 
 .back-to-dashboard-btn:hover {
   background-color: var(--button-back-hover); /* Use theme variable */
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3); /* Adjust shadow if needed for dark mode */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* Adjust shadow if needed for dark mode */
 }
 
 .add-service-btn {
@@ -57,23 +65,24 @@
   font-weight: 600;
   margin-bottom: 2rem; /* More margin */
   transition: background-color 0.2s ease, transform 0.1s ease;
-  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); /* Adjust shadow if needed for dark mode */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Adjust shadow if needed for dark mode */
 }
 
 .add-service-btn:hover {
   background-color: var(--cta-primary-hover-bg); /* Use theme variable */
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4); /* Adjust shadow if needed for dark mode */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4); /* Adjust shadow if needed for dark mode */
 }
 
 .services-table-container {
   background: var(--background-secondary); /* Use theme variable */
   border: 1px solid var(--border-color); /* Use theme variable */
   border-radius: 12px; /* More rounded corners */
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08); /* More prominent shadow */
+  /* Increased shadow prominence with more opaque rgba for dark mode visibility */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2); /* Stronger shadow */
   overflow: hidden; /* Ensures rounded corners clip content */
   margin-top: 2rem;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .services-table-container h2 {
@@ -82,7 +91,7 @@
   padding: 1.5rem;
   margin: 0;
   border-bottom: 1px solid var(--border-color); /* Use theme variable */
-  background-color: var(--background-primary); /* Use theme variable */
+  background-color: var(--table-header-bg); /* Changed to use table-header-bg for consistency */
   font-weight: 600;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -94,13 +103,14 @@
 .services-table .table-header,
 .services-table .table-row {
   display: grid;
-  /* Updated grid for fixed columns to prevent wrapping too early on large screens */
-  grid-template-columns: 0.9fr 1.2fr 2fr 1fr 1.2fr 1fr 1.2fr; /* Date, Type, Description, Cost, Odometer/Engine Hours, Actions */
+  /* Updated grid for better alignment and actions visibility on larger screens */
+  /* Date, Type, Description, Cost, Odometer/Engine Hours, Actions */
+  grid-template-columns: 0.8fr 1.2fr 2fr 1fr 1.2fr 1fr 1.2fr; /* Adjusted for better balance */
   gap: 10px;
   padding: 1rem 1.5rem; /* Increased padding */
   border-bottom: 1px solid var(--border-color); /* Use theme variable */
   align-items: center;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .services-table .table-header {
@@ -126,6 +136,14 @@
 .services-table .table-row:hover {
   background: var(--table-row-hover-bg); /* Use theme variable */
 }
+
+/* Ensure cell content handles overflow properly */
+.services-table .table-row > div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 
 .no-services-message, .loading, .error-message {
   padding: 2.5rem; /* Increased padding */
@@ -175,7 +193,8 @@
 @media (max-width: 992px) {
   .services-table .table-header,
   .services-table .table-row {
-    grid-template-columns: 1.2fr 1.5fr 1fr 1fr; /* Date, Type, Cost, Actions */
+    /* Adjust grid for medium screens: Date, Type, Cost, Actions (Description, Odometer/Engine Hours hidden) */
+    grid-template-columns: 1.2fr 1.5fr 1fr 1.2fr; /* Explicitly defining 4 columns for Date, Type, Cost, Actions */
   }
   /* Hide Description, Odometer, Engine Hours on medium screens */
   .services-table .table-header div:nth-child(3), /* Description */
@@ -186,11 +205,18 @@
   .services-table .table-row div:nth-child(6) {
     display: none;
   }
+  /* Explicitly ensure actions column (originally 7th) is positioned correctly in the new 4-column grid */
+  .services-table .table-header div:nth-child(7),
+  .services-table .table-row div:nth-child(7) {
+    grid-column: 4; /* Assign to the 4th column */
+    display: block; /* Ensure it's displayed */
+  }
 }
 
 @media (max-width: 768px) {
   .vehicle-services-page {
     padding: 1.5rem;
+    padding-top: 4.5rem; /* Adjusted padding for mobile navbar height */
   }
   .services-header {
     flex-direction: column;
@@ -211,23 +237,24 @@
   .services-table .table-header,
   .services-table .table-row {
     /* CRITICAL CHANGE: Only show Date, Type, Actions on small screens */
-    grid-template-columns: 1fr 1.2fr 90px; /* Date, Type, Actions */
+    grid-template-columns: 1fr 1fr 120px; /* Date, Type, Actions - Increased actions column */
     gap: 8px;
     padding: 0.8rem 1rem;
     font-size: 0.8em;
   }
   /* Hide Cost and Description, and Odometer/Engine Hours */
   /* This needs to target columns by their original order, or use nth-child combined with specific classes */
-  .services-table .table-header div:nth-child(3), /* Description */
-  .services-table .table-row div:nth-child(3),
   .services-table .table-header div:nth-child(4), /* Cost */
   .services-table .table-row div:nth-child(4),
   .services-table .table-header div:nth-child(5), /* Odometer */
   .services-table .table-row div:nth-child(5),
   .services-table .table-header div:nth-child(6), /* Engine Hours */
-  .services-table .table-row div:nth-child(6) {
+  .services-table .table-row div:nth-child(6),
+  .services-table .table-header div:nth-child(3), /* Description (added this to hidden) */
+  .services-table .table-row div:nth-child(3) {
     display: none;
   }
+
   /* Explicitly ensure actions column is visible and positioned correctly */
   .services-table .table-header div:nth-child(7), /* Actions column is 7th child */
   .services-table .table-row div:nth-child(7) {
@@ -251,7 +278,7 @@
   }
   .services-table .table-header,
   .services-table .table-row {
-    grid-template-columns: 1fr 1.1fr 80px; /* Tighter for very small screens */
+    grid-template-columns: 1fr 1.1fr 100px; /* Tighter for very small screens, increased action width */
     font-size: 0.7em;
     padding: 0.6rem 0.8rem;
   }
