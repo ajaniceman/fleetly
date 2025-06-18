@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 import './ServiceForm.css';
 
-// Define common service types
+// Define common service types - these will now be translated via i18n keys
 const commonServiceTypes = [
   'Oil Change',
   'Filter Change (Oil, Air, Fuel)',
@@ -14,6 +15,8 @@ const commonServiceTypes = [
 ];
 
 export default function ServiceForm({ onSubmit, onCancel, vehicleType, initial = {} }) {
+  const { t } = useTranslation(); // Initialize useTranslation
+
   // Initialize form state with initial values (for editing) or empty strings (for adding)
   // Ensure all initial properties are accessed using camelCase, as data from backend is transformed
   const [form, setForm] = useState({
@@ -73,10 +76,10 @@ export default function ServiceForm({ onSubmit, onCancel, vehicleType, initial =
 
   return (
     <form className="service-form" onSubmit={handleSubmit}>
-      <h3>{initial?.id ? 'Edit Service Record' : 'Add New Service Record'}</h3>
+      <h3>{initial?.id ? t('service_form_title_edit') : t('service_form_title_add')}</h3>
       <div className="service-form-grid">
         <div>
-          <label htmlFor="service_date">Service Date</label>
+          <label htmlFor="service_date">{t('service_form_label_date')}</label>
           <input
             id="service_date"
             type="date"
@@ -87,7 +90,7 @@ export default function ServiceForm({ onSubmit, onCancel, vehicleType, initial =
           />
         </div>
         <div>
-          <label htmlFor="service_type">Service Type</label>
+          <label htmlFor="service_type">{t('service_form_label_type')}</label>
           <select
             id="service_type"
             name="service_type"
@@ -95,14 +98,14 @@ export default function ServiceForm({ onSubmit, onCancel, vehicleType, initial =
             onChange={handleChange}
             required
           >
-            <option value="">Select Service Type</option>
+            <option value="">{t('service_form_option_select_type')}</option>
             {commonServiceTypes.map(type => (
-              <option key={type} value={type}>{type}</option>
+              <option key={type} value={type}>{t(`service_type_${type.toLowerCase().replace(/[^a-z0-9]/g, '_')}`)}</option>
             ))}
           </select>
         </div>
         <div>
-          <label htmlFor="cost">Cost ($)</label>
+          <label htmlFor="cost">{t('service_form_label_cost')}</label>
           <input
             id="cost"
             type="number"
@@ -118,7 +121,7 @@ export default function ServiceForm({ onSubmit, onCancel, vehicleType, initial =
         {showOdometer && (
           <>
             <div>
-              <label htmlFor="odometer_reading">Odometer Reading (KM)</label>
+              <label htmlFor="odometer_reading">{t('service_form_label_odometer')}</label>
               <input
                 id="odometer_reading"
                 type="number"
@@ -129,7 +132,7 @@ export default function ServiceForm({ onSubmit, onCancel, vehicleType, initial =
               />
             </div>
             <div>
-              <label htmlFor="next_service_odometer">Next Service Odometer (KM)</label>
+              <label htmlFor="next_service_odometer">{t('service_form_label_next_odometer')}</label>
               <input
                 id="next_service_odometer"
                 type="number"
@@ -145,7 +148,7 @@ export default function ServiceForm({ onSubmit, onCancel, vehicleType, initial =
         {showEngineHours && (
           <>
             <div>
-              <label htmlFor="engine_hours">Engine Hours</label>
+              <label htmlFor="engine_hours">{t('service_form_label_engine_hours')}</label>
               <input
                 id="engine_hours"
                 type="number"
@@ -157,7 +160,7 @@ export default function ServiceForm({ onSubmit, onCancel, vehicleType, initial =
               />
             </div>
             <div>
-              <label htmlFor="next_service_hours">Next Service Hours</label>
+              <label htmlFor="next_service_hours">{t('service_form_label_next_engine_hours')}</label>
               <input
                 id="next_service_hours"
                 type="number"
@@ -172,24 +175,24 @@ export default function ServiceForm({ onSubmit, onCancel, vehicleType, initial =
         )}
 
         <div className="full-width">
-          <label htmlFor="description">Description</label>
+          <label htmlFor="description">{t('service_form_label_description')}</label>
           <textarea
             id="description"
             name="description"
             value={form.description}
             onChange={handleChange}
             rows="3"
-            placeholder="e.g., Replaced engine oil, oil filter, air filter; adjusted tire pressure."
+            placeholder={t('service_form_placeholder_description')}
           ></textarea>
         </div>
       </div>
 
       <div className="actions-form">
         <button type="submit" className="save-btn">
-          {initial?.id ? 'Update Service' : 'Add Service'}
+          {initial?.id ? t('service_form_update_btn') : t('service_form_save_btn')}
         </button>
         <button type="button" className="cancel-btn" onClick={onCancel}>
-          Cancel
+          {t('service_form_cancel_btn')}
         </button>
       </div>
     </form>
