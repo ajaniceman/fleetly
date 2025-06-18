@@ -187,14 +187,6 @@ export default function Dashboard() {
           <h1>{t('dashboard_welcome_title', { name: user?.name || t('user_placeholder') })}</h1> {/* Translated greeting */}
           <p className="dashboard-subtitle">{t('dashboard_subtitle')}</p> {/* Translated subtitle */}
         </div>
-        <div className="header-buttons">
-          {/* Theme Toggle Button */}
-          {/* Note: This ThemeToggleButton is now also in the NavBar. You might want to consider
-              if you need it in both places or just one, depending on your desired UI. */}
-          <ThemeToggleButton />
-          {/* Logout button restored as per your request */}
-          {user && <button onClick={logout} className="logout-btn">{t('logout_button')}</button>}
-        </div>
       </div>
 
       <div className="dashboard-stats-grid">
