@@ -204,11 +204,11 @@
   "service_form_update_btn": "Mettre à jour l'entretien",
   "service_form_cancel_btn": "Annuler",
   "service_type_oil_change": "Vidange d'huile",
-  "service_type_filter_change": "Changement de filtre (huile, air, carburant)",
+  "service_type_filter_change_oil_air_fuel": "Changement de filtre (huile, air, carburant)",
   "service_type_tire_rotation": "Permutation des pneus",
   "service_type_brake_inspection": "Inspection/Remplacement des freins",
-  "service_type_fluid_check": "Vérification/Remise à niveau des fluides (liquide de refroidissement, de frein, de direction assistée)",
+  "service_type_fluid_check_top_up_coolant_brake_power_steering": "Vérification/Remise à niveau des fluides (liquide de refroidissement, de frein, de direction assistée)",
   "service_type_suspension_repair": "Réparation de la suspension",
-  "service_type_electrical_check": "Vérification du système électrique",
-  "service_type_custom_repair": "Réparation personnalisée/Changement de pièce"
+  "service_type_electrical_system_check": "Vérification du système électrique",
+  "service_type_custom_repair_part_change": "Réparation personnalisée/Changement de pièce"
 }

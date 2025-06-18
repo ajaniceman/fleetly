@@ -204,11 +204,11 @@
   "service_form_update_btn": "Actualizar servicio",
   "service_form_cancel_btn": "Cancelar",
   "service_type_oil_change": "Cambio de aceite",
-  "service_type_filter_change": "Cambio de filtro (aceite, aire, combustible)",
+  "service_type_filter_change_oil_air_fuel": "Cambio de filtro (aceite, aire, combustible)",
   "service_type_tire_rotation": "Rotación de neumáticos",
-  "service_type_brake_inspection": "Inspección/reemplazo de frenos",
-  "service_type_fluid_check": "Revisión/relleno de fluidos (refrigerante, frenos, dirección asistida)",
+  "service_type_brake_inspection_replacement": "Inspección/reemplazo de frenos",
+  "service_type_fluid_check_top_up_coolant_brake_power_steering": "Revisión/relleno de fluidos (refrigerante, frenos, dirección asistida)",
   "service_type_suspension_repair": "Reparación de suspensión",
-  "service_type_electrical_check": "Revisión del sistema eléctrico",
-  "service_type_custom_repair": "Reparación personalizada/Cambio de pieza"
+  "service_type_electrical_system_check": "Revisión del sistema eléctrico",
+  "service_type_custom_repair_part_change": "Reparación personalizada/Cambio de pieza"
 }

@@ -118,11 +118,11 @@
   "service_form_update_btn": "Aktualizuj serwis",
   "service_form_cancel_btn": "Anuluj",
   "service_type_oil_change": "Wymiana oleju",
-  "service_type_filter_change": "Wymiana filtra (olej, powietrze, paliwo)",
+  "service_type_filter_change_oil_air_fuel": "Wymiana filtra (olej, powietrze, paliwo)",
   "service_type_tire_rotation": "Rotacja opon",
-  "service_type_brake_inspection": "Inspekcja/wymiana hamulców",
-  "service_type_fluid_check": "Sprawdzenie/uzupełnienie płynów (płyn chłodniczy, hamulcowy, wspomagania kierownicy)",
+  "service_type_brake_inspection_replacement": "Inspekcja/wymiana hamulców",
+  "service_type_fluid_check_top_up_coolant_brake_power_steering": "Sprawdzenie/uzupełnienie płynów (płyn chłodniczy, hamulcowy, wspomagania kierownicy)",
   "service_type_suspension_repair": "Naprawa zawieszenia",
-  "service_type_electrical_check": "Sprawdzenie instalacji elektrycznej",
-  "service_type_custom_repair": "Naprawa niestandardowa/Wymiana części"
+  "service_type_electrical_system_check": "Sprawdzenie instalacji elektrycznej",
+  "service_type_custom_repair_part_change": "Naprawa niestandardowa/Wymiana części"
 }

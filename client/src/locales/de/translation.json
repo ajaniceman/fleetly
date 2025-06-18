@@ -204,11 +204,11 @@
   "service_form_update_btn": "Service aktualisieren",
   "service_form_cancel_btn": "Abbrechen",
   "service_type_oil_change": "Ölwechsel",
-  "service_type_filter_change": "Filterwechsel (Öl, Luft, Kraftstoff)",
+  "service_type_filter_change_oil_air_fuel": "Filterwechsel (Öl, Luft, Kraftstoff)",
   "service_type_tire_rotation": "Reifenwechsel",
-  "service_type_brake_inspection": "Bremseninspektion/-wechsel",
-  "service_type_fluid_check": "Flüssigkeitsprüfung/-auffüllung (Kühlmittel, Bremsflüssigkeit, Servolenkung)",
+  "service_type_brake_inspection_replacement": "Bremseninspektion/-wechsel",
+  "service_type_fluid_check_top_up_coolant_brake_power_steering": "Flüssigkeitsprüfung/-auffüllung (Kühlmittel, Bremsflüssigkeit, Servolenkung)",
   "service_type_suspension_repair": "Federungsreparatur",
-  "service_type_electrical_check": "Elektrische Systemprüfung",
-  "service_type_custom_repair": "Benutzerdefinierte Reparatur/Teilewechsel"
+  "service_type_electrical_system_check": "Elektrische Systemprüfung",
+  "service_type_custom_repair_part_change": "Benutzerdefinierte Reparatur/Teilewechsel"
 }

@@ -204,11 +204,11 @@
   "service_form_update_btn": "Aggiorna servizio",
   "service_form_cancel_btn": "Annulla",
   "service_type_oil_change": "Cambio olio",
-  "service_type_filter_change": "Cambio filtro (olio, aria, carburante)",
+  "service_type_filter_change_oil_air_fuel": "Cambio filtro (olio, aria, carburante)",
   "service_type_tire_rotation": "Rotazione pneumatici",
-  "service_type_brake_inspection": "Ispezione/sostituzione freni",
-  "service_type_fluid_check": "Controllo/rabbocco fluidi (liquido refrigerante, freni, servosterzo)",
+  "service_type_brake_inspection_replacement": "Ispezione/sostituzione freni",
+  "service_type_fluid_check_top_up_coolant_brake_power_steering": "Controllo/rabbocco fluidi (liquido refrigerante, freni, servosterzo)",
   "service_type_suspension_repair": "Riparazione sospensioni",
-  "service_type_electrical_check": "Controllo impianto elettrico",
-  "service_type_custom_repair": "Riparazione personalizzata/Sostituzione parte"
+  "service_type_electrical_system_check": "Controllo impianto elettrico",
+  "service_type_custom_repair_part_change": "Riparazione personalizzata/Sostituzione parte"
 }

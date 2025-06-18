@@ -204,11 +204,11 @@
   "service_form_update_btn": "Update Service",
   "service_form_cancel_btn": "Cancel",
   "service_type_oil_change": "Oil Change",
-  "service_type_filter_change": "Filter Change (Oil, Air, Fuel)",
+  "service_type_filter_change_oil_air_fuel": "Filter Change (Oil, Air, Fuel)",
   "service_type_tire_rotation": "Tire Rotation",
-  "service_type_brake_inspection": "Brake Inspection/Replacement",
-  "service_type_fluid_check": "Fluid Check/Top-up (Coolant, Brake, Power Steering)",
+  "service_type_brake_inspection_replacement": "Brake Inspection/Replacement",
+  "service_type_fluid_check_top_up_coolant_brake_power_steering": "Fluid Check/Top-up (Coolant, Brake, Power Steering)",
   "service_type_suspension_repair": "Suspension Repair",
-  "service_type_electrical_check": "Electrical System Check",
-  "service_type_custom_repair": "Custom Repair/Part Change"
+  "service_type_electrical_system_check": "Electrical System Check",
+  "service_type_custom_repair_part_change": "Custom Repair/Part Change"
 }

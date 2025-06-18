@@ -204,11 +204,11 @@
   "service_form_update_btn": "Ažuriraj servis",
   "service_form_cancel_btn": "Poništi",
   "service_type_oil_change": "Promjena ulja",
-  "service_type_filter_change": "Promjena filtera (ulje, zrak, gorivo)",
+  "service_type_filter_change_oil_air_fuel": "Promjena filtera (ulje, zrak, gorivo)",
   "service_type_tire_rotation": "Rotacija guma",
-  "service_type_brake_inspection": "Pregled/zamjena kočnica",
-  "service_type_fluid_check": "Provjera/dopuna tečnosti (rashladna tečnost, kočiona tečnost, servo upravljač)",
+  "service_type_brake_inspection_replacement": "Pregled/zamjena kočnica",
+  "service_type_fluid_check_top_up_coolant_brake_power_steering": "Provjera/dopuna tečnosti (rashladna tečnost, kočiona tečnost, servo upravljač)",
   "service_type_suspension_repair": "Popravak ovjesa",
-  "service_type_electrical_check": "Provjera električnog sistema",
-  "service_type_custom_repair": "Popravak po narudžbi/Zamjena dijela"
+  "service_type_electrical_system_check": "Provjera električnog sistema",
+  "service_type_custom_repair_part_change": "Popravak po narudžbi/Zamjena dijela"
 }
