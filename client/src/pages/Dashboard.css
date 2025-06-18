@@ -1,83 +1,66 @@
-/* Dashboard Page Container */
-.dashboard {
-  font-family: 'Inter', sans-serif;
+/* client/src/pages/Dashboard/Dashboard.css */
+
+.dashboard-page {
+  padding: 2rem; /* General padding for the page */
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
-  background-color: var(--background-primary); /* Use theme variable */
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.05);
-  min-height: 100vh; /* Ensure it takes full viewport height */
-  box-sizing: border-box; /* Include padding in element's total width and height */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  min-height: calc(100vh - 80px); /* Ensure content pushes footer down */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* Space between sections */
+  /* Add padding-top to account for the fixed navbar */
+  padding-top: 5rem; /* Adjust this value as needed based on your navbar's height */
 }
 
-/* Header Section */
+/* Ensure content adapts to theme */
+.dashboard-page {
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+}
+
 .dashboard-header-main {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2.5rem;
-  border-bottom: 1px solid var(--border-color); /* Use theme variable */
-  padding-bottom: 1.5rem;
+  align-items: flex-start; /* Align greeting to top */
+  margin-bottom: 2rem;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
 .dashboard-greeting h1 {
-  font-size: 2.5em;
-  color: var(--heading-color); /* Use theme variable */
-  margin: 0 0 0.5rem 0;
-  font-weight: 700;
+  font-size: 2.5rem;
+  color: var(--cta-primary-bg);
+  margin-bottom: 0.5rem;
 }
 
-.dashboard-greeting .dashboard-subtitle {
-  font-size: 1.1em;
-  color: var(--text-secondary); /* Use theme variable */
-  margin: 0;
+.dashboard-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
 }
 
-.header-buttons { /* New container for buttons */
+.header-buttons {
   display: flex;
-  gap: 1rem; /* Space between buttons */
-  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem; /* Align better with greeting on wrap */
 }
 
-.logout-btn {
-  background-color: var(--button-delete); /* Use theme variable */
-  color: var(--text-light); /* Use theme variable */
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1em;
-  font-weight: 500;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.logout-btn:hover {
-  background-color: var(--button-delete-hover); /* Use theme variable */
-  transform: translateY(-1px);
-}
-
-/* Dashboard Stats Grid */
+/* Stat Cards */
 .dashboard-stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .stat-card {
-  background-color: var(--background-secondary); /* Use theme variable */
-  padding: 1.8rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  background-color: var(--background-secondary);
+  border-radius: 12px;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease; /* Smooth transition */
-  border: 1px solid var(--border-color); /* Use theme variable */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .stat-card:hover {
@@ -87,273 +70,242 @@
 
 .stat-icon {
   font-size: 3em;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.75rem;
 }
 
 .stat-value {
   font-size: 2.5em;
   font-weight: 700;
+  color: var(--cta-primary-bg);
+  margin-bottom: 0.5rem;
 }
 
 .stat-label {
   font-size: 1em;
-  color: var(--text-secondary); /* Use theme variable */
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  color: var(--text-secondary);
 }
 
-/* Specific stat card colors */
-.stat-card.total-vehicles .stat-icon,
-.stat-card.total-vehicles .stat-value { color: var(--cta-primary-bg); } /* Use theme variable */
-
-.stat-card.expired-dates .stat-icon,
-.stat-card.expired-dates .stat-value { color: var(--button-delete); } /* Use theme variable */
-
-.stat-card.upcoming-dates .stat-icon,
-.stat-card.upcoming-dates .stat-value { color: var(--status-due-soon-text); } /* Use theme variable */
+/* Specific colors for stat cards (optional, can be adapted to theme) */
+.total-vehicles .stat-icon { color: #3498db; } /* Blue */
+.expired-dates .stat-icon { color: #e74c3c; }   /* Red */
+.upcoming-dates .stat-icon { color: #f39c12; }  /* Orange */
 
 
-/* Actions Row (Add Button & Search Bar) */
+/* Add/Search Row */
 .dashboard-actions-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap; /* Allow wrapping */
+  gap: 1rem; /* Space between elements */
   margin-bottom: 2rem;
-  flex-wrap: wrap; /* Allow wrapping on small screens */
-  gap: 1.5rem; /* Gap between items when wrapped */
 }
 
 .add-btn {
-  background-color: var(--button-add); /* Use theme variable */
-  color: var(--text-light); /* Use theme variable */
+  background-color: var(--cta-primary-bg);
+  color: var(--text-light);
   padding: 0.8rem 1.5rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 600;
   transition: background-color 0.2s ease, transform 0.1s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  flex-shrink: 0; /* Prevent shrinking if space is tight */
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .add-btn:hover {
-  background-color: var(--button-add-hover); /* Use theme variable */
-  transform: translateY(-1px);
+  background-color: var(--cta-primary-hover-bg);
+  transform: translateY(-2px);
 }
 
 .search-bar {
+  flex-grow: 1; /* Allow search bar to take available space */
   display: flex;
-  gap: 0.5rem;
-  flex-grow: 1; /* Allows search bar to take available space */
+  align-items: center;
   max-width: 400px; /* Limit search bar width */
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  background-color: var(--background-secondary);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-bar:focus-within {
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 0.2rem var(--input-focus-border-light);
 }
 
 .search-input {
   flex-grow: 1;
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--input-border); /* Use theme variable */
-  border-radius: 6px;
+  padding: 0.7rem 1rem;
+  border: none;
+  background-color: transparent;
+  color: var(--text-primary);
   font-size: 1em;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
-  box-sizing: border-box;
-  background-color: var(--background-secondary); /* Use theme variable */
-  color: var(--text-primary); /* Use theme variable */
+  outline: none;
 }
 
-.search-input:focus {
-  outline: none;
-  border-color: var(--input-focus-border); /* Use theme variable */
-  box-shadow: 0 0 0 0.2rem var(--input-focus-border); /* Use theme variable */
+.search-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
 }
 
 .clear-search-btn {
   background: none;
   border: none;
+  color: var(--text-secondary);
   font-size: 1.2em;
-  color: var(--text-secondary); /* Use theme variable */
   cursor: pointer;
-  padding: 0 0.5rem;
+  padding: 0 0.8rem;
   transition: color 0.2s ease;
 }
+
 .clear-search-btn:hover {
-  color: var(--heading-color); /* Use theme variable */
+  color: var(--button-delete);
 }
 
 /* Vehicle Table */
 .vehicle-table-container {
-  background: var(--background-secondary); /* Use theme variable */
-  border: 1px solid var(--border-color); /* Use theme variable */
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  overflow-x: auto; /* Enable horizontal scrolling for the table if needed */
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-  transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transition */
+  background-color: var(--background-secondary);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  overflow-x: auto; /* Enable horizontal scrolling for tables on small screens */
 }
 
-.table-header, .table-row {
+.vehicle-table-container h2 {
+  padding: 1.5rem;
+  font-size: 1.5rem;
+  color: var(--cta-primary-bg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table-header,
+.table-row {
   display: grid;
-  /* Define columns for larger screens */
-  grid-template-columns: 0.8fr 1fr 1fr 0.6fr 1fr 1.2fr 150px; /* Type, Make, Model, Year, License Plate, VIN, Actions */
-  gap: 10px;
+  grid-template-columns: repeat(7, minmax(100px, 1fr)); /* Adjusted for 7 columns */
+  gap: 1rem;
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid var(--border-color); /* Use theme variable */
   align-items: center;
 }
 
 .table-header {
-  background: var(--table-header-bg); /* Use theme variable */
   font-weight: 600;
+  background-color: var(--table-header-bg); /* Use theme variable */
   color: var(--table-header-text); /* Use theme variable */
-  text-transform: uppercase;
-  font-size: 0.85em;
-  position: sticky; /* Make header sticky for scrolling */
+  border-bottom: 1px solid var(--border-color);
+  position: sticky; /* Sticky header for table */
   top: 0;
-  z-index: 1; /* Ensure header is above rows */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  z-index: 1;
 }
 
 .table-row {
-  background: var(--background-secondary); /* Use theme variable */
-  font-size: 0.95em;
-  color: var(--text-primary); /* Use theme variable */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s ease;
 }
 
 .table-row:last-child {
-  border-bottom: none; /* No border for the last row */
+  border-bottom: none;
+}
+
+.table-row:nth-child(even) {
+  background-color: var(--table-row-alt-bg); /* Alternating row background */
 }
 
 .table-row:hover {
-  background: var(--table-row-hover-bg); /* Use theme variable */
+  background-color: var(--table-row-hover-bg); /* Hover effect */
+}
+
+.table-row > div {
+  padding: 0.5rem 0;
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Add ellipsis for overflow */
+  white-space: nowrap; /* Prevent wrapping */
 }
 
 .actions select {
-  padding: 0.5rem 0.8rem;
-  border: 1px solid var(--input-border); /* Use theme variable */
-  border-radius: 4px;
-  background-color: var(--background-secondary); /* Use theme variable */
-  color: var(--text-primary); /* Use theme variable */
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--input-border);
+  border-radius: 6px;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  font-size: 0.9em;
   cursor: pointer;
-  font-size: 0.85em;
-  appearance: none; /* Remove default arrow */
-  /* Re-add custom arrow if desired, using a theme-compatible SVG or dynamic color */
-  /* Example using filter to change SVG color: */
-  /* filter: invert(var(--theme-icon-invert, 0)); for light mode 0, dark mode 1 */
-  /* For now, just remove the explicit blue from the SVG */
-  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22gray%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13%205.7L146.2%20202.7%2018.6%2075.1a17.6%2017.6%200%200%200-25.3%2024.5l137%20137a17.6%2017.6%200%200%200%2025.3%200l137%20-137c6.5-6.5%206.5-17%200-23.5z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow, using 'gray' as a placeholder for now */
+  appearance: none; /* Remove default select arrow */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22gray%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13%205.7L146.2%20202.7%2018.6%2075.1a17.6%2017.6%200%200%200-25.3%2024.5l137%20137a17.6%2017.6%200%200%200%2025.3%200l137%20-137c6.5-6.5%206.5-17%200-23.5z%22%2F%3E%3C%2Fsvg%3E');
   background-repeat: no-repeat;
   background-position: right 0.7em top 50%, 0 0;
   background-size: 0.65em auto, 100%;
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
 .actions select:focus {
   outline: none;
-  border-color: var(--input-focus-border); /* Use theme variable */
-  box-shadow: 0 0 0 0.2rem var(--input-focus-border); /* Use theme variable */
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 0.2rem var(--input-focus-border-light);
 }
 
 .no-vehicles {
-  padding: 2rem;
-  text-align: center;
-  color: var(--text-secondary); /* Use theme variable */
-  font-size: 1.1em;
-}
-
-.loading {
   text-align: center;
   padding: 2rem;
-  font-size: 1.2em;
-  color: var(--text-secondary); /* Use theme variable */
+  color: var(--text-secondary);
+  font-style: italic;
 }
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-  .dashboard {
-    padding: 1rem; /* Reduce padding on small screens */
+  .dashboard-page {
+    padding: 1rem;
+    padding-top: 4.5rem; /* Adjust padding for mobile navbar height */
   }
 
   .dashboard-header-main {
-    flex-direction: column; /* Stack header elements */
-    align-items: flex-start;
-    gap: 1rem;
+    flex-direction: column;
+    align-items: stretch;
     margin-bottom: 1.5rem;
   }
+
   .dashboard-greeting h1 {
-    font-size: 2em;
+    font-size: 2rem;
+    text-align: center;
   }
-  .dashboard-greeting .dashboard-subtitle {
-    font-size: 0.95em;
+
+  .dashboard-subtitle {
+    font-size: 0.95rem;
+    text-align: center;
   }
-  .header-buttons { /* Ensure buttons stack or fill width correctly */
+
+  .header-buttons {
+    justify-content: center;
     width: 100%;
-    justify-content: space-between; /* Space out logout and theme toggle */
-  }
-  .logout-btn {
-    /* width: 100%; Remove fixed width here, let flex manage */
   }
 
   .dashboard-stats-grid {
-    grid-template-columns: 1fr; /* Stack stats cards */
+    grid-template-columns: 1fr; /* Stack stats vertically on small screens */
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 
   .dashboard-actions-row {
-    flex-direction: column; /* Stack actions */
+    flex-direction: column; /* Stack add button and search bar */
     align-items: stretch;
-    gap: 1rem;
   }
+
   .add-btn {
-    width: 100%; /* Full width button */
+    width: 100%;
   }
+
   .search-bar {
-    width: 100%; /* Full width search bar */
-    max-width: none; /* Remove max-width constraint */
+    max-width: 100%;
   }
 
-  .vehicle-table-container {
-    border-radius: 4px; /* Slightly less rounded on mobile */
-  }
-
-  .table-header, .table-row {
-    /* CRITICAL CHANGE: Only show Type, Make, and Actions */
-    grid-template-columns: 1fr 1fr 100px; /* Type, Make, Actions */
-    gap: 8px; /* Slightly smaller gap */
-    padding: 0.8rem 1rem; /* Reduce padding */
-  }
-
-  /* Explicitly hide columns not needed on small screens for table-header */
-  /* This now includes the 'Model' column (3rd child) */
-  .table-header div:nth-child(3), /* Model */
-  .table-header div:nth-child(4), /* Year */
-  .table-header div:nth-child(5), /* License Plate */
-  .table-header div:nth-child(6) {  /* VIN */
-    display: none;
-  }
-
-  /* Explicitly hide columns not needed on small screens for table-row */
-  /* This now includes the 'Model' column (3rd child) */
-  .table-row div:nth-child(3), /* Model */
-  .table-row div:nth-child(4), /* Year */
-  .table-row div:nth-child(5), /* License Plate */
-  .table-row div:nth-child(6) { /* VIN */
-    display: none;
-  }
-}
-
-/* Further refinements for very small mobile screens if necessary */
-@media (max-width: 480px) {
-  .dashboard-greeting h1 {
-    font-size: 1.8em;
-  }
-  .table-header, .table-row {
-    grid-template-columns: 1fr 1fr 90px; /* Slightly tighter actions column */
+  .table-header,
+  .table-row {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Allow columns to wrap */
+    padding: 0.8rem 1rem;
     font-size: 0.9em;
   }
-  .actions select {
-    font-size: 0.8em;
-    padding: 0.4rem 0.6rem;
+
+  .vehicle-table-container h2 {
+    padding: 1rem;
+    font-size: 1.2rem;
   }
 }
