@@ -229,5 +229,17 @@
   "footer_contact_email": "support@fleetly.com",
   "footer_contact_address_text": "Bosna i Hercegovina",
   "footer_contact_phone_text": "+1 (555) 123-4567",
-  "footer_powered_by_text": "Pokreće <strong>Eman</strong>"
+  "footer_powered_by_text": "Pokreće <strong>Eman</strong>",
+  "date_form_save_btn": "Dodaj datum",
+  "date_form_update_btn": "Ažuriraj datum",
+  "date_form_cancel_btn": "Poništi",
+  "date_type_registration": "Registracija",
+  "date_type_fire_extinguisher_expiry": "Istek roka vatrogasnog aparata",
+  "date_type_tachograph_calibration": "Kalibracija tahografa",
+  "date_type_annual_inspection": "Godišnji pregled",
+  "date_type_insurance_renewal": "Obnova osiguranja",
+  "date_type_roadworthiness_test": "Test ispravnosti vozila",
+  "date_type_safety_check": "Sigurnosna provjera",
+  "date_type_license_renewal": "Obnova dozvole",
+  "date_type_other": "Ostalo"
 }

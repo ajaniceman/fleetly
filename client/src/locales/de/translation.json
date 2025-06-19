@@ -229,5 +229,17 @@
   "footer_contact_email": "support@fleetly.com",
   "footer_contact_address_text": "Bosnien und Herzegowina",
   "footer_contact_phone_text": "+1 (555) 123-4567",
-  "footer_powered_by_text": "Powered by <strong>Eman</strong>"
+  "footer_powered_by_text": "Powered by <strong>Eman</strong>",
+  "date_form_save_btn": "Datum hinzufügen",
+  "date_form_update_btn": "Datum aktualisieren",
+  "date_form_cancel_btn": "Abbrechen",
+  "date_type_registration": "Registrierung",
+  "date_type_fire_extinguisher_expiry": "Ablauf Feuerlöscher",
+  "date_type_tachograph_calibration": "Tachographenkalibrierung",
+  "date_type_annual_inspection": "Jährliche Inspektion",
+  "date_type_insurance_renewal": "Versicherungsverlängerung",
+  "date_type_roadworthiness_test": "Hauptuntersuchung (TÜV)",
+  "date_type_safety_check": "Sicherheitsprüfung",
+  "date_type_license_renewal": "Führerscheinverlängerung",
+  "date_type_other": "Sonstiges"
 }
