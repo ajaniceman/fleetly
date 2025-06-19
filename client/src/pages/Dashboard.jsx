@@ -1,4 +1,3 @@
-// client/src/pages/Dashboard/Dashboard.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
@@ -7,6 +6,15 @@ import './Dashboard.css'; // Assuming you have Dashboard.css
 import { useTranslation } from 'react-i18next'; // Import useTranslation
 import { useTheme } from '../contexts/ThemeContext'; // Import useTheme context for the toggle button
 import ThemeToggleButton from '../components/ThemeToggleButton/ThemeToggleButton'; // Import the toggle button
+
+// Helper function to generate a translation key from the vehicle type string
+const getVehicleTypeTranslationKey = (typeString) => {
+  if (!typeString) return '';
+  // Convert to lowercase, replace non-alphanumeric with underscores, and add prefix
+  // Example: "Car" -> "vehicle_type_car"
+  // Example: "Fire Truck" -> "vehicle_type_fire_truck"
+  return `vehicle_type_${typeString.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '')}`;
+};
 
 export default function Dashboard() {
   const { user, logout, fetchWithAuth } = useAuth();
@@ -77,7 +85,7 @@ export default function Dashboard() {
   }).length;
 
   const filteredVehicles = vehicles.filter(v =>
-    v.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    t(getVehicleTypeTranslationKey(v.type)).toLowerCase().includes(searchTerm.toLowerCase()) || // Search translated type
     v.make.toLowerCase().includes(searchTerm.toLowerCase()) ||
     v.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
     (v.licensePlate && v.licensePlate.toLowerCase().includes(searchTerm.toLowerCase())) ||
@@ -263,7 +271,7 @@ export default function Dashboard() {
           </div>
         ) : filteredVehicles.map((v) => (
           <div key={v.id} className={`table-row animated-row`}>
-            <div>{v.type}</div>
+            <div>{t(getVehicleTypeTranslationKey(v.type))}</div> {/* This is the key change! */}
             <div>{v.make}</div>
             <div>{v.model}</div>
             <div>{v.year}</div>
