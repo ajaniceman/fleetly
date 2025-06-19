@@ -252,5 +252,11 @@
   "loading_dates": "Caricamento dei record di data...",
   "error_displaying_dates": "Errore durante la visualizzazione dei record di data: {{message}}",
   "no_vehicle_found": "Nessun veicolo trovato.",
-  "error_fetching_data": "Errore durante il recupero dei dati: {{message}}"
+  "error_fetching_data": "Errore durante il recupero dei dati: {{message}}",
+  "date_form_title_add": "Aggiungi nuova data",
+  "date_form_label_date_type": "Tipo di data",
+  "date_form_option_select_date_type": "Seleziona tipo di data",
+  "date_form_label_due_date": "Data di scadenza",
+  "date_form_label_notes": "Note sulla data",
+  "date_form_placeholder_notes": "Es: Scadenza della registrazione"
 }

@@ -252,5 +252,11 @@
   "loading_dates": "Učitavanje zapisa o datumima...",
   "error_displaying_dates": "Greška pri prikazivanju zapisa o datumima: {{message}}",
   "no_vehicle_found": "Vozilo nije pronađeno.",
-  "error_fetching_data": "Greška pri dohvatanju podataka: {{message}}"
+  "error_fetching_data": "Greška pri dohvatanju podataka: {{message}}",
+  "date_form_title_add": "Dodaj novi datum",
+  "date_form_label_date_type": "Vrsta datuma",
+  "date_form_option_select_date_type": "Odaberite vrstu datuma",
+  "date_form_label_due_date": "Datum dospijeća",
+  "date_form_label_notes": "Bilješke o datumu",
+  "date_form_placeholder_notes": "Npr. Istek registracije"
 }
