@@ -253,10 +253,11 @@
   "error_displaying_dates": "Error displaying date records: {{message}}",
   "no_vehicle_found": "No vehicle found.",
   "error_fetching_data": "Error fetching data: {{message}}",
-  "date_form_title_add": "Add new date",
-  "date_form_label_date_type": "Date type",
-  "date_form_option_select_date_type": "Select a date type",
-  "date form_label_due_date": "Due date",
-  "date_form_label_notes": "Date notes",
-  "date_form_placeholder_notes": "E.g. Registration expiration"
+  "date_form_title_add": "Add A New Date",
+  "date_form_label_date_type": "Date Type",
+  "date_form_option_select_date_type": "Select A Date Type",
+  "date_form_label_due_date": "Due Date",
+  "date_form_label_notes": "Date Notes",
+  "date_form_placeholder_notes": "E.g. Registration expiration",
+  "date_form_title_edit": "Edit Date"
 }

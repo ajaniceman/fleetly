@@ -253,10 +253,11 @@
   "error_displaying_dates": "Fehler beim Anzeigen der Termineinträge: {{message}}",
   "no_vehicle_found": "Fahrzeug nicht gefunden.",
   "error_fetching_data": "Fehler beim Abrufen der Daten: {{message}}",
-  "date_form_title_add": "Neues Datum hinzufügen",
+  "date_form_title_add": "Neues Datum Hinzufügen",
   "date_form_label_date_type": "Datumstyp",
-  "date_form_option_select_date_type": "Datumstyp auswählen",
+  "date_form_option_select_date_type": "Datumstyp Auswählen",
   "date_form_label_due_date": "Fälligkeitsdatum",
   "date_form_label_notes": "Datumsnotizen",
-  "date_form_placeholder_notes": "Z. B. Ablauf der Registrierung"
+  "date_form_placeholder_notes": "Z. B. Ablauf der Registrierung",
+  "date_form_title_edit": "Datum Bearbeiten"
 }

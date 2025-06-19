@@ -167,10 +167,11 @@
   "error_displaying_dates": "Błąd wyświetlania wpisów dat: {{message}}",
   "no_vehicle_found": "Nie znaleziono pojazdu.",
   "error_fetching_data": "Błąd pobierania danych: {{message}}",
-  "date_form_title_add": "Dodaj nową datę",
-  "date_form_label_date_type": "Typ daty",
-  "date_form_option_select_date_type": "Wybierz typ daty",
-  "date_form_label_due_date": "Termin płatności",
-  "date_form_label_notes": "Notatki dotyczące daty",
-  "date_form_placeholder_notes": "Np. Wygaśnięcie rejestracji"
+  "date_form_title_add": "Dodaj Nową Datę",
+  "date_form_label_date_type": "Typ Daty",
+  "date_form_option_select_date_type": "Wybierz Typ Daty",
+  "date_form_label_due_date": "Termin Płatności",
+  "date_form_label_notes": "Notatki Dotyczące Daty",
+  "date_form_placeholder_notes": "Np. Wygaśnięcie rejestracji",
+  "date_form_title_edit": "Edytuj Datę"
 }

@@ -253,10 +253,11 @@
   "error_displaying_dates": "Error al mostrar los registros de fechas: {{message}}",
   "no_vehicle_found": "Vehículo no encontrado.",
   "error_fetching_data": "Error al obtener datos: {{message}}",
-  "date_form_title_add": "Añadir nueva fecha",
-  "date_form_label_date_type": "Tipo de fecha",
-  "date_form_option_select_date_type": "Seleccionar tipo de fecha",
-  "date_form_label_due_date": "Fecha de vencimiento",
-  "date_form_label_notes": "Notas de fecha",
-  "date_form_placeholder_notes": "Ej: vencimiento del registro"
+  "date_form_title_add": "Añadir Nueva Fecha",
+  "date_form_label_date_type": "Tipo De Fecha",
+  "date_form_option_select_date_type": "Seleccionar Tipo De Fecha",
+  "date_form_label_due_date": "Fecha De Vencimiento",
+  "date_form_label_notes": "Notas De Fecha",
+  "date_form_placeholder_notes": "Ej: vencimiento del registro",
+  "date_form_title_edit": "Editar Fecha"
 }

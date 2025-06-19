@@ -253,10 +253,11 @@
   "error_displaying_dates": "Erreur lors de l'affichage des enregistrements de dates : {{message}}",
   "no_vehicle_found": "Véhicule non trouvé.",
   "error_fetching_data": "Erreur lors de la récupération des données : {{message}}",
-  "date_form_title_add": "Ajouter une nouvelle date",
-  "date_form_label_date_type": "Type de date",
-  "date_form_option_select_date_type": "Sélectionner le type de date",
-  "date_form_label_due_date": "Date d'échéance",
-  "date_form_label_notes": "Notes sur la date",
-  "date_form_placeholder_notes": "Ex: l'expiration de l'enregistrement"
+  "date_form_title_add": "Ajouter Une Nouvelle Date",
+  "date_form_label_date_type": "Type De Date",
+  "date_form_option_select_date_type": "Sélectionner Le Type De Date",
+  "date_form_label_due_date": "Date D'échéance",
+  "date_form_label_notes": "Notes Sur La Date",
+  "date_form_placeholder_notes": "Ex: l'expiration de l'enregistrement",
+  "date_form_title_edit": "Modifier La Date"
 }
