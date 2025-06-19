@@ -241,5 +241,16 @@
   "date_type_roadworthiness_test": "Test ispravnosti vozila",
   "date_type_safety_check": "Sigurnosna provjera",
   "date_type_license_renewal": "Obnova dozvole",
-  "date_type_other": "Ostalo"
+  "date_type_other": "Ostalo",
+  "dates_for_vehicle": "Datumi za {{make}} {{model}}",
+  "date_history_title": "Historija datuma",
+  "no_date_records_yet": "Još nema zapisa o datumima.",
+  "date_status_upcoming": "Predstojeće",
+  "date_status_expired": "Isteklo",
+  "date_status_due_today": "Danas dospijeva",
+  "date_status_valid": "Važeće",
+  "loading_dates": "Učitavanje zapisa o datumima...",
+  "error_displaying_dates": "Greška pri prikazivanju zapisa o datumima: {{message}}",
+  "no_vehicle_found": "Vozilo nije pronađeno.",
+  "error_fetching_data": "Greška pri dohvatanju podataka: {{message}}"
 }

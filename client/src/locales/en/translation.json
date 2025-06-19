@@ -241,5 +241,16 @@
   "date_type_roadworthiness_test": "Roadworthiness Test",
   "date_type_safety_check": "Safety Check",
   "date_type_license_renewal": "License Renewal",
-  "date_type_other": "Other"
+  "date_type_other": "Other",
+  "dates_for_vehicle": "Dates for {{make}} {{model}}",
+  "date_history_title": "Date History",
+  "no_date_records_yet": "No date records yet.",
+  "date_status_upcoming": "Upcoming",
+  "date_status_expired": "Expired",
+  "date_status_due_today": "Due Today",
+  "date_status_valid": "Valid",
+  "loading_dates": "Loading date records...",
+  "error_displaying_dates": "Error displaying date records: {{message}}",
+  "no_vehicle_found": "No vehicle found.",
+  "error_fetching_data": "Error fetching data: {{message}}"
 }

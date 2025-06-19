@@ -241,5 +241,16 @@
   "date_type_roadworthiness_test": "Contrôle technique",
   "date_type_safety_check": "Contrôle de sécurité",
   "date_type_license_renewal": "Renouvellement de permis",
-  "date_type_other": "Autre"
+  "date_type_other": "Autre",
+  "dates_for_vehicle": "Dates pour {{make}} {{model}}",
+  "date_history_title": "Historique des dates",
+  "no_date_records_yet": "Aucun enregistrement de date pour l'instant.",
+  "date_status_upcoming": "À venir",
+  "date_status_expired": "Expiré",
+  "date_status_due_today": "Échéance aujourd'hui",
+  "date_status_valid": "Valide",
+  "loading_dates": "Chargement des enregistrements de dates...",
+  "error_displaying_dates": "Erreur lors de l'affichage des enregistrements de dates : {{message}}",
+  "no_vehicle_found": "Véhicule non trouvé.",
+  "error_fetching_data": "Erreur lors de la récupération des données : {{message}}"
 }

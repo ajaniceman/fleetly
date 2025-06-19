@@ -241,5 +241,16 @@
   "date_type_roadworthiness_test": "Hauptuntersuchung (TÜV)",
   "date_type_safety_check": "Sicherheitsprüfung",
   "date_type_license_renewal": "Führerscheinverlängerung",
-  "date_type_other": "Sonstiges"
+  "date_type_other": "Sonstiges",
+  "dates_for_vehicle": "Termine für {{make}} {{model}}",
+  "date_history_title": "Terminhistorie",
+  "no_date_records_yet": "Noch keine Termineinträge vorhanden.",
+  "date_status_upcoming": "Bevorstehend",
+  "date_status_expired": "Abgelaufen",
+  "date_status_due_today": "Heute fällig",
+  "date_status_valid": "Gültig",
+  "loading_dates": "Termineinträge werden geladen...",
+  "error_displaying_dates": "Fehler beim Anzeigen der Termineinträge: {{message}}",
+  "no_vehicle_found": "Fahrzeug nicht gefunden.",
+  "error_fetching_data": "Fehler beim Abrufen der Daten: {{message}}"
 }

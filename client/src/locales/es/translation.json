@@ -241,5 +241,16 @@
   "date_type_roadworthiness_test": "Prueba de aptitud para la circulación",
   "date_type_safety_check": "Revisión de seguridad",
   "date_type_license_renewal": "Renovación de licencia",
-  "date_type_other": "Otro"
+  "date_type_other": "Otro",
+  "dates_for_vehicle": "Fechas para {{make}} {{model}}",
+  "date_history_title": "Historial de fechas",
+  "no_date_records_yet": "Aún no hay registros de fechas.",
+  "date_status_upcoming": "Próximas",
+  "date_status_expired": "Vencidas",
+  "date_status_due_today": "Vence hoy",
+  "date_status_valid": "Válida",
+  "loading_dates": "Cargando registros de fechas...",
+  "error_displaying_dates": "Error al mostrar los registros de fechas: {{message}}",
+  "no_vehicle_found": "Vehículo no encontrado.",
+  "error_fetching_data": "Error al obtener datos: {{message}}"
 }

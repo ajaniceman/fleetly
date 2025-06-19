@@ -155,5 +155,16 @@
   "date_type_roadworthiness_test": "Test zdatności do ruchu drogowego",
   "date_type_safety_check": "Kontrola bezpieczeństwa",
   "date_type_license_renewal": "Odnowienie licencji",
-  "date_type_other": "Inne"
+  "date_type_other": "Inne",
+  "dates_for_vehicle": "Daty dla {{make}} {{model}}",
+  "date_history_title": "Historia dat",
+  "no_date_records_yet": "Brak wpisów daty.",
+  "date_status_upcoming": "Nadchodzące",
+  "date_status_expired": "Wygasłe",
+  "date_status_due_today": "Termin dzisiaj",
+  "date_status_valid": "Ważne",
+  "loading_dates": "Ładowanie wpisów dat...",
+  "error_displaying_dates": "Błąd wyświetlania wpisów dat: {{message}}",
+  "no_vehicle_found": "Nie znaleziono pojazdu.",
+  "error_fetching_data": "Błąd pobierania danych: {{message}}"
 }

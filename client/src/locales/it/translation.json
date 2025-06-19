@@ -241,5 +241,16 @@
   "date_type_roadworthiness_test": "Test di idoneità alla circolazione",
   "date_type_safety_check": "Controllo di sicurezza",
   "date_type_license_renewal": "Rinnovo patente",
-  "date_type_other": "Altro"
+  "date_type_other": "Altro",
+  "dates_for_vehicle": "Date per {{make}} {{model}}",
+  "date_history_title": "Cronologia date",
+  "no_date_records_yet": "Ancora nessun record di data.",
+  "date_status_upcoming": "Prossime",
+  "date_status_expired": "Scadute",
+  "date_status_due_today": "Scade oggi",
+  "date_status_valid": "Valido",
+  "loading_dates": "Caricamento dei record di data...",
+  "error_displaying_dates": "Errore durante la visualizzazione dei record di data: {{message}}",
+  "no_vehicle_found": "Nessun veicolo trovato.",
+  "error_fetching_data": "Errore durante il recupero dei dati: {{message}}"
 }
