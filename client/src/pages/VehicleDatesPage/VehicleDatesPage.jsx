@@ -5,14 +5,13 @@ import DateForm from '../../components/DateForm/DateForm';
 import { useTranslation } from 'react-i18next';
 import './VehicleDatesPage.css'; // Make sure this CSS file exists
 
-// Helper to generate a translation key from the date type string
 const getDateTypeTranslationKey = (typeString) => {
   if (!typeString) return '';
   return `date_type_${typeString.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '')}`;
 };
 
 export default function VehicleDatesPage() {
-  const { id: vehicleId } = useParams(); // Get vehicle ID from URL
+  const { vehicleId } = useParams();
   const navigate = useNavigate();
   const { fetchWithAuth } = useAuth();
   const { t } = useTranslation();
@@ -59,8 +58,11 @@ export default function VehicleDatesPage() {
   }, [vehicleId, fetchWithAuth, t]);
 
   useEffect(() => {
-    fetchVehicleAndDates();
-  }, [fetchVehicleAndDates]);
+    // Only attempt to fetch if vehicleId is available
+    if (vehicleId) {
+      fetchVehicleAndDates();
+    }
+  }, [fetchVehicleAndDates, vehicleId]); // Added vehicleId to dependencies for completeness
 
   // Helper function to determine date status
   const getDateStatus = (dueDate) => {
