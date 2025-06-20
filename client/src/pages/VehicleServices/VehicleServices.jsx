@@ -1,14 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ServiceForm from '../../components/ServiceForm/ServiceForm';
-import { useAuth } from '../../hooks/useAuth'; // Import useAuth
 import './VehicleServices.css';
+import { useAuth } from '../../hooks/useAuth';
 import { useTranslation } from 'react-i18next'; // Import useTranslation
 
+// Helper function to generate a translation key from the service type string
+const getServiceTypeTranslationKey = (typeString) => {
+  if (!typeString) return '';
+  // Convert to lowercase, replace non-alphanumeric with underscores, and add prefix
+  // Example: "Oil Change" -> "service_type_oil_change"
+  // Example: "Fluid Check (Coolant, Brake, Power Steering)" -> "service_type_fluid_check_top_up_coolant_brake_power_steering"
+  return `service_type_${typeString.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '')}`;
+};
+
+
 export default function VehicleServices() {
-  const { vehicleId } = useParams(); // Changed 'id' to 'vehicleId' to match route parameter
+  const { vehicleId } = useParams();
   const navigate = useNavigate();
-  const { fetchWithAuth } = useAuth(); // Destructure fetchWithAuth
+  const { fetchWithAuth } = useAuth();
   const { t } = useTranslation(); // Initialize translation hook
 
   const [vehicle, setVehicle] = useState(null);
@@ -17,47 +27,51 @@ export default function VehicleServices() {
   const [showServiceForm, setShowServiceForm] = useState(false);
   const [editingService, setEditingService] = useState(null);
 
-  useEffect(() => {
-    const fetchVehicleAndServices = async () => {
-      try {
-        // Fetch vehicle details using fetchWithAuth
-        const vehicleRes = await fetchWithAuth(`/api/vehicles/${vehicleId}`); // Use vehicleId
-        if (!vehicleRes.ok) {
-          throw new Error('Failed to fetch vehicle details');
+  const fetchVehicleAndServices = useCallback(async () => {
+    try {
+      // Fetch vehicle details using fetchWithAuth
+      const vehicleRes = await fetchWithAuth(`/api/vehicles/${vehicleId}`);
+      if (!vehicleRes.ok) {
+        if (vehicleRes.status === 404) {
+          throw new Error('Vehicle not found.');
         }
-        const vehicleData = await vehicleRes.json();
-        setVehicle(vehicleData);
-
-        // Fetch services for this vehicle using fetchWithAuth
-        const servicesRes = await fetchWithAuth(`/api/services/vehicle/${vehicleId}`); // Use vehicleId
-        if (!servicesRes.ok) {
-          throw new Error('Failed to fetch services');
-        }
-        const servicesData = await servicesRes.json();
-        setServices(servicesData);
-
-      } catch (error) {
-        console.error("Error loading vehicle services:", error);
-        if (!error.message.includes("Session expired")) {
-          alert(t('error_loading_services', { message: error.message })); // Translated alert
-          navigate('/dashboard'); // Go back to dashboard on other errors
-        }
-      } finally {
-        setLoading(false);
+        throw new Error('Failed to fetch vehicle details');
       }
-    };
+      const vehicleData = await vehicleRes.json();
+      setVehicle(vehicleData);
 
-    if (vehicleId) { // Check if vehicleId exists before fetching
+      // Fetch services for this vehicle using fetchWithAuth
+      const servicesRes = await fetchWithAuth(`/api/services/vehicle/${vehicleId}`);
+      if (!servicesRes.ok) {
+        throw new Error('Failed to fetch services');
+      }
+      const servicesData = await servicesRes.json();
+      setServices(servicesData);
+
+    } catch (error) {
+      console.error("Error loading vehicle services:", error);
+      // Only alert if the error isn't a session expiration handled by fetchWithAuth
+      if (!error.message.includes("Session expired")) {
+        alert(t('error_loading_services', { message: error.message })); // Translated alert
+        navigate('/dashboard'); // Go back to dashboard on other errors
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, [vehicleId, navigate, fetchWithAuth, t]); // Add t to dependency array
+
+  useEffect(() => {
+    if (vehicleId) {
       fetchVehicleAndServices();
     }
-  }, [vehicleId, navigate, fetchWithAuth, t]); // Added t to dependency array
+  }, [fetchVehicleAndServices, vehicleId]);
 
   const handleSaveService = async (formData) => {
     let res;
     let url;
     let method;
 
-    formData.vehicle_id = vehicleId; // Use vehicleId here
+    formData.vehicle_id = vehicleId;
 
     if (editingService) {
       url = `/api/services/${editingService.id}`;
@@ -68,7 +82,7 @@ export default function VehicleServices() {
     }
 
     try {
-      res = await fetchWithAuth(url, { // Use fetchWithAuth
+      res = await fetchWithAuth(url, {
         method: method,
         headers: {
           'Content-Type': 'application/json',
@@ -77,16 +91,8 @@ export default function VehicleServices() {
       });
 
       if (res.ok) {
-        const savedService = await res.json();
-        setServices(prevServices => {
-          if (editingService) {
-            // Update the existing service
-            return prevServices.map(s => s.id === savedService.id ? savedService : s);
-          } else {
-            // Add new service to the beginning of the list
-            return [savedService, ...prevServices];
-          }
-        });
+        // Re-fetch all services to ensure table is fully updated
+        await fetchVehicleAndServices();
         setShowServiceForm(false);
         setEditingService(null);
         alert(t(`service_${editingService ? 'updated' : 'added'}_success`)); // Translated alert
@@ -105,7 +111,7 @@ export default function VehicleServices() {
   const handleDeleteService = async (serviceId) => {
     if (window.confirm(t('confirm_delete_service'))) { // Translated confirmation
       try {
-        const res = await fetchWithAuth(`/api/services/${serviceId}`, { // Use fetchWithAuth
+        const res = await fetchWithAuth(`/api/services/${serviceId}`, {
           method: 'DELETE',
         });
         if (res.ok) {
@@ -164,6 +170,7 @@ export default function VehicleServices() {
               <div>{t('service_table_type')}</div> {/* Translated */}
               <div>{t('service_table_description')}</div> {/* Translated */}
               <div>{t('service_table_cost')}</div> {/* Translated */}
+              {/* Conditional columns for Odometer/Engine Hours based on vehicle type */}
               {['Car', 'Truck', 'Van', 'Bus'].includes(vehicle.type) && <div>{t('service_table_odometer')}</div>} {/* Translated */}
               {['Excavator', 'Roller'].includes(vehicle.type) && <div>{t('service_table_engine_hours')}</div>} {/* Translated */}
               <div>{t('service_table_actions')}</div> {/* Translated */}
@@ -175,7 +182,7 @@ export default function VehicleServices() {
                     ? new Date(s.serviceDate).toLocaleDateString()
                     : t('n_a_placeholder')} {/* Translated N/A */}
                 </div>
-                <div>{s.serviceType || t('n_a_placeholder')}</div> {/* Translated N/A */}
+                <div>{t(getServiceTypeTranslationKey(s.serviceType))}</div> {/* This is the key change! */}
                 <div>{s.description || t('n_a_placeholder')}</div> {/* Translated N/A */}
                 <div>
                   ${s.cost !== null && s.cost !== undefined && !isNaN(s.cost)
