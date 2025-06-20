@@ -102,8 +102,9 @@
 .dates-table .table-header,
 .dates-table .table-row {
   display: grid;
-  /* Columns: Type, Due Date, Status, Notes, Actions (with increased fixed width for actions) */
-  grid-template-columns: minmax(100px, 1.2fr) minmax(100px, 1fr) minmax(80px, 0.8fr) minmax(150px, 2fr) 160px;
+  /* UPDATED: Increased fixed width for actions column on desktop for more space */
+  /* Columns: Type, Due Date, Status, Notes, Actions */
+  grid-template-columns: minmax(100px, 1.2fr) minmax(100px, 1fr) minmax(80px, 0.8fr) minmax(150px, 2fr) 180px; /* Actions column is now 180px */
   gap: 10px;
   padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border-color);
@@ -170,7 +171,8 @@
   display: flex;
   gap: 0.75rem; /* Spacing between action buttons */
   justify-content: flex-end; /* Align actions to the right */
-  min-width: 120px; /* Ensure container has enough space */
+  /* min-width on actions container is no longer strictly needed due to fixed grid column, but kept for robustness */
+  min-width: 120px;
 }
 
 .actions .edit-date-btn, .actions .delete-date-btn {
@@ -208,8 +210,8 @@
 @media (max-width: 992px) {
   .dates-table .table-header,
   .dates-table .table-row {
-    /* Hide Notes on medium screens, adjust action column width */
-    grid-template-columns: minmax(100px, 1.2fr) minmax(100px, 1fr) minmax(80px, 0.8fr) 140px; /* Type, Due Date, Status, Actions */
+    /* UPDATED: Increased fixed width for actions column on medium screens */
+    grid-template-columns: minmax(100px, 1.2fr) minmax(100px, 1fr) minmax(80px, 0.8fr) 160px; /* Actions column now 160px */
   }
   .dates-table .table-header div:nth-child(4), /* Notes column */
   .dates-table .table-row div:nth-child(4) {
@@ -250,8 +252,8 @@
 
   .dates-table .table-header,
   .dates-table .table-row {
-    /* Hide Status and Notes on small screens, adjust action column width */
-    grid-template-columns: minmax(70px, 1fr) minmax(90px, 1fr) 140px; /* Type, Due Date, Actions */
+    /* UPDATED: Increased fixed width for actions column on small screens */
+    grid-template-columns: minmax(70px, 1fr) minmax(90px, 1fr) 140px; /* Actions column now 140px */
     gap: 8px;
     padding: 0.8rem 1rem;
     font-size: 0.8em;
@@ -286,8 +288,8 @@
   }
   .dates-table .table-header,
   .dates-table .table-row {
-    /* Tighter grid for very small screens, increased action width */
-    grid-template-columns: minmax(60px, 1fr) minmax(70px, 1.1fr) 100px; /* Type, Due Date, Actions */
+    /* UPDATED: Increased fixed width for actions column on very small screens */
+    grid-template-columns: minmax(60px, 1fr) minmax(70px, 1.1fr) 120px; /* Actions column now 120px */
     font-size: 0.7em;
     padding: 0.6rem 0.8rem;
   }
