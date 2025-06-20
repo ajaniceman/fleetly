@@ -103,8 +103,8 @@
 .services-table .table-header,
 .services-table .table-row {
   display: grid;
-  /* Updated grid for fixed columns to prevent wrapping too early on large screens */
-  grid-template-columns: 0.9fr 1.2fr 2fr 1fr 1.2fr 1fr 1.2fr; /* Date, Type, Description, Cost, Odometer/Engine Hours, Actions */
+  /* Updated grid to give fixed width to actions column to prevent cutoff */
+  grid-template-columns: 0.9fr 1.2fr 2fr 1fr 1.2fr 1fr 140px; /* Date, Type, Description, Cost, Odometer/Engine Hours, Actions (fixed width) */
   gap: 10px;
   padding: 1rem 1.5rem; /* Increased padding */
   border-bottom: 1px solid var(--border-color); /* Use theme variable */
@@ -197,7 +197,8 @@
 @media (max-width: 992px) {
   .services-table .table-header,
   .services-table .table-row {
-    grid-template-columns: 1.2fr 1.5fr 1fr 1fr; /* Date, Type, Cost, Actions */
+    /* Adjusted to provide fixed width for actions column on medium screens */
+    grid-template-columns: 1.2fr 1.5fr 1fr 120px; /* Date, Type, Cost, Actions (fixed width) */
   }
   /* Hide Description, Odometer, Engine Hours on medium screens */
   .services-table .table-header div:nth-child(3), /* Description */
@@ -243,8 +244,8 @@
 
   .services-table .table-header,
   .services-table .table-row {
-    /* Only show Date, Type, Actions on small screens */
-    grid-template-columns: 1fr 1fr 100px; /* Date, Type, Actions */
+    /* Adjusted to provide fixed width for actions column on small screens */
+    grid-template-columns: 1fr 1fr 120px; /* Date, Type, Actions (fixed width) */
     gap: 8px;
     padding: 0.8rem 1rem;
     font-size: 0.8em;
