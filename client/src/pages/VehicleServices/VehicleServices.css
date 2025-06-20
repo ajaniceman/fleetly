@@ -1,156 +1,168 @@
 /*
-  CRITICAL FIX: Removed local :root variables. All color-related variables should now
-  be defined globally in client/src/index.css and accessed here.
+  This CSS specifically styles the Vehicle Dates Page, including the table and buttons.
+  It uses global CSS variables defined in client/src/index.css for theming.
 */
 
-.vehicle-services-page {
-  padding: 2.5rem; /* Increased padding */
+.vehicle-dates-page {
+  padding: 2.5rem; /* Consistent padding with other pages */
   max-width: 1200px;
   margin: auto;
   font-family: 'Inter', sans-serif;
-  color: var(--text-primary); /* Use theme variable */
-  background-color: var(--background-primary); /* Use theme variable */
+  color: var(--text-primary);
+  background-color: var(--background-primary);
   min-height: 100vh;
   transition: background-color 0.3s ease, color 0.3s ease;
-  padding-top: 5rem; /* Added padding-top to account for fixed navbar */
+  padding-top: 5rem; /* Space for fixed navigation bar */
 }
 
-.services-header {
+.dates-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2.5rem; /* More space below header */
-  border-bottom: 1px solid var(--border-color); /* Use theme variable */
-  padding-bottom: 1.5rem; /* More padding */
-  flex-wrap: wrap; /* Allow wrapping */
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+  flex-wrap: wrap; /* Allow elements to wrap on smaller screens */
   gap: 1rem;
   transition: border-color 0.3s ease;
 }
 
-.services-header h1 {
-  font-size: 2.8em; /* Larger title */
-  color: var(--heading-color); /* Use theme variable */
+.dates-header h1 {
+  font-size: 2.8em;
+  color: var(--heading-color);
   margin: 0;
   font-weight: 700;
   transition: color 0.3s ease;
 }
 
 .back-to-dashboard-btn {
-  background-color: var(--button-back); /* Use theme variable */
-  color: var(--text-light); /* Use theme variable */
-  padding: 0.7rem 1.4rem; /* Consistent button padding */
+  background-color: var(--button-back);
+  color: var(--text-light);
+  padding: 0.7rem 1.4rem;
   border: none;
-  border-radius: 8px; /* More rounded */
+  border-radius: 8px;
   cursor: pointer;
   font-size: 1em;
   font-weight: 500;
   transition: background-color 0.2s ease, transform 0.1s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2); /* Adjust shadow if needed for dark mode */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 .back-to-dashboard-btn:hover {
-  background-color: var(--button-back-hover); /* Use theme variable */
+  background-color: var(--button-back-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* Adjust shadow if needed for dark mode */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-.add-service-btn {
-  background-color: var(--cta-primary-bg); /* Use theme variable */
-  color: var(--text-light); /* Use theme variable */
-  padding: 0.85rem 1.75rem; /* Consistent button padding */
+.add-date-btn {
+  background-color: var(--cta-primary-bg);
+  color: var(--text-light);
+  padding: 0.85rem 1.75rem;
   border: none;
-  border-radius: 8px; /* More rounded */
+  border-radius: 8px;
   cursor: pointer;
   font-size: 1em;
   font-weight: 600;
-  margin-bottom: 2rem; /* More margin */
+  margin-bottom: 2rem;
   transition: background-color 0.2s ease, transform 0.1s ease;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Adjust shadow if needed for dark mode */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-.add-service-btn:hover {
-  background-color: var(--cta-primary-hover-bg); /* Use theme variable */
+.add-date-btn:hover {
+  background-color: var(--cta-primary-hover-bg);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4); /* Adjust shadow if needed for dark mode */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
 }
 
-.services-table-container {
-  background: var(--background-secondary); /* Use theme variable */
-  border: 1px solid var(--border-color); /* Use theme variable */
-  border-radius: 12px; /* More rounded corners */
-  /* Increased shadow prominence with more opaque rgba for dark mode visibility */
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2); /* Stronger shadow */
+.dates-table-container {
+  background: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
   overflow: hidden; /* Ensures rounded corners clip content */
   margin-top: 2rem;
   transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.services-table-container h2 {
+.dates-table-container h2 {
   font-size: 1.8em;
-  color: var(--heading-color); /* Use theme variable */
+  color: var(--heading-color);
   padding: 1.5rem;
   margin: 0;
-  border-bottom: 1px solid var(--border-color); /* Use theme variable */
-  background-color: var(--table-header-bg); /* Changed to use table-header-bg for consistency */
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--table-header-bg);
   font-weight: 600;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.services-table {
+.dates-table {
   width: 100%;
 }
 
-.services-table .table-header,
-.services-table .table-row {
+.dates-table .table-header,
+.dates-table .table-row {
   display: grid;
-  /* UPDATED: Increased fixed width for actions column on desktop */
-  /* Using repeat(N, minmax(MIN_WIDTH, 1fr)) for flexible columns and fixed last column */
-  grid-template-columns: minmax(80px, 0.9fr) minmax(100px, 1.2fr) minmax(150px, 2fr) minmax(60px, 1fr) minmax(90px, 1.2fr) minmax(90px, 1fr) 160px; /* Date, Type, Description, Cost, Odometer/Engine Hours, Actions (fixed width) */
+  /* Columns: Type, Due Date, Status, Notes, Actions (with increased fixed width for actions) */
+  grid-template-columns: minmax(100px, 1.2fr) minmax(100px, 1fr) minmax(80px, 0.8fr) minmax(150px, 2fr) 160px;
   gap: 10px;
-  padding: 1rem 1.5rem; /* Increased padding */
-  border-bottom: 1px solid var(--border-color); /* Use theme variable */
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
   align-items: center;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-.services-table .table-header {
-  background: var(--table-header-bg); /* Use theme variable */
+.dates-table .table-header {
+  background: var(--table-header-bg);
   font-weight: 600;
-  color: var(--table-header-text); /* Use theme variable */
+  color: var(--table-header-text);
   text-transform: uppercase;
   font-size: 0.85em;
   letter-spacing: 0.5px;
 }
 
-.services-table .table-row {
-  background: var(--background-secondary); /* Use theme variable */
+.dates-table .table-row {
+  background: var(--background-secondary);
   font-size: 0.95em;
-  color: var(--text-primary); /* Use theme variable */
+  color: var(--text-primary);
   transition: background 0.2s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
-.services-table .table-row:last-child {
-  border-bottom: none; /* No border for the last row */
+.dates-table .table-row:last-child {
+  border-bottom: none;
 }
 
-.services-table .table-row:hover {
-  background: var(--table-row-hover-bg); /* Use theme variable */
+.dates-table .table-row:hover {
+  background: var(--table-row-hover-bg);
 }
 
 /* Ensure cell content handles overflow properly */
-.services-table .table-row > div {
+.dates-table .table-row > div {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+.date-status {
+  padding: 0.3em 0.6em;
+  border-radius: 5px;
+  font-weight: 600;
+  display: inline-block; /* Allows padding and background to wrap content snugly */
+  font-size: 0.9em;
+}
 
-.no-services-message, .loading, .error-message {
-  padding: 2.5rem; /* Increased padding */
+/* Status colors are defined in global-styles.css */
+.date-status-expired { /* Uses --status-expired-bg/text from global-styles.css */ }
+.date-status-due-soon { /* Uses --status-due-soon-bg/text from global-styles.css */ }
+.date-status-valid { /* Uses --status-valid-bg/text from global-styles.css */ }
+.date-status-due-today { /* Uses --status-due-soon-bg/text from global-styles.css or similar */ }
+
+
+.no-dates-message, .loading, .error-message {
+  padding: 2.5rem;
   text-align: center;
-  color: var(--text-secondary); /* Use theme variable */
+  color: var(--text-secondary);
   font-size: 1.2em;
-  background-color: var(--background-secondary); /* Use theme variable */
+  background-color: var(--background-secondary);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -158,71 +170,65 @@
   display: flex;
   gap: 0.75rem; /* Spacing between action buttons */
   justify-content: flex-end; /* Align actions to the right */
-  /* min-width on actions container is no longer strictly needed due to fixed grid column, but kept for robustness */
-  min-width: 120px;
+  min-width: 120px; /* Ensure container has enough space */
 }
 
-.actions .edit-service-btn, .actions .delete-service-btn {
-  padding: 0.6rem 1rem; /* Consistent button padding */
+.actions .edit-date-btn, .actions .delete-date-btn {
+  padding: 0.6rem 1rem;
   border: none;
-  border-radius: 6px; /* More rounded */
+  border-radius: 6px;
   cursor: pointer;
   font-size: 0.9em;
   font-weight: 500;
   transition: background-color 0.2s ease, transform 0.1s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for action buttons */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   min-width: 50px; /* Ensure individual buttons have a minimum width */
   flex-shrink: 0; /* Prevent buttons from shrinking */
 }
 
-.actions .edit-service-btn {
-  background-color: var(--button-edit); /* Use theme variable */
-  color: var(--text-light); /* Use theme variable */
+.actions .edit-date-btn {
+  background-color: var(--button-edit);
+  color: var(--text-light);
 }
-.actions .edit-service-btn:hover {
-  background-color: var(--button-edit-hover); /* Use theme variable */
+.actions .edit-date-btn:hover {
+  background-color: var(--button-edit-hover);
   transform: translateY(-1px);
 }
 
-.actions .delete-service-btn {
-  background-color: var(--button-delete); /* Use theme variable */
-  color: var(--text-light); /* Use theme variable */
+.actions .delete-date-btn {
+  background-color: var(--button-delete);
+  color: var(--text-light);
 }
-.actions .delete-service-btn:hover {
-  background-color: var(--button-delete-hover); /* Use theme variable */
+.actions .delete-date-btn:hover {
+  background-color: var(--button-delete-hover);
   transform: translateY(-1px);
 }
 
 /* Responsive adjustments */
 @media (max-width: 992px) {
-  .services-table .table-header,
-  .services-table .table-row {
-    /* UPDATED: Increased fixed width for actions column on medium screens */
-    grid-template-columns: minmax(80px, 1.2fr) minmax(100px, 1.5fr) minmax(60px, 1fr) 140px; /* Date, Type, Cost, Actions (fixed width) */
+  .dates-table .table-header,
+  .dates-table .table-row {
+    /* Hide Notes on medium screens, adjust action column width */
+    grid-template-columns: minmax(100px, 1.2fr) minmax(100px, 1fr) minmax(80px, 0.8fr) 140px; /* Type, Due Date, Status, Actions */
   }
-  /* Hide Description, Odometer, Engine Hours on medium screens */
-  .services-table .table-header div:nth-child(3), /* Description */
-  .services-table .table-row div:nth-child(3),
-  .services-table .table-header div:nth-child(5), /* Odometer */
-  .services-table .table-row div:nth-child(5),
-  .services-table .table-header div:nth-child(6), /* Engine Hours */
-  .services-table .table-row div:nth-child(6) {
+  .dates-table .table-header div:nth-child(4), /* Notes column */
+  .dates-table .table-row div:nth-child(4) {
     display: none;
   }
-  /* Ensure actions column is visible and positioned correctly */
-  .services-table .table-header div:nth-child(7), /* Actions column is 7th child */
-  .services-table .table-row div:nth-child(7) {
-    display: block; /* Ensure it's shown */
+  /* Actions column is now the 4th logical column (originally 5th child) */
+  .dates-table .table-header div:nth-child(5),
+  .dates-table .table-row div:nth-child(5) {
     grid-column: 4; /* Position it in the 4th column of the new grid */
+    display: block; /* Ensure it's shown */
   }
 }
 
 @media (max-width: 768px) {
-  .vehicle-services-page {
+  .vehicle-dates-page {
     padding: 1.5rem;
-    padding-top: 4.5rem; /* Adjusted padding for mobile navbar height */
+    padding-top: 4.5rem;
   }
-  .services-header {
+  .dates-header {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -230,51 +236,44 @@
     align-self: flex-end;
     margin-top: 1rem;
   }
-  .services-header h1 {
+  .dates-header h1 {
     font-size: 2em;
   }
-  .add-service-btn {
+  .add-date-btn {
     width: 100%;
     padding: 0.75rem 1.5rem;
   }
 
-  .services-table-container {
-    overflow-x: auto; /* Allow horizontal scroll if table content is too wide */
+  .dates-table-container {
+    overflow-x: auto; /* Enable horizontal scrolling if table is too wide */
   }
 
-  .services-table .table-header,
-  .services-table .table-row {
-    /* UPDATED: Increased fixed width for actions column on small screens */
-    grid-template-columns: minmax(70px, 1fr) minmax(90px, 1fr) 140px; /* Date, Type, Actions (fixed width) */
+  .dates-table .table-header,
+  .dates-table .table-row {
+    /* Hide Status and Notes on small screens, adjust action column width */
+    grid-template-columns: minmax(70px, 1fr) minmax(90px, 1fr) 140px; /* Type, Due Date, Actions */
     gap: 8px;
     padding: 0.8rem 1rem;
     font-size: 0.8em;
   }
-  /* Hide Cost and Description, and Odometer/Engine Hours */
-  /* This needs to target columns by their original order, or use nth-child combined with specific classes */
-  .services-table .table-header div:nth-child(4), /* Cost */
-  .services-table .table-row div:nth-child(4),
-  .services-table .table-header div:nth-child(5), /* Odometer */
-  .services-table .table-row div:nth-child(5),
-  .services-table .table-header div:nth-child(6), /* Engine Hours */
-  .services-table .table-row div:nth-child(6),
-  .services-table .table-header div:nth-child(3), /* Description (added this to hidden) */
-  .services-table .table-row div:nth-child(3) {
+  .dates-table .table-header div:nth-child(3), /* Status column */
+  .dates-table .table-row div:nth-child(3),
+  .dates-table .table-header div:nth-child(4), /* Notes column */
+  .dates-table .table-row div:nth-child(4) {
     display: none;
   }
-
-  /* Explicitly ensure actions column is visible and positioned correctly */
-  .services-table .table-header div:nth-child(7), /* Actions column is 7th child */
-  .services-table .table-row div:nth-child(7) {
-    display: block; /* Ensure it's shown */
+  /* Actions column is now the 3rd logical column (originally 5th child) */
+  .dates-table .table-header div:nth-child(5),
+  .dates-table .table-row div:nth-child(5) {
     grid-column: 3; /* Position it in the 3rd column of the new grid */
+    display: block;
   }
 
-  .services-table .table-row .actions {
+  .dates-table .table-row .actions {
     justify-content: center; /* Center actions on small screen */
-    gap: 0.5rem; /* Adjust gap between buttons */
+    gap: 0.5rem;
   }
-  .actions .edit-service-btn, .actions .delete-service-btn {
+  .actions .edit-date-btn, .actions .delete-date-btn {
     padding: 0.5rem 0.7rem;
     font-size: 0.75em;
     min-width: unset; /* Remove fixed min-width for mobile */
@@ -282,17 +281,17 @@
 }
 
 @media (max-width: 480px) {
-  .services-header h1 {
+  .dates-header h1 {
     font-size: 1.8em;
   }
-  .services-table .table-header,
-  .services-table .table-row {
-    /* UPDATED: Increased fixed width for actions column on very small screens */
-    grid-template-columns: minmax(60px, 1fr) minmax(70px, 1.1fr) 100px; /* Tighter for very small screens, slightly increased action width */
+  .dates-table .table-header,
+  .dates-table .table-row {
+    /* Tighter grid for very small screens, increased action width */
+    grid-template-columns: minmax(60px, 1fr) minmax(70px, 1.1fr) 100px; /* Type, Due Date, Actions */
     font-size: 0.7em;
     padding: 0.6rem 0.8rem;
   }
-  .actions .edit-service-btn, .actions .delete-service-btn {
+  .actions .edit-date-btn, .actions .delete-date-btn {
     padding: 0.4rem 0.6rem;
     font-size: 0.65em;
   }
