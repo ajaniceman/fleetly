@@ -154,11 +154,11 @@
 
 .actions {
   display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  align-items: center;
   flex-wrap: nowrap;
   overflow: visible;
-  gap: 0.5rem;
-  /* Removed justify-content: flex-end here to allow media queries to control */
-  align-items: center;
 }
 
 .actions .edit-service-btn,
@@ -228,67 +228,26 @@
 }
 
 @media (max-width: 768px) {
-  .vehicle-services-page {
-    padding: 1.5rem;
-    padding-top: 4.5rem;
-  }
-
-  .services-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .back-to-dashboard-btn {
-    align-self: flex-end;
-    margin-top: 1rem;
-  }
-
-  .services-header h1 {
-    font-size: 2em;
-  }
-
-  .add-service-btn {
-    width: 100%;
-    padding: 0.75rem 1.5rem;
-  }
-
-  .services-table-container {
-    overflow-x: auto;
-  }
-
   .services-table .table-header,
   .services-table .table-row {
-    /* Explicitly define columns for Date, Type, Cost, and a wider Actions column */
-    grid-template-columns: 1fr 1fr 0.8fr 160px; /* Actions column increased to 160px */
+    grid-template-columns: 1fr 1fr 1fr 120px;
     gap: 8px;
     padding: 0.8rem 1rem;
     font-size: 0.8em;
   }
 
-  /* Hide Description, Odometer, Engine Hours */
-  .services-table .table-header div:nth-child(3), /* Description */
-  .services-table .table-row div:nth-child(3),
-  .services-table .table-header div:nth-child(5), /* Odometer */
-  .services-table .table-row div:nth-child(5),
-  .services-table .table-header div:nth-child(6), /* Engine Hours */
-  .services-table .table-row div:nth-child(6) {
+  .services-table .table-header div:nth-child(n+3):nth-child(-n+6),
+  .services-table .table-row div:nth-child(n+3):nth-child(-n+6) {
     display: none;
   }
 
-  /* Reposition Actions column and ensure it's visible as BLOCK */
   .services-table .table-header div:nth-child(7),
   .services-table .table-row div:nth-child(7) {
-    display: block !important; /* Changed from flex !important to match Dates page */
-    grid-column: 4; /* Place it in the 4th (last) column */
-    justify-content: flex-end; /* Keep for header text alignment if it's display flex, but parent is block now */
+    display: flex !important;
+    grid-column: 4;
+    justify-content: flex-end;
     align-items: center;
     padding-left: 0.5rem;
-  }
-
-  .services-table .table-row .actions {
-    justify-content: flex-end; /* KEEP flex-end here to push buttons to the right within their flex container */
-    gap: 0.5rem;
-    flex-shrink: 0; /* CRITICAL: Prevent the actions container from shrinking */
   }
 
   .actions .edit-service-btn,
@@ -299,42 +258,20 @@
 }
 
 @media (max-width: 480px) {
-  .services-header h1 {
-    font-size: 1.8em;
-  }
-
   .services-table .table-header,
   .services-table .table-row {
-    /* Further adjusted for very small screens, with a generous actions column */
-    grid-template-columns: 1fr 1fr 0.8fr 140px; /* Actions column increased to 140px */
+    grid-template-columns: 1fr 1fr 1fr 100px;
     font-size: 0.7em;
     padding: 0.6rem 0.8rem;
   }
 
-  /* Hide Description, Odometer, Engine Hours (already hidden, but re-confirm) */
-  .services-table .table-header div:nth-child(3),
-  .services-table .table-row div:nth-child(3),
-  .services-table .table-header div:nth-child(5),
-  .services-table .table-row div:nth-child(5),
-  .services-table .table-header div:nth-child(6),
-  .services-table .table-row div:nth-child(6) {
-    display: none;
-  }
-
-  /* Reposition Actions column and ensure it's visible as BLOCK */
   .services-table .table-header div:nth-child(7),
   .services-table .table-row div:nth-child(7) {
-    display: block !important; /* Changed from flex !important to match Dates page */
+    display: flex !important;
     grid-column: 4;
     justify-content: flex-end;
     align-items: center;
     padding-left: 0.5rem;
-  }
-
-  .services-table .table-row .actions {
-    justify-content: flex-end;
-    gap: 0.5rem;
-    flex-shrink: 0; /* CRITICAL: Prevent the actions container from shrinking */
   }
 
   .actions .edit-service-btn,
