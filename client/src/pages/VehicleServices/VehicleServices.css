@@ -102,7 +102,8 @@
 .services-table .table-header,
 .services-table .table-row {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1.5fr 1fr 1fr 1.5fr 120px;
+  /* Keeping original desktop grid with slightly increased actions width */
+  grid-template-columns: 1.2fr 1fr 1.5fr 1fr 1fr 1.5fr 140px; /* Actions column increased from 120px to 140px */
   gap: 10px;
   padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border-color);
@@ -156,7 +157,7 @@
   flex-wrap: nowrap;
   overflow: visible;
   gap: 0.5rem;
-  justify-content: flex-end;
+  /* Removed justify-content: flex-end here to allow media queries to control */
   align-items: center;
 }
 
@@ -196,7 +197,8 @@
 @media (max-width: 992px) {
   .services-table .table-header,
   .services-table .table-row {
-    grid-template-columns: 0.9fr 1.2fr 2fr 1fr 1.2fr 1fr minmax(180px, 300px);
+    /* Adjusted to be more flexible, but with a good min width for actions */
+    grid-template-columns: 0.9fr 1.2fr 1fr minmax(180px, 300px); /* Keeping the minmax as in your provided code */
   }
 
   /* Hide Description, Odometer, Engine Hours on medium screens */
@@ -211,10 +213,10 @@
 
   .services-table .table-header div:nth-child(7),
   .services-table .table-row div:nth-child(7) {
-    display: flex !important;   /* SHOW the action buttons */
-    justify-content: flex-end;  /* Push to right side */
+    display: flex !important;
+    justify-content: flex-end;
     align-items: center;
-    grid-column: 4;             /* On mobile layout: Date, Type, Cost, Actions */
+    grid-column: 4;
     padding-left: 0.5rem;
   }
 
@@ -256,8 +258,8 @@
 
   .services-table .table-header,
   .services-table .table-row {
-    /* Match mobile layout like Dates page: Date, Type, Cost, Actions */
-    grid-template-columns: 1fr 1fr 0.8fr 100px;
+    /* Adjusted to directly match Dates page mobile logic: Date, Type, Cost, Actions */
+    grid-template-columns: 1fr 1fr 0.8fr 120px; /* Increased Actions column to 120px */
     gap: 8px;
     padding: 0.8rem 1rem;
     font-size: 0.8em;
@@ -273,18 +275,18 @@
     display: none;
   }
 
-  /* Reposition Actions */
+  /* Reposition Actions column and ensure it's visible as flex */
   .services-table .table-header div:nth-child(7),
   .services-table .table-row div:nth-child(7) {
-    display: flex !important;        /* Ensure buttons are shown */
-    grid-column: 4;                  /* Fourth column */
-    justify-content: flex-end;
+    display: flex !important; /* Ensure buttons are shown */
+    grid-column: 4; /* Fourth column */
+    justify-content: flex-end; /* Align actions to the right within its cell */
     align-items: center;
     padding-left: 0.5rem;
   }
 
   .services-table .table-row .actions {
-    justify-content: flex-end;
+    justify-content: flex-end; /* KEEP flex-end here to push buttons to the right within their flex container */
     gap: 0.5rem;
   }
 
@@ -302,9 +304,30 @@
 
   .services-table .table-header,
   .services-table .table-row {
-    grid-template-columns: 1fr 1fr 0.8fr 80px;
+    /* Adjusted for very small screens, focusing on 3 key columns + Actions */
+    grid-template-columns: 1fr 1fr 0.8fr 100px; /* Actions column increased to 100px */
     font-size: 0.7em;
     padding: 0.6rem 0.8rem;
+  }
+
+  /* Hide Description, Odometer, Engine Hours (already hidden, but re-confirm) */
+  .services-table .table-header div:nth-child(3),
+  .services-table .table-row div:nth-child(3),
+  .services-table .table-header div:nth-child(5),
+  .services-table .table-row div:nth-child(5),
+  .services-table .table-header div:nth-child(6),
+  .services-table .table-row div:nth-child(6) {
+    display: none;
+  }
+
+  /* Reposition Actions column and ensure it's visible as flex */
+  .services-table .table-header div:nth-child(7),
+  .services-table .table-row div:nth-child(7) {
+    display: flex !important;
+    grid-column: 4;
+    justify-content: flex-end; /* Align actions to the right within its cell */
+    align-items: center;
+    padding-left: 0.5rem;
   }
 
   .actions .edit-service-btn,
@@ -312,14 +335,4 @@
     padding: 0.4rem 0.6rem;
     font-size: 0.65em;
   }
-
-  .services-table .table-header div:nth-child(7),
-  .services-table .table-row div:nth-child(7) {
-    display: flex !important;
-    grid-column: 4;
-    justify-content: flex-end;
-    align-items: center;
-    padding-left: 0.5rem;
-  }
-
 }
