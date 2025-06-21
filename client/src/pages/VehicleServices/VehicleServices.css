@@ -249,28 +249,28 @@
 
   .services-table .table-header,
   .services-table .table-row {
-    grid-template-columns: 0.9fr 1.2fr 2fr 1fr 1.2fr 1fr minmax(180px, 300px);
+    /* Match mobile layout like Dates page: Date, Type, Cost, Actions */
+    grid-template-columns: 1fr 1fr 0.8fr 100px;
     gap: 8px;
     padding: 0.8rem 1rem;
     font-size: 0.8em;
   }
 
+  /* Hide Description, Odometer, Engine Hours */
+  .services-table .table-header div:nth-child(3),
+  .services-table .table-row div:nth-child(3),
   .services-table .table-header div:nth-child(5),
   .services-table .table-row div:nth-child(5),
   .services-table .table-header div:nth-child(6),
-  .services-table .table-row div:nth-child(6),
-  .services-table .table-header div:nth-child(3),
-  .services-table .table-row div:nth-child(3) {
+  .services-table .table-row div:nth-child(6) {
     display: none;
   }
 
+  /* Reposition Actions */
   .services-table .table-header div:nth-child(7),
   .services-table .table-row div:nth-child(7) {
     display: block;
     grid-column: 4;
-  }
-
-  .services-table .table-header div:nth-child(7) {
     text-align: right;
   }
 
@@ -293,7 +293,7 @@
 
   .services-table .table-header,
   .services-table .table-row {
-    grid-template-columns: 0.9fr 1.2fr 2fr 1fr 1.2fr 1fr minmax(180px, 300px);
+    grid-template-columns: 1fr 1fr 0.8fr 80px;
     font-size: 0.7em;
     padding: 0.6rem 0.8rem;
   }
