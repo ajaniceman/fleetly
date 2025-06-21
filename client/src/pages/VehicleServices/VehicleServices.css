@@ -153,8 +153,11 @@
 
 .actions {
   display: flex;
-  gap: 0.75rem;
+  flex-wrap: nowrap;
+  overflow: visible;
+  gap: 0.5rem;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .actions .edit-service-btn,
@@ -273,9 +276,11 @@
   /* Reposition Actions */
   .services-table .table-header div:nth-child(7),
   .services-table .table-row div:nth-child(7) {
-    display: block;
-    grid-column: 4;
-    text-align: right;
+    display: flex !important;        /* Ensure buttons are shown */
+    grid-column: 4;                  /* Fourth column */
+    justify-content: flex-end;
+    align-items: center;
+    padding-left: 0.5rem;
   }
 
   .services-table .table-row .actions {
@@ -307,4 +312,14 @@
     padding: 0.4rem 0.6rem;
     font-size: 0.65em;
   }
+
+  .services-table .table-header div:nth-child(7),
+  .services-table .table-row div:nth-child(7) {
+    display: flex !important;
+    grid-column: 4;
+    justify-content: flex-end;
+    align-items: center;
+    padding-left: 0.5rem;
+  }
+
 }
