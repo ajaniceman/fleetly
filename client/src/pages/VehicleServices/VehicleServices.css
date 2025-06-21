@@ -275,12 +275,12 @@
     display: none;
   }
 
-  /* Reposition Actions column and ensure it's visible as flex */
+  /* Reposition Actions column and ensure it's visible as BLOCK */
   .services-table .table-header div:nth-child(7),
   .services-table .table-row div:nth-child(7) {
-    display: flex !important; /* Ensure buttons are shown */
+    display: block !important; /* Changed from flex !important to match Dates page */
     grid-column: 4; /* Place it in the 4th (last) column */
-    justify-content: flex-end; /* Align actions to the right within its cell */
+    justify-content: flex-end; /* Keep for header text alignment if it's display flex, but parent is block now */
     align-items: center;
     padding-left: 0.5rem;
   }
@@ -321,12 +321,12 @@
     display: none;
   }
 
-  /* Reposition Actions column and ensure it's visible as flex */
+  /* Reposition Actions column and ensure it's visible as BLOCK */
   .services-table .table-header div:nth-child(7),
   .services-table .table-row div:nth-child(7) {
-    display: flex !important;
+    display: block !important; /* Changed from flex !important to match Dates page */
     grid-column: 4;
-    justify-content: flex-end; /* Align actions to the right within its cell */
+    justify-content: flex-end;
     align-items: center;
     padding-left: 0.5rem;
   }
