@@ -157,6 +157,7 @@
   display: flex;
   gap: 0.75rem; /* Spacing between action buttons */
   justify-content: flex-end; /* Align actions to the right */
+  /* No min-width here, let the grid column control the size */
 }
 
 .actions .edit-service-btn, .actions .delete-service-btn {
@@ -168,6 +169,7 @@
   font-weight: 500;
   transition: background-color 0.2s ease, transform 0.1s ease;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for action buttons */
+  /* REMOVED: white-space: nowrap; and min-width: max-content; to match working dates page CSS */
 }
 
 .actions .edit-service-btn {
@@ -260,8 +262,8 @@
   /* Explicitly ensure actions column is visible and positioned correctly */
   .services-table .table-header div:nth-child(7), /* Actions column is 7th child */
   .services-table .table-row div:nth-child(7) {
-    grid-column: 4; /* Move to 4th position in new grid */
-    display: block;
+    display: block; /* Ensure it's shown */
+    grid-column: 3; /* Position it in the 3rd column of the new grid */
   }
 
   .services-table .table-row .actions {
@@ -271,8 +273,7 @@
   .actions .edit-service-btn, .actions .delete-service-btn {
     padding: 0.5rem 0.7rem;
     font-size: 0.75em;
-    white-space: nowrap; /* CRITICAL: Prevent button text from wrapping */
-    min-width: max-content; /* CRITICAL: Ensure button takes minimum width of its content */
+    /* REMOVED: white-space: nowrap; and min-width: max-content; to match working dates page CSS */
   }
 }
 
