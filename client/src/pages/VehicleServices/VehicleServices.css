@@ -104,7 +104,7 @@
 .services-table .table-row {
   display: grid;
   /* Significantly increased fixed width for actions column on desktop */
-  grid-template-columns: 0.9fr 1.2fr 2fr 1fr 1.2fr 1fr minmax(120px, 250px); /* Actions column increased to 250px */
+  grid-template-columns: 0.9fr 1.2fr 2fr 1fr 1.2fr 1fr minmax(180px, 300px); /* Actions column increased to 250px */
   gap: 10px;
   padding: 1rem 1.5rem; /* Increased padding */
   border-bottom: 1px solid var(--border-color); /* Use theme variable */
@@ -141,7 +141,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  border: 1px dashed rgba(0, 255, 0, 0.3); /* TEMP DEBUG */
 }
 
 
@@ -173,6 +172,7 @@
   transition: background-color 0.2s ease, transform 0.1s ease;
   flex-shrink: 0;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for action buttons */
+  min-width: 80px;
   white-space: nowrap; /* prevent breaking into multiple lines */
 }
 
@@ -199,7 +199,7 @@
   .services-table .table-header,
   .services-table .table-row {
     /* Adjusted for medium screens, making actions column wider */
-    grid-template-columns: 0.9fr 1.2fr 2fr 1fr 1.2fr 1fr minmax(120px, 250px);/* Actions column increased to 220px */
+    grid-template-columns: 0.9fr 1.2fr 2fr 1fr 1.2fr 1fr minmax(180px, 300px);/* Actions column increased to 220px */
   }
   /* Hide Description, Odometer, Engine Hours on medium screens */
   .services-table .table-header div:nth-child(3), /* Description */
@@ -246,7 +246,7 @@
   .services-table .table-header,
   .services-table .table-row {
     /* Adjusted for small screens, making actions column wider */
-    grid-template-columns: 0.9fr 1.2fr 2fr 1fr 1.2fr 1fr minmax(120px, 250px); /* Actions column increased to 220px */
+    grid-template-columns: 0.9fr 1.2fr 2fr 1fr 1.2fr 1fr minmax(180px, 300px);; /* Actions column increased to 220px */
     gap: 8px;
     padding: 0.8rem 1rem;
     font-size: 0.8em;
@@ -288,7 +288,7 @@
   .services-table .table-header,
   .services-table .table-row {
     /* Adjusted for very small screens, making actions column wider */
-    grid-template-columns: 0.9fr 1.2fr 2fr 1fr 1.2fr 1fr minmax(120px, 250px); /* Actions column increased to 180px */
+    grid-template-columns: 0.9fr 1.2fr 2fr 1fr 1.2fr 1fr minmax(180px, 300px); /* Actions column increased to 180px */
     font-size: 0.7em;
     padding: 0.6rem 0.8rem;
   }
