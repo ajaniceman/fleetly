@@ -103,8 +103,8 @@
 .services-table .table-header,
 .services-table .table-row {
   display: grid;
-  /* Fixed width for actions column on desktop */
-  grid-template-columns: 0.9fr 1.2fr 2fr 1fr 1.2fr 1fr 200px; /* Actions column width */
+  /* Significantly increased fixed width for actions column on desktop */
+  grid-template-columns: 0.9fr 1.2fr 2fr 1fr 1.2fr 1fr 220px; /* Actions column increased to 220px */
   gap: 10px;
   padding: 1rem 1.5rem; /* Increased padding */
   border-bottom: 1px solid var(--border-color); /* Use theme variable */
@@ -157,7 +157,7 @@
   display: flex;
   gap: 0.75rem; /* Spacing between action buttons */
   justify-content: flex-end; /* Align actions to the right */
-  /* Removed min-width from here to match VehicleDatesPage.css */
+  /* Removed min-width from here as it's often overridden by grid column */
 }
 
 .actions .edit-service-btn, .actions .delete-service-btn {
@@ -169,7 +169,8 @@
   font-weight: 500;
   transition: background-color 0.2s ease, transform 0.1s ease;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for action buttons */
-  /* Removed min-width and flex-shrink: 0 from here to match VehicleDatesPage.css */
+  white-space: nowrap; /* CRITICAL: Prevent button text from wrapping */
+  min-width: max-content; /* CRITICAL: Ensure button takes minimum width of its content */
 }
 
 .actions .edit-service-btn {
@@ -195,7 +196,7 @@
   .services-table .table-header,
   .services-table .table-row {
     /* Adjusted for medium screens, making actions column wider */
-    grid-template-columns: 1.2fr 1.5fr 1fr 180px; /* Actions column width */
+    grid-template-columns: 1.2fr 1.5fr 1fr 200px; /* Actions column increased to 200px */
   }
   /* Hide Description, Odometer, Engine Hours on medium screens */
   .services-table .table-header div:nth-child(3), /* Description */
@@ -242,7 +243,7 @@
   .services-table .table-header,
   .services-table .table-row {
     /* Adjusted for small screens, making actions column wider */
-    grid-template-columns: 1fr 1fr 180px; /* Actions column width */
+    grid-template-columns: 1fr 1fr 200px; /* Actions column increased to 200px */
     gap: 8px;
     padding: 0.8rem 1rem;
     font-size: 0.8em;
@@ -273,7 +274,8 @@
   .actions .edit-service-btn, .actions .delete-service-btn {
     padding: 0.5rem 0.7rem;
     font-size: 0.75em;
-    /* Removed min-width and flex-shrink: 0 from here to match VehicleDatesPage.css */
+    white-space: nowrap; /* CRITICAL: Prevent button text from wrapping */
+    min-width: max-content; /* CRITICAL: Ensure button takes minimum width of its content */
   }
 }
 
@@ -284,7 +286,7 @@
   .services-table .table-header,
   .services-table .table-row {
     /* Adjusted for very small screens, making actions column wider */
-    grid-template-columns: 1fr 1.1fr 140px; /* Actions column width */
+    grid-template-columns: 1fr 1.1fr 160px; /* Actions column increased to 160px */
     font-size: 0.7em;
     padding: 0.6rem 0.8rem;
   }
