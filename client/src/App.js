@@ -15,7 +15,8 @@ import { ThemeProvider } from './contexts/ThemeContext'; // Corrected path to 'c
 // NEW: Import useTranslation for language switching
 import { useTranslation } from 'react-i18next';
 import Blog from './pages/Blog/Blog'; // NEW: Import the Blog page
-
+import FullFeaturesPage from './pages/FullFeaturesPage/FullFeaturesPage'; // NEW: Import the FullFeaturesPage
+import Contact from './pages/Contact/Contact'; // NEW: Import the Contact page
 
 // Helper component for Auth Pages (remains unchanged)
 function AuthPage({ mode }) {
@@ -51,6 +52,12 @@ function App() {
         {/* NEW: Blog Routes */}
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<Blog />} /> {/* For individual blog posts, though we only have a list for now */}
+
+        {/* Features Page Route */}
+        <Route path="/features" element={<FullFeaturesPage />} />
+
+        {/* NEW: Contact Page Route */}
+        <Route path="/contact" element={<Contact />} />
 
         {/* Protected Routes */}
         <Route path="/dashboard" element={user ? <Dashboard/> : <Navigate to="/login" replace />} />
