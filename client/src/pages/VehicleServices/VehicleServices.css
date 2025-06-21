@@ -103,11 +103,10 @@
 .services-table .table-header,
 .services-table .table-row {
   display: grid;
-  /* Significantly increased fixed width for actions column on desktop */
-  grid-template-columns: 0.9fr 1.2fr 2fr 1fr 1.2fr 1fr minmax(180px, 300px); /* Actions column increased to 250px */
+  grid-template-columns: 1.2fr 1fr 1.5fr 1fr 1fr 1.5fr 120px; /* Adjusted last column width */
   gap: 10px;
-  padding: 1rem 1.5rem; /* Increased padding */
-  border-bottom: 1px solid var(--border-color); /* Use theme variable */
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
   align-items: center;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
@@ -155,42 +154,36 @@
 
 .actions {
   display: flex;
-  gap: 0.75rem; /* Spacing between action buttons */
-  justify-content: flex-end; /* Align actions to the right */
-  flex-wrap: nowrap;
-  align-items: center;
-  overflow: visible; /* Ensure nothing is hidden */
+  gap: 0.75rem;
+  justify-content: flex-end;
 }
 
 .actions .edit-service-btn, .actions .delete-service-btn {
-  padding: 0.6rem 1rem; /* Consistent button padding */
+  padding: 0.6rem 1rem;
   border: none;
-  border-radius: 6px; /* More rounded */
+  border-radius: 6px;
   cursor: pointer;
   font-size: 0.9em;
   font-weight: 500;
   transition: background-color 0.2s ease, transform 0.1s ease;
-  flex-shrink: 0;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for action buttons */
-  min-width: 80px;
-  white-space: nowrap; /* prevent breaking into multiple lines */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .actions .edit-service-btn {
-  background-color: var(--button-edit); /* Use theme variable */
-  color: var(--text-light); /* Use theme variable */
+  background-color: var(--button-edit);
+  color: var(--text-light);
 }
 .actions .edit-service-btn:hover {
-  background-color: var(--button-edit-hover); /* Use theme variable */
+  background-color: var(--button-edit-hover);
   transform: translateY(-1px);
 }
 
 .actions .delete-service-btn {
-  background-color: var(--button-delete); /* Use theme variable */
-  color: var(--text-light); /* Use theme variable */
+  background-color: var(--button-delete);
+  color: var(--text-light);
 }
 .actions .delete-service-btn:hover {
-  background-color: var(--button-delete-hover); /* Use theme variable */
+  background-color: var(--button-delete-hover);
   transform: translateY(-1px);
 }
 
