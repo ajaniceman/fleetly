@@ -1,0 +1,118 @@
+/* client/src/pages/PrivacyPolicy/PrivacyPolicyPage.css */
+
+.privacy-policy-container {
+  padding: 2.5rem;
+  max-width: 900px; /* Wider content area for policy text */
+  margin: auto;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+  background-color: var(--background-primary);
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  padding-top: 5rem; /* Space for fixed navigation bar */
+}
+
+.privacy-policy-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+}
+
+.privacy-policy-header h1 {
+  font-size: 3em;
+  color: var(--heading-color);
+  margin-bottom: 0.8rem;
+}
+
+.privacy-policy-header p {
+  font-size: 1em;
+  color: var(--text-secondary);
+}
+
+.privacy-policy-content section {
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.privacy-policy-content h2 {
+  font-size: 2em;
+  color: var(--cta-primary-bg);
+  margin-top: 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.privacy-policy-content h3 {
+  font-size: 1.4em;
+  color: var(--heading-color);
+  margin-top: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.privacy-policy-content p {
+  font-size: 1em;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 1em;
+}
+
+.privacy-policy-content ul {
+  list-style-type: disc;
+  margin-left: 1.5em;
+  margin-bottom: 1.5em;
+  color: var(--text-secondary);
+}
+
+.privacy-policy-content ul li {
+  margin-bottom: 0.5em;
+  font-size: 1em;
+  line-height: 1.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .privacy-policy-container {
+    padding: 1.5rem;
+    padding-top: 4.5rem;
+  }
+  .privacy-policy-header h1 {
+    font-size: 2.2em;
+  }
+  .privacy-policy-content section {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .privacy-policy-content h2 {
+    font-size: 1.8em;
+  }
+  .privacy-policy-content h3 {
+    font-size: 1.2em;
+  }
+  .privacy-policy-content p,
+  .privacy-policy-content ul li {
+    font-size: 0.95em;
+  }
+}
+
+@media (max-width: 480px) {
+  .privacy-policy-container {
+    padding: 1rem;
+    padding-top: 4rem;
+  }
+  .privacy-policy-header h1 {
+    font-size: 1.8em;
+  }
+  .privacy-policy-content section {
+    padding: 1rem;
+  }
+  .privacy-policy-content h2 {
+    font-size: 1.5em;
+  }
+}

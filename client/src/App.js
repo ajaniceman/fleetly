@@ -17,6 +17,7 @@ import { useTranslation } from 'react-i18next';
 import Blog from './pages/Blog/Blog'; // NEW: Import the Blog page
 import FullFeaturesPage from './pages/FullFeaturesPage/FullFeaturesPage'; // NEW: Import the FullFeaturesPage
 import Contact from './pages/Contact/Contact'; // NEW: Import the Contact page
+import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicyPage';
 
 // Helper component for Auth Pages (remains unchanged)
 function AuthPage({ mode }) {
@@ -58,6 +59,9 @@ function App() {
 
         {/* NEW: Contact Page Route */}
         <Route path="/contact" element={<Contact />} />
+
+        {/* Privacy & Policy Page Route */}
+        <Route path="/privacy" element={<PrivacyPolicy />} />
 
         {/* Protected Routes */}
         <Route path="/dashboard" element={user ? <Dashboard/> : <Navigate to="/login" replace />} />
