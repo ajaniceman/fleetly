@@ -157,7 +157,9 @@
   display: flex;
   gap: 0.75rem; /* Spacing between action buttons */
   justify-content: flex-end; /* Align actions to the right */
-  /* No min-width here, let the grid column control the size */
+  flex-wrap: nowrap;
+  align-items: center;
+  overflow: visible; /* Ensure nothing is hidden */
 }
 
 .actions .edit-service-btn, .actions .delete-service-btn {
@@ -168,8 +170,9 @@
   font-size: 0.9em;
   font-weight: 500;
   transition: background-color 0.2s ease, transform 0.1s ease;
+  flex-shrink: 0;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for action buttons */
-  /* REMOVED: white-space: nowrap; and min-width: max-content; to match working dates page CSS */
+  white-space: nowrap; /* prevent breaking into multiple lines */
 }
 
 .actions .edit-service-btn {
