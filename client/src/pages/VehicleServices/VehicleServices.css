@@ -157,7 +157,6 @@
   display: flex;
   gap: 0.75rem; /* Spacing between action buttons */
   justify-content: flex-end; /* Align actions to the right */
-  /* Removed min-width from here as it's often overridden by grid column */
 }
 
 .actions .edit-service-btn, .actions .delete-service-btn {
@@ -169,8 +168,6 @@
   font-weight: 500;
   transition: background-color 0.2s ease, transform 0.1s ease;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for action buttons */
-  white-space: nowrap; /* CRITICAL: Prevent button text from wrapping */
-  min-width: max-content; /* CRITICAL: Ensure button takes minimum width of its content */
 }
 
 .actions .edit-service-btn {
@@ -263,8 +260,8 @@
   /* Explicitly ensure actions column is visible and positioned correctly */
   .services-table .table-header div:nth-child(7), /* Actions column is 7th child */
   .services-table .table-row div:nth-child(7) {
-    display: block; /* Ensure it's shown */
-    grid-column: 3; /* Position it in the 3rd column of the new grid */
+    grid-column: 4; /* Move to 4th position in new grid */
+    display: block;
   }
 
   .services-table .table-row .actions {
