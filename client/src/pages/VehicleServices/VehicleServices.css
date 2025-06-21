@@ -258,19 +258,19 @@
 
   .services-table .table-header,
   .services-table .table-row {
-    /* Adjusted to directly match Dates page mobile logic: Date, Type, Cost, Actions */
-    grid-template-columns: 1fr 1fr 0.8fr 120px; /* Increased Actions column to 120px */
+    /* Explicitly define columns for Date, Type, Cost, and a wider Actions column */
+    grid-template-columns: 1fr 1fr 0.8fr 160px; /* Actions column increased to 160px */
     gap: 8px;
     padding: 0.8rem 1rem;
     font-size: 0.8em;
   }
 
   /* Hide Description, Odometer, Engine Hours */
-  .services-table .table-header div:nth-child(3),
+  .services-table .table-header div:nth-child(3), /* Description */
   .services-table .table-row div:nth-child(3),
-  .services-table .table-header div:nth-child(5),
+  .services-table .table-header div:nth-child(5), /* Odometer */
   .services-table .table-row div:nth-child(5),
-  .services-table .table-header div:nth-child(6),
+  .services-table .table-header div:nth-child(6), /* Engine Hours */
   .services-table .table-row div:nth-child(6) {
     display: none;
   }
@@ -279,7 +279,7 @@
   .services-table .table-header div:nth-child(7),
   .services-table .table-row div:nth-child(7) {
     display: flex !important; /* Ensure buttons are shown */
-    grid-column: 4; /* Fourth column */
+    grid-column: 4; /* Place it in the 4th (last) column */
     justify-content: flex-end; /* Align actions to the right within its cell */
     align-items: center;
     padding-left: 0.5rem;
@@ -288,6 +288,7 @@
   .services-table .table-row .actions {
     justify-content: flex-end; /* KEEP flex-end here to push buttons to the right within their flex container */
     gap: 0.5rem;
+    flex-shrink: 0; /* CRITICAL: Prevent the actions container from shrinking */
   }
 
   .actions .edit-service-btn,
@@ -304,8 +305,8 @@
 
   .services-table .table-header,
   .services-table .table-row {
-    /* Adjusted for very small screens, focusing on 3 key columns + Actions */
-    grid-template-columns: 1fr 1fr 0.8fr 100px; /* Actions column increased to 100px */
+    /* Further adjusted for very small screens, with a generous actions column */
+    grid-template-columns: 1fr 1fr 0.8fr 140px; /* Actions column increased to 140px */
     font-size: 0.7em;
     padding: 0.6rem 0.8rem;
   }
@@ -328,6 +329,12 @@
     justify-content: flex-end; /* Align actions to the right within its cell */
     align-items: center;
     padding-left: 0.5rem;
+  }
+
+  .services-table .table-row .actions {
+    justify-content: flex-end;
+    gap: 0.5rem;
+    flex-shrink: 0; /* CRITICAL: Prevent the actions container from shrinking */
   }
 
   .actions .edit-service-btn,
